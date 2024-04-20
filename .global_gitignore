@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+
+# IDE
+.vscode
+
+# Python
+__pycache__
+.hypothesis
+.pytest_cache
+
+# Notebooks
+*.ipynb_checkpoints
+*.ipynb
+
+# Environment variables
+.env*
+
