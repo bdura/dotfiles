@@ -15,4 +15,6 @@
     lg = log --oneline --graph --decorate --color
 [status]
     showUntrackedFiles = all
+[core]
+    editor = nvim
 
