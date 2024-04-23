@@ -7,7 +7,7 @@ This repo contains the configuration files for my system, which I manage with GN
 Check out this directory within `$HOME`:
 
 ```shell
-git clone git@github.com/bdura/dotfiles.git $HOME/.dotfiles
+git clone git@github.com:bdura/dotfiles.git $HOME/.dotfiles
 ```
 
 Then use GNU Stow to create symlinks:
