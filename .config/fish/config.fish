@@ -10,6 +10,9 @@ function starship_transient_rprompt_func
   starship module time
 end
 
+fish_add_path /opt/homebrew/bin/
+fish_add_path $HOME/.local/bin/
+
 # Overwrite fish_greeting with empty message
 set fish_greeting
 
