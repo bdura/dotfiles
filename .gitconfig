@@ -4,6 +4,8 @@
     signingkey = /Users/basile/.ssh/id_ed25519_sign
 [gpg]
     format = ssh
+[commit]
+    gpgsign = true
 [core]
     excludesfile = /Users/basile/.global_gitignore
 [pull]
