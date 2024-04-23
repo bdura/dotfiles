@@ -13,6 +13,12 @@ end
 fish_add_path /opt/homebrew/bin/
 fish_add_path $HOME/.local/bin/
 
+set -x POETRY_CONFIG_DIR $HOME/.config/poetry.toml
+
+if test -e $HOME/.local/config.fish
+  source $HOME/.local/config.fish
+end
+
 # Overwrite fish_greeting with empty message
 set fish_greeting
 
