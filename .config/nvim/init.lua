@@ -8,3 +8,6 @@ require('config.keymaps')
 
 -- Bootstrap Lazy
 require('config.lazy')
+
+-- Choose colorscheme
+vim.cmd.colorscheme('tokyonight')
