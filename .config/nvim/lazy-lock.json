@@ -5,7 +5,7 @@
   },
   "catppuccin": {
     "branch": "main",
-    "commit": "e1268d1c0351aa5a42ea00a680ce84de2ba080fc"
+    "commit": "68b92f9a8d122c13433866c85c13210a320a65d3"
   },
   "cmp-nvim-lsp": {
     "branch": "main",
@@ -81,11 +81,11 @@
   },
   "nvim-lspconfig": {
     "branch": "master",
-    "commit": "81a19de18990208b678be084597613e2dbe66912"
+    "commit": "6c505d4220b521f3b0e7b645f6ce45fa914d0eed"
   },
   "nvim-treesitter": {
     "branch": "master",
-    "commit": "1aad04ecde5ebf8f2b3eea5c6f39d38b251757f5"
+    "commit": "c79b068f395817c39ed147d4ee76855c36b846e6"
   },
   "nvim-web-devicons": {
     "branch": "master",
@@ -118,6 +118,10 @@
   "vim-sleuth": {
     "branch": "master",
     "commit": "1cc4557420f215d02c4d2645a748a816c220e99b"
+  },
+  "vim-tmux-navigator": {
+    "branch": "master",
+    "commit": "5b3c701686fb4e6629c100ed32e827edf8dad01e"
   },
   "which-key.nvim": {
     "branch": "main",
