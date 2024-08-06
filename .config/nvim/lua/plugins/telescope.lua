@@ -53,7 +53,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
       --   },
       -- },
-      pickers = { find_files = { hidden = true } },
+      defaults = {
+        file_ignore_patterns = { '.git/', 'node_modules' },
+      },
+      pickers = {
+        find_files = { hidden = true },
+      },
 
       extensions = {
         ['ui-select'] = {
