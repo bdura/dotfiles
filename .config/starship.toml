@@ -58,4 +58,3 @@ disabled = false
 time_format = "%T"
 style = "bg:#1d2230"
 format = '[[[](fg:#1d2230) $time ](fg:#a0a9cb bg:#1d2230)]($style)'
-

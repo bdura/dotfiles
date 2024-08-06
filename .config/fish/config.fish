@@ -26,4 +26,3 @@ zoxide init fish | source
 
 starship init fish | source
 enable_transience
-

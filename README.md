@@ -16,4 +16,3 @@ Then use GNU Stow to create symlinks:
 cd $HOME/.dotfiles
 stow .
 ```
-
