@@ -6,3 +6,5 @@
 # Markdown files
 .+\.md
 
+# Linters
+\.stylua\.toml
