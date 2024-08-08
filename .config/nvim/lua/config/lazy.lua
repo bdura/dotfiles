@@ -23,5 +23,8 @@ require('lazy').setup({
     { import = 'plugins' },
     { import = 'colorschemes' },
   },
-  checker = { enabled = true },
+  checker = {
+    -- Disable auto-update
+    enabled = false,
+  },
 })
