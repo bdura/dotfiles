@@ -16,7 +16,7 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    require('mini.jump').setup()
+    -- require('mini.jump').setup()
 
     -- NOTE: I use Lualine for the status line.
     --
