@@ -1,11 +1,11 @@
 {
   "LuaSnip": {
     "branch": "master",
-    "commit": "7552e6504ee95a9c8cfc6db53e389122ded46cd4"
+    "commit": "b84eeb3641b08324287587b426ec974b888390d9"
   },
   "catppuccin": {
     "branch": "main",
-    "commit": "68b92f9a8d122c13433866c85c13210a320a65d3"
+    "commit": "05206bbb6d500a339cd55a9486532c3871a4455e"
   },
   "cmp-nvim-lsp": {
     "branch": "main",
@@ -21,7 +21,7 @@
   },
   "conform.nvim": {
     "branch": "master",
-    "commit": "25d48271e3d4404ba017cb92a37d3a681c1ad149"
+    "commit": "2122fe2ff01e9a542fc358ee9398ce2cbddf345d"
   },
   "fidget.nvim": {
     "branch": "main",
@@ -29,7 +29,7 @@
   },
   "gitsigns.nvim": {
     "branch": "main",
-    "commit": "58bd9e98d8e3c5a1c98af312e85247ee1afd3ed2"
+    "commit": "562dc47189ad3c8696dbf460d38603a74d544849"
   },
   "lazy.nvim": {
     "branch": "main",
@@ -61,7 +61,7 @@
   },
   "mini.nvim": {
     "branch": "main",
-    "commit": "af673d8523c5c2c5ff0a53b1e42a296ca358dcc7"
+    "commit": "d8faae693d266ee4f3a2bf1fb7ca4bc81314c3e9"
   },
   "neo-tree.nvim": {
     "branch": "main",
@@ -73,7 +73,7 @@
   },
   "nvim-autopairs": {
     "branch": "master",
-    "commit": "e38c5d837e755ce186ae51d2c48e1b387c4425c6"
+    "commit": "4a39f2dcbe1967ddc3a0f76f863540dd3aa7871a"
   },
   "nvim-cmp": {
     "branch": "main",
@@ -81,11 +81,11 @@
   },
   "nvim-lspconfig": {
     "branch": "master",
-    "commit": "6c505d4220b521f3b0e7b645f6ce45fa914d0eed"
+    "commit": "652386deae739e38fa1bcf2f06e3e7de9b3436ba"
   },
   "nvim-treesitter": {
     "branch": "master",
-    "commit": "c79b068f395817c39ed147d4ee76855c36b846e6"
+    "commit": "2e01c7104c0983467ee1b9f569e0874b8d2b44c6"
   },
   "nvim-web-devicons": {
     "branch": "master",
