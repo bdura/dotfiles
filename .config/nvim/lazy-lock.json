@@ -51,6 +51,10 @@
     "branch": "main",
     "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60"
   },
+  "markdown.nvim": {
+    "branch": "master",
+    "commit": "dfa0d2def6dbf77e9206b16dc90cad4dd23d55d2"
+  },
   "mason-lspconfig.nvim": {
     "branch": "main",
     "commit": "62360f061d45177dda8afc1b0fd1327328540301"
