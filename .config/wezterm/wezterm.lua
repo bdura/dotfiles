@@ -1,7 +1,136 @@
+-- Taken from https://github.com/dragonlobster/wezterm-config
+--
+-- Pull in the wezterm API
 local wezterm = require('wezterm')
 
-return {
-  font = wezterm.font('JetBrainsMono Nerd Font'),
-  font_size = 10.5,
-  color_scheme = 'Catppuccin Mocha',
+-- This table will hold the configuration.
+local config = {}
+
+-- In newer versions of wezterm, use the config_builder which will
+-- help provide clearer error messages
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
+
+-- For example, changing the color scheme:
+config.color_scheme = 'tokyonight_night'
+config.font = wezterm.font('JetBrainsMono Nerd Font')
+config.font_size = 13
+
+-- config.window_decorations = 'RESIZE'
+
+-- tmux
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
+config.keys = {
+  {
+    mods = 'LEADER',
+    key = 'c',
+    action = wezterm.action.SpawnTab('CurrentPaneDomain'),
+  },
+  {
+    mods = 'LEADER',
+    key = 'x',
+    action = wezterm.action.CloseCurrentPane({ confirm = false }),
+  },
+  {
+    mods = 'LEADER',
+    key = 'b',
+    action = wezterm.action.ActivateTabRelative(-1),
+  },
+  {
+    mods = 'LEADER',
+    key = 'n',
+    action = wezterm.action.ActivateTabRelative(1),
+  },
+  {
+    mods = 'LEADER',
+    key = '|',
+    action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+  },
+  {
+    mods = 'LEADER',
+    key = '-',
+    action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
+  },
+  {
+    mods = 'LEADER',
+    key = 'h',
+    action = wezterm.action.ActivatePaneDirection('Left'),
+  },
+  {
+    mods = 'LEADER',
+    key = 'j',
+    action = wezterm.action.ActivatePaneDirection('Down'),
+  },
+  {
+    mods = 'LEADER',
+    key = 'k',
+    action = wezterm.action.ActivatePaneDirection('Up'),
+  },
+  {
+    mods = 'LEADER',
+    key = 'l',
+    action = wezterm.action.ActivatePaneDirection('Right'),
+  },
+  {
+    mods = 'LEADER',
+    key = 'LeftArrow',
+    action = wezterm.action.AdjustPaneSize({ 'Left', 5 }),
+  },
+  {
+    mods = 'LEADER',
+    key = 'RightArrow',
+    action = wezterm.action.AdjustPaneSize({ 'Right', 5 }),
+  },
+  {
+    mods = 'LEADER',
+    key = 'DownArrow',
+    action = wezterm.action.AdjustPaneSize({ 'Down', 5 }),
+  },
+  {
+    mods = 'LEADER',
+    key = 'UpArrow',
+    action = wezterm.action.AdjustPaneSize({ 'Up', 5 }),
+  },
 }
+
+for i = 1, 9 do
+  -- leader + number to activate that tab
+  table.insert(config.keys, {
+    mods = 'LEADER',
+    key = tostring(i),
+    action = wezterm.action.ActivateTab(i - 1),
+  })
+end
+
+-- tab bar
+config.hide_tab_bar_if_only_one_tab = false
+config.tab_bar_at_bottom = false
+config.use_fancy_tab_bar = false
+config.tab_and_split_indices_are_zero_based = false
+
+-- tmux status
+wezterm.on('update-right-status', function(window, _)
+  local SOLID_LEFT_ARROW = ''
+  local ARROW_FOREGROUND = { Foreground = { Color = 'fg' } }
+  local prefix = ''
+
+  if window:leader_is_active() then
+    prefix = ' 🌊'
+    SOLID_LEFT_ARROW = ''
+  end
+
+  if window:active_tab():tab_id() ~= 0 then
+    ARROW_FOREGROUND = { Foreground = { Color = 'blue1' } }
+  end -- arrow color based on if tab is first pane
+
+  window:set_left_status(wezterm.format({
+    { Background = { Color = '#b7bdf8' } },
+    { Text = prefix },
+    ARROW_FOREGROUND,
+    { Text = SOLID_LEFT_ARROW },
+  }))
+end)
+
+-- and finally, return the configuration to wezterm
+return config
