@@ -12,6 +12,7 @@ end
 
 fish_add_path /opt/homebrew/bin/
 fish_add_path $HOME/.local/bin/
+fish_add_path $HOME/.cargo/bin/
 
 set -x POETRY_CONFIG_DIR $HOME/.config/poetry
 
