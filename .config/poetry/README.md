@@ -1,6 +1,6 @@
 # Poetry
 
-Poetry is a strict dependency management system, allowing fully reproducible environments.
+[Poetry](https://python-poetry.org/) is a strict dependency management system, allowing fully reproducible environments.
 
 ## Installation
 
