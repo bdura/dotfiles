@@ -22,6 +22,7 @@ config.font_size = 13
 -- tmux
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {
+  { key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom('Clipboard') },
   {
     mods = 'LEADER',
     key = 'c',
