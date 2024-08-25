@@ -111,27 +111,79 @@ config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = false
 
 -- tmux status
-wezterm.on('update-right-status', function(window, _)
-  local SOLID_LEFT_ARROW = ''
-  local ARROW_FOREGROUND = { Foreground = { Color = 'fg' } }
-  local prefix = ''
+-- wezterm.on('update-right-status', function(window, _)
+--   local SOLID_LEFT_ARROW = ''
+--   local ARROW_FOREGROUND = { Foreground = { Color = 'fg' } }
+--   local prefix = ''
+--
+--   if window:leader_is_active() then
+--     prefix = ' 🌊'
+--     SOLID_LEFT_ARROW = ''
+--   end
+--
+--   if window:active_tab():tab_id() ~= 0 then
+--     ARROW_FOREGROUND = { Foreground = { Color = 'blue1' } }
+--   end -- arrow color based on if tab is first pane
+--
+--   window:set_left_status(wezterm.format({
+--     { Background = { Color = '#b7bdf8' } },
+--     { Text = prefix },
+--     ARROW_FOREGROUND,
+--     { Text = SOLID_LEFT_ARROW },
+--   }))
+-- end)
 
-  if window:leader_is_active() then
-    prefix = ' 🌊'
-    SOLID_LEFT_ARROW = ''
-  end
+-- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
+local function is_vim(pane)
+  -- this is set by the plugin, and unset on ExitPre in Neovim
+  return pane:get_user_vars().IS_NVIM == 'true'
+end
 
-  if window:active_tab():tab_id() ~= 0 then
-    ARROW_FOREGROUND = { Foreground = { Color = 'blue1' } }
-  end -- arrow color based on if tab is first pane
+local direction_keys = {
+  h = 'Left',
+  j = 'Down',
+  k = 'Up',
+  l = 'Right',
+}
 
-  window:set_left_status(wezterm.format({
-    { Background = { Color = '#b7bdf8' } },
-    { Text = prefix },
-    ARROW_FOREGROUND,
-    { Text = SOLID_LEFT_ARROW },
-  }))
-end)
+local function move(key)
+  return {
+    key = key,
+    mods = 'CTRL',
+    action = wezterm.action_callback(function(win, pane)
+      if is_vim(pane) then
+        -- pass the keys through to vim/nvim
+        win:perform_action({
+          SendKey = { key = key, mods = 'CTRL' },
+        }, pane)
+      else
+        win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+      end
+    end),
+  }
+end
+
+local function resize(key)
+  return {
+    key = key,
+    mods = 'META',
+    action = wezterm.action_callback(function(win, pane)
+      if is_vim(pane) then
+        -- pass the keys through to vim/nvim
+        win:perform_action({
+          SendKey = { key = key, mods = 'META' },
+        }, pane)
+      else
+        win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+      end
+    end),
+  }
+end
+
+for key, _ in pairs(direction_keys) do
+  table.insert(config.keys, move(key))
+  table.insert(config.keys, resize(key))
+end
 
 -- and finally, return the configuration to wezterm
 return config

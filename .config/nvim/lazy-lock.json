@@ -103,6 +103,10 @@
     "branch": "master",
     "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683"
   },
+  "smart-splits.nvim": {
+    "branch": "master",
+    "commit": "b518cfb5283a2da43fa9935e850ba9d77873453d"
+  },
   "telescope-fzf-native.nvim": {
     "branch": "main",
     "commit": "cf48d4dfce44e0b9a2e19a008d6ec6ea6f01a83b"
@@ -126,10 +130,6 @@
   "vim-sleuth": {
     "branch": "master",
     "commit": "1cc4557420f215d02c4d2645a748a816c220e99b"
-  },
-  "vim-tmux-navigator": {
-    "branch": "master",
-    "commit": "5b3c701686fb4e6629c100ed32e827edf8dad01e"
   },
   "which-key.nvim": {
     "branch": "main",
