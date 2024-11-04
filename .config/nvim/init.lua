@@ -10,4 +10,4 @@ require('config.keymaps')
 require('config.lazy')
 
 -- Choose colorscheme
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme('catppuccin-mocha')

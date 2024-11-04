@@ -17,6 +17,7 @@ return { -- Highlight, edit, and navigate code
       'vim',
       'vimdoc',
       'rust',
+      'ron',
       'python',
     },
     -- Autoinstall languages that are not installed

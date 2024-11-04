@@ -137,8 +137,15 @@ return { -- LSP Configuration & Plugins
       -- clangd = {},
       -- gopls = {},
       pyright = {},
-      rust_analyzer = {},
+      rust_analyzer = {
+        settings = {
+          ['rust_analyzer'] = {
+            cargo = { allFeatures = true },
+          },
+        },
+      },
       taplo = {},
+      graphql = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -147,6 +154,8 @@ return { -- LSP Configuration & Plugins
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
       --
+
+      sqls = {},
 
       yamlls = {},
       jsonls = {},
@@ -181,6 +190,7 @@ return { -- LSP Configuration & Plugins
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
       'ruff',
+      'codelldb',
     })
     require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
