@@ -1,13 +1,13 @@
 [user]
     name = Basile Dura
     email = basile@bdura.me
-    signingkey = /Users/basile/.ssh/id_ed25519_sign
+    signingkey = ~/.ssh/id_ed25519
 [gpg]
     format = ssh
 [commit]
     gpgsign = true
 [core]
-    excludesfile = /Users/basile/.global_gitignore
+    excludesfile = ~/.global_gitignore
 [pull]
     rebase = true
 [push]
