@@ -137,13 +137,6 @@ return { -- LSP Configuration & Plugins
       -- clangd = {},
       -- gopls = {},
       pyright = {},
-      rust_analyzer = {
-        settings = {
-          ['rust_analyzer'] = {
-            cargo = { allFeatures = true },
-          },
-        },
-      },
       taplo = {},
       graphql = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
