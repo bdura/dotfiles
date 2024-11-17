@@ -19,3 +19,5 @@
     showUntrackedFiles = all
 [core]
     editor = nvim
+[init]
+    defaultBranch = main
