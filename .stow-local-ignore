@@ -8,3 +8,6 @@
 
 # Linters
 \.stylua\.toml
+
+# Nix
+nix
