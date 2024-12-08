@@ -251,6 +251,7 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+    nh
     neovim
     zoxide
     rustup
@@ -326,6 +327,7 @@ in
   environment.variables = {
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
+    FLAKE = "/home/${username}/.dotfiles/nix";
   };
 
   # Extra Portal Configuration
