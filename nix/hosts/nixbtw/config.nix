@@ -150,78 +150,10 @@ in
       enable = true;
       defaultEditor = true;
     };
-    starship = {
-      enable = true;
-      settings = {
-        add_newline = false;
-        buf = {
-          symbol = " ";
-        };
-        c = {
-          symbol = " ";
-        };
-        directory = {
-          read_only = " 󰌾";
-        };
-        docker_context = {
-          symbol = " ";
-        };
-        fossil_branch = {
-          symbol = " ";
-        };
-        git_branch = {
-          symbol = " ";
-        };
-        golang = {
-          symbol = " ";
-        };
-        hg_branch = {
-          symbol = " ";
-        };
-        hostname = {
-          ssh_symbol = " ";
-        };
-        lua = {
-          symbol = " ";
-        };
-        memory_usage = {
-          symbol = "󰍛 ";
-        };
-        meson = {
-          symbol = "󰔷 ";
-        };
-        nim = {
-          symbol = "󰆥 ";
-        };
-        nix_shell = {
-          symbol = " ";
-        };
-        nodejs = {
-          symbol = " ";
-        };
-        ocaml = {
-          symbol = " ";
-        };
-        package = {
-          symbol = "󰏗 ";
-        };
-        python = {
-          symbol = " ";
-        };
-        rust = {
-          symbol = " ";
-        };
-        swift = {
-          symbol = " ";
-        };
-        zig = {
-          symbol = " ";
-        };
-      };
-    };
+    starship.enable = true;
     dconf.enable = true;
-    seahorse.enable = true;
-    fuse.userAllowOther = true;
+    # seahorse.enable = true;
+    # fuse.userAllowOther = true;
     mtr.enable = true;
     gnupg.agent = {
       enable = true;
@@ -251,66 +183,65 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    nh
-    neovim
-    zoxide
-    rustup
-    tmux
-    uv
-    clang
-    go
-    nodejs
-    kanata
-    wget
-    killall
-    eza
-    git
-    htop
-    libvirt
-    lxqt.lxqt-policykit
-    lm_sensors
-    unzip
-    unrar
-    libnotify
-    v4l-utils
-    ydotool
-    duf
-    ncdu
-    wl-clipboard
-    pciutils
-    ffmpeg
-    socat
-    ripgrep
-    lshw
-    bat
-    pkg-config
-    meson
-    hyprpicker
-    ninja
-    brightnessctl
-    virt-viewer
-    swappy
     appimage-run
-    networkmanagerapplet
-    yad
-    inxi
-    playerctl
-    nh
-    nixfmt-rfc-style
+    bat
+    brightnessctl
+    clang
     discord
-    libvirt
-    swww
-    grim
-    slurp
+    duf
+    eza
+    ffmpeg
     file-roller
-    swaynotificationcenter
-    imv
-    mpv
     gimp
-    pavucontrol
-    tree
-    neovide
+    git
+    go
     greetd.tuigreet
+    grim
+    htop
+    hyprpicker
+    imv
+    inxi
+    kanata
+    killall
+    libnotify
+    libvirt
+    libvirt
+    lm_sensors
+    lshw
+    lxqt.lxqt-policykit
+    meson
+    mpv
+    ncdu
+    neovide
+    neovim
+    networkmanagerapplet
+    nh
+    ninja
+    nixfmt-rfc-style
+    nodejs
+    pavucontrol
+    pciutils
+    pkg-config
+    playerctl
+    ripgrep
+    rustup
+    slurp
+    socat
+    swappy
+    swaynotificationcenter
+    swww
+    tmux
+    tree
+    unrar
+    unzip
+    uv
+    v4l-utils
+    virt-viewer
+    wget
+    wl-clipboard
+    yad
+    ydotool
+    zoxide
   ];
 
   fonts = {
