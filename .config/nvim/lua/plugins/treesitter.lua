@@ -19,6 +19,7 @@ return { -- Highlight, edit, and navigate code
       'rust',
       'ron',
       'python',
+      'nix'
     },
     -- Autoinstall languages that are not installed
     auto_install = true,

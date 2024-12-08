@@ -148,6 +148,9 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
 
+      tailwindcss = {},
+      eslint = {},
+
       sqls = {},
 
       yamlls = {},
