@@ -11,3 +11,6 @@
 
 # Nix
 nix
+
+# Temporary exclude
+.config/hypr
