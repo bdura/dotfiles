@@ -200,6 +200,7 @@ in
     htop
     hyprpicker
     imv
+    inkscape
     inxi
     kanata
     killall
