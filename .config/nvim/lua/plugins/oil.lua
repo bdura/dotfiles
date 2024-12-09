@@ -10,11 +10,27 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
   config = function()
     local oil = require('oil')
+
+    local hidden = {
+      '..',
+      '.git',
+      '.ipynb_checkpoints',
+      '.DS_Store',
+      '.ruff_cache',
+      '.pytest_cache',
+      '.venv',
+    }
+
     oil.setup({
       view_options = {
         show_hidden = true,
         is_always_hidden = function(name, _)
-          return name == '..' or name == '.git'
+          for _, n in ipairs(hidden) do
+            if n == name then
+              return true
+            end
+          end
+          return false
         end,
       },
     })
