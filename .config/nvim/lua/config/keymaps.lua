@@ -25,7 +25,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Half page up/down + centering
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down by half a page, and center', noremap = true })
+vim.keymap.set('n', '<C-m>', '<C-d>zz', { desc = 'Move down by half a page, and center', noremap = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up by half a page, and center', noremap = true })
 
 -- Paste and put the deleted text to the _ registry (discarding it)
