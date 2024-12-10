@@ -195,6 +195,7 @@ in
     gimp
     git
     go
+    google-chrome
     greetd.tuigreet
     grim
     htop
