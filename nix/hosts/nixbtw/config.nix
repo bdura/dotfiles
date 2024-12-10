@@ -204,6 +204,7 @@ in
     inxi
     kanata
     killall
+    lazygit
     libnotify
     libvirt
     libvirt
