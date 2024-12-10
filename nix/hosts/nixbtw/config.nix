@@ -229,6 +229,7 @@ in
     rustup
     slurp
     socat
+    stow
     swappy
     swaynotificationcenter
     swww
