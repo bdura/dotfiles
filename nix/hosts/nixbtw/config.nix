@@ -185,6 +185,7 @@ in
   environment.systemPackages = with pkgs; [
     appimage-run
     bat
+    bun
     brightnessctl
     clang
     discord
@@ -226,6 +227,7 @@ in
     pciutils
     pkg-config
     playerctl
+    python312
     ripgrep
     rustup
     slurp
