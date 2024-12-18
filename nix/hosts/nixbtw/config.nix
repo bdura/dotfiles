@@ -238,6 +238,7 @@ in
     swww
     tmux
     tree
+    tree-sitter
     unrar
     unzip
     uv
