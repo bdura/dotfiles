@@ -63,26 +63,26 @@ in
     # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
     # looks like it's broken.
-    # base16Scheme = {
-    #   base00 = "#1A1B26";
-    #   base01 = "#16161E";
-    #   base02 = "#2F3549";
-    #   base03 = "#444B6A";
-    #   base04 = "#787C99";
-    #   base05 = "#A9B1D6";
-    #   base06 = "#CBCCD1";
-    #   base07 = "#D5D6DB";
-    #   base08 = "#C0CAF5";
-    #   base09 = "#A9B1D6";
-    #   base0A = "#0DB9D7";
-    #   base0B = "#9ECE6A";
-    #   base0C = "#B4F9F8";
-    #   base0D = "#2AC3DE";
-    #   base0E = "#BB9AF7";
-    #   base0F = "#F7768E";
-    # };
+    base16Scheme = {
+      base00 = "#1A1B26";
+      base01 = "#16161E";
+      base02 = "#2F3549";
+      base03 = "#444B6A";
+      base04 = "#787C99";
+      base05 = "#A9B1D6";
+      base06 = "#CBCCD1";
+      base07 = "#D5D6DB";
+      base08 = "#C0CAF5";
+      base09 = "#A9B1D6";
+      base0A = "#0DB9D7";
+      base0B = "#9ECE6A";
+      base0C = "#B4F9F8";
+      base0D = "#2AC3DE";
+      base0E = "#BB9AF7";
+      base0F = "#F7768E";
+    };
     polarity = "dark";
-    opacity.terminal = 0.8;
+    opacity.terminal = 1.0;
     cursor.package = pkgs.bibata-cursors;
     cursor.name = "Bibata-Modern-Ice";
     cursor.size = 24;
@@ -193,7 +193,6 @@ in
     eza
     ffmpeg
     file-roller
-    gimp
     git
     go
     google-chrome
