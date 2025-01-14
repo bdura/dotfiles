@@ -13,7 +13,7 @@
     monitor = desc:$dotblocksLGScreen,preferred,auto-up,1
     monitor = desc:$homeScreen,preferred,auto-left,1
     # Uncomment next line to mirror eDP-1
-    # monitor = , preferred, auto, 1, mirror, eDP-1
+    monitor = , preferred, auto, 1, mirror, eDP-1
   '';
 
   # Waybar Settings

@@ -226,6 +226,8 @@ in
     pciutils
     pkg-config
     playerctl
+    pnpm
+    podman-compose
     python312
     ripgrep
     rustup
