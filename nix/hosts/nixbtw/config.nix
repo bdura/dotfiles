@@ -198,6 +198,7 @@ in
     google-chrome
     greetd.tuigreet
     grim
+    gcc
     htop
     hyprpicker
     imv
@@ -228,6 +229,7 @@ in
     playerctl
     pnpm
     podman-compose
+    prettierd
     python312
     ripgrep
     rustup
