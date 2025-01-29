@@ -223,6 +223,7 @@ in
     ninja
     nixfmt-rfc-style
     nodejs
+    openssl
     pavucontrol
     pciutils
     pkg-config
