@@ -193,6 +193,7 @@ in
     eza
     ffmpeg
     file-roller
+    fzf
     git
     go
     google-chrome
