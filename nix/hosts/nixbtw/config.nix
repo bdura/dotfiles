@@ -191,6 +191,7 @@ in
     discord
     duf
     eza
+    fd
     ffmpeg
     file-roller
     fzf
@@ -213,6 +214,7 @@ in
     libvirt
     lm_sensors
     lshw
+    luarocks
     lxqt.lxqt-policykit
     meson
     mpv
