@@ -3,68 +3,72 @@
 --
 -- It also adds resize capabilities with the `<A-h/j/k/l>` keys
 return {
-  'mrjones2014/smart-splits.nvim',
+  "mrjones2014/smart-splits.nvim",
   lazy = false,
   keys = {
     {
-      '<A-h>',
-      mode = { 'n' },
+      "<A-h>",
+      mode = { "n" },
       function()
-        require('smart-splits').resize_left()
+        require("smart-splits").resize_left()
       end,
-      desc = 'Resize pane left',
+      desc = "Resize pane left",
     },
     {
-      '<A-j>',
-      mode = { 'n' },
+      "<A-j>",
+      mode = { "n" },
       function()
-        require('smart-splits').resize_down()
+        require("smart-splits").resize_down()
       end,
-      desc = 'Resize pane down',
+      desc = "Resize pane down",
     },
     {
-      '<A-k>',
-      mode = { 'n' },
+      "<A-k>",
+      mode = { "n" },
       function()
-        require('smart-splits').resize_up()
+        require("smart-splits").resize_up()
       end,
-      desc = 'Resize pane up',
+      desc = "Resize pane up",
     },
     {
-      '<A-l>',
-      mode = { 'n' },
+      "<A-l>",
+      mode = { "n" },
       function()
-        require('smart-splits').resize_right()
+        require("smart-splits").resize_right()
       end,
-      desc = 'Resize pane right',
+      desc = "Resize pane right",
     },
     {
-      '<C-h>',
-      mode = { 'n' },
+      "<C-h>",
+      mode = { "n" },
       function()
-        require('smart-splits').move_cursor_left()
+        require("smart-splits").move_cursor_left()
       end,
+      desc = "Move to left pane",
     },
     {
-      '<C-j>',
-      mode = { 'n' },
+      "<C-j>",
+      mode = { "n" },
       function()
-        require('smart-splits').move_cursor_down()
+        require("smart-splits").move_cursor_down()
       end,
+      desc = "Move to bottom pane",
     },
     {
-      '<C-k>',
-      mode = { 'n' },
+      "<C-k>",
+      mode = { "n" },
       function()
-        require('smart-splits').move_cursor_up()
+        require("smart-splits").move_cursor_up()
       end,
+      desc = "Move to top pane",
     },
     {
-      '<C-l>',
-      mode = { 'n' },
+      "<C-l>",
+      mode = { "n" },
       function()
-        require('smart-splits').move_cursor_right()
+        require("smart-splits").move_cursor_right()
       end,
+      desc = "Move to right pane",
     },
     --
     -- The following keys are conflicting with other shortcuts,
