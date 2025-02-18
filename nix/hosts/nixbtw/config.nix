@@ -72,7 +72,7 @@ in
       base05 = "A9B1D6";
       base06 = "CBCCD1";
       base07 = "D5D6DB";
-      base08 = "C0CAF5";
+      base08 = "f38ba8";
       base09 = "A9B1D6";
       base0A = "0DB9D7";
       base0B = "9ECE6A";
@@ -222,6 +222,7 @@ in
     networkmanagerapplet
     nh
     ninja
+    nixFlakes
     nixfmt-rfc-style
     nodejs
     openssl
