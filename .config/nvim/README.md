@@ -1,3 +1,4 @@
-# nvim configuration
+# 💤 LazyVim
 
-Originally used Kickstart, but moved away from it to fulfill my dream of writing it from scratch.
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
