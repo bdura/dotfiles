@@ -19,6 +19,7 @@
         ripgrep
         fzf
         tmux
+        starship
       ];
 
       fonts.packages = with pkgs; [
@@ -30,6 +31,7 @@
 
       # Enable alternative shell support in nix-darwin.
       programs.zsh.enable = true;
+      programs.fish.enable = true;
 
       security.pam.enableSudoTouchIdAuth = true;
 
