@@ -44,6 +44,16 @@
         nerd-fonts.jetbrains-mono
       ];
 
+      # Packages installed through brew
+      homebrew = {
+        enable = true;
+        onActivation.cleanup = "zap";
+        casks = [
+          "amethyst"
+          "the-unarchiver"
+        ];
+      };
+
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
