@@ -72,8 +72,15 @@
 
       system.defaults = {
         loginwindow.GuestEnabled = false;
-        NSGlobalDomain.AppleICUForce24HourTime = true;
-        NSGlobalDomain.AppleInterfaceStyle = "Dark";
+        finder = {
+          FXPreferredViewStyle = "Nlsv";
+          ShowPathbar = true;
+        };
+        NSGlobalDomain = {
+          AppleICUForce24HourTime = true;
+          AppleInterfaceStyle = "Dark";
+          "com.apple.mouse.tapBehavior" = 1;
+        };
         NSGlobalDomain.KeyRepeat = 2;
       };
 
