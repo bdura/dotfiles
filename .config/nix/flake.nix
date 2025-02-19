@@ -82,8 +82,11 @@
           AppleInterfaceStyle = "Dark";
           "com.apple.mouse.tapBehavior" = 1;
           NSAutomaticSpellingCorrectionEnabled = false;
+          KeyRepeat = 2;
         };
-        NSGlobalDomain.KeyRepeat = 2;
+        trackpad = {
+          TrackpadThreeFingerDrag = true;
+        };
       };
 
       # Allow unfree apps:
