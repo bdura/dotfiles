@@ -39,6 +39,7 @@
         tmux
         unnaturalscrollwheels
         wezterm
+        zoxide
       ];
 
       fonts.packages = with pkgs; [
