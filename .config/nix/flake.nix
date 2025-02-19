@@ -20,6 +20,7 @@
         fzf
         tmux
         starship
+        wezterm
       ];
 
       fonts.packages = with pkgs; [
