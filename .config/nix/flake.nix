@@ -36,6 +36,7 @@
         pre-commit
         ripgrep
         starship
+        signal-desktop
         tmux
         unnaturalscrollwheels
         wezterm
@@ -52,7 +53,9 @@
         onActivation.cleanup = "zap";
         casks = [
           "amethyst"
+          "bitwarden"
           "the-unarchiver"
+          "whatsapp"
         ];
       };
 
