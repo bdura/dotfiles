@@ -12,12 +12,16 @@
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-          with pkgs;
-        [
-          vim
-          nerd-fonts.jetbrains-mono
-        ];
+      environment.systemPackages = with pkgs; [
+        neovim
+        ripgrep
+        fzf
+        tmux
+      ];
+
+      fonts.packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+      ];
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
