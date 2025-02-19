@@ -37,6 +37,7 @@
         ripgrep
         starship
         tmux
+        unnaturalscrollwheels
         wezterm
       ];
 
@@ -80,6 +81,7 @@
           AppleICUForce24HourTime = true;
           AppleInterfaceStyle = "Dark";
           "com.apple.mouse.tapBehavior" = 1;
+          NSAutomaticSpellingCorrectionEnabled = false;
         };
         NSGlobalDomain.KeyRepeat = 2;
       };
