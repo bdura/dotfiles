@@ -75,7 +75,7 @@
             };
 
             casks = [
-              "amethyst"
+              # "amethyst"
               "bitwarden"
               "the-unarchiver"
               "whatsapp"
@@ -133,6 +133,10 @@
             # Disable most recently used apps in the dock
             dock.mru-spaces = false;
           };
+
+          # Enable yabai & skhd
+          services.yabai.enable = true;
+          services.skhd.enable = true;
 
           # Allow unfree apps:
           nixpkgs.config.allowUnfree = true;
