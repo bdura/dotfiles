@@ -50,7 +50,12 @@
       # Packages installed through brew
       homebrew = {
         enable = true;
-        onActivation.cleanup = "zap";
+
+        onActivation = {
+          cleanup = "zap";
+            # autoUpdate = true;
+        };
+
         casks = [
           "amethyst"
           "bitwarden"
@@ -74,6 +79,8 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
+
+      time.timeZone = "Europe/Paris";
 
       system.defaults = {
         loginwindow.GuestEnabled = false;
