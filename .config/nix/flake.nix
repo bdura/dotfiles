@@ -84,9 +84,13 @@
 
       system.defaults = {
         loginwindow.GuestEnabled = false;
+        # Each display has its own spaces
+        spaces.spans-displays = false;
+        menuExtraClock.Show24Hour = true;
         finder = {
           FXPreferredViewStyle = "Nlsv";
           ShowPathbar = true;
+          ShowStatusBar = true;
         };
         NSGlobalDomain = {
           AppleICUForce24HourTime = true;
@@ -97,7 +101,13 @@
         };
         trackpad = {
           TrackpadThreeFingerDrag = true;
+          # tap to click
+          Clicking = true;
+          # two-finger-tap right click
+          TrackpadRightClick = true;
         };
+        # Disable most recently used apps in the dock
+        dock.mru-spaces = false;
       };
 
       # Allow unfree apps:
