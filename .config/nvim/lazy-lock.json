@@ -7,6 +7,10 @@
     "branch": "main",
     "commit": "6c40d8a0874201d7f91599102864573bdd191859"
   },
+  "alpha-nvim": {
+    "branch": "main",
+    "commit": "de72250e054e5e691b9736ee30db72c65d560771"
+  },
   "blink.cmp": {
     "branch": "main",
     "commit": "18b352d12b35bca148427b607098df14b75a218f"
@@ -29,7 +33,7 @@
   },
   "crates.nvim": {
     "branch": "main",
-    "commit": "85356807f3a0e9a3f7015586f3a010170d338686"
+    "commit": "72644e516866e343b711203a977750e4e9fe38cc"
   },
   "dial.nvim": {
     "branch": "master",
@@ -45,7 +49,7 @@
   },
   "gitsigns.nvim": {
     "branch": "main",
-    "commit": "c3070fcc2e7da1798041219fde8d88f2e4bf7eb5"
+    "commit": "6668f379ca634c36b8e11453118590b91bf8b295"
   },
   "grug-far.nvim": {
     "branch": "main",
@@ -125,7 +129,7 @@
   },
   "nvim-treesitter": {
     "branch": "master",
-    "commit": "36bbf518420918e965d11dad3d3f194803c47731"
+    "commit": "2c4c8c10ed440ddf8df5ac8811d5c8ee5fc23d11"
   },
   "nvim-treesitter-textobjects": {
     "branch": "master",
@@ -161,7 +165,7 @@
   },
   "snacks.nvim": {
     "branch": "main",
-    "commit": "08c2eaf369fc6bf84de3cb8da510982c9281d552"
+    "commit": "830ac62815e70f3db35ed7a295710c836578c6e3"
   },
   "todo-comments.nvim": {
     "branch": "main",
@@ -193,7 +197,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "56d531225b14397c470f7a1f55382a4a449b46e1"
+    "commit": "10c6c1672919db9d0687e5cb74d613dc811b1684"
   },
   "which-key.nvim": {
     "branch": "main",
