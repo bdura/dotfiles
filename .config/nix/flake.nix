@@ -158,6 +158,8 @@
       # $ darwin-rebuild build --flake .
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
+          ./services/yabai.nix
+          ./services/skhd.nix
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
