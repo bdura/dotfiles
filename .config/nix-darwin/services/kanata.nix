@@ -3,7 +3,7 @@
   ...
 }:
 let
-  skhdConfig = ''
+  config = ''
     ;; defsrc is still necessary
     (defcfg
       process-unmapped-keys yes
@@ -34,7 +34,7 @@ let
       @escctrl @a @s @d @f @j @k @l @;
     )
   '';
-  configFile = pkgs.writeScript "kanata.kbd" skhdConfig;
+  configFile = pkgs.writeScript "kanata.kbd" config;
 in
 {
   config = {
