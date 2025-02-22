@@ -59,6 +59,19 @@
             unnaturalscrollwheels
             wezterm
             zoxide
+            # Neovim
+            # treesitter
+            cmake
+            lua
+            luarocks
+            imagemagick # Image conversion
+            ghostscript # PDF files
+            tectonic # Render LaTeX expressions
+            mermaid-cli # Render mermaid diagrams
+            fd # Faster find
+            # latexmk
+            # bibtex
+            biber
           ];
 
           fonts.packages = with pkgs; [
