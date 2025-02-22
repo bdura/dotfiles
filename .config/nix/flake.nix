@@ -76,12 +76,12 @@
 
             casks = [
               "bitwarden"
-              "the-unarchiver"
-              "whatsapp"
               # There is an issue with the Karabiner service.
               # See <https://github.com/LnL7/nix-darwin/issues/1041>
               # TODO: use the service once it's running again.
               "karabiner-elements"
+              "the-unarchiver"
+              "whatsapp"
             ];
           };
 
@@ -145,10 +145,6 @@
             # Disable most recently used apps in the dock
             dock.mru-spaces = false;
           };
-
-          # Enable yabai & skhd
-          services.yabai.enable = true;
-          services.skhd.enable = true;
 
           # Allow unfree apps:
           nixpkgs.config.allowUnfree = true;
