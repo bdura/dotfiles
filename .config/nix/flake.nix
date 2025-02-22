@@ -104,13 +104,18 @@
 
           time.timeZone = "Europe/Paris";
 
+          system.startup.chime = false;
           system.defaults = {
+            screencapture.target = "clipboard";
             # Faster transitions
             # universalaccess.reduceMotion = true;
             loginwindow.GuestEnabled = false;
             # Each display has its own spaces
             spaces.spans-displays = false;
-            menuExtraClock.Show24Hour = true;
+            menuExtraClock = {
+              Show24Hour = true;
+              ShowSeconds = true;
+            };
             finder = {
               FXPreferredViewStyle = "Nlsv";
               ShowPathbar = true;
@@ -120,7 +125,11 @@
               AppleICUForce24HourTime = true;
               AppleInterfaceStyle = "Dark";
               "com.apple.mouse.tapBehavior" = 1;
+              # Natural scroll direction
+              "com.apple.swipescrolldirection" = true;
               NSAutomaticSpellingCorrectionEnabled = false;
+              # Auto-hide menu bar. Useful if we use sketchybar
+              _HIHideMenuBar = false;
               KeyRepeat = 2;
             };
             trackpad = {
