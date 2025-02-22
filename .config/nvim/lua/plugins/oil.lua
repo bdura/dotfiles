@@ -1,5 +1,5 @@
 return {
-  "stevearc/oil.nvim",
+  'stevearc/oil.nvim',
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
@@ -7,18 +7,18 @@ return {
   },
   -- Optional dependencies
   -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
   config = function()
-    local oil = require("oil")
+    local oil = require('oil')
 
     local hidden = {
-      "..",
-      ".git",
-      ".ipynb_checkpoints",
-      ".DS_Store",
-      ".ruff_cache",
-      ".pytest_cache",
-      ".venv",
+      '..',
+      '.git',
+      '.ipynb_checkpoints',
+      '.DS_Store',
+      '.ruff_cache',
+      '.pytest_cache',
+      '.venv',
     }
 
     oil.setup({
@@ -35,6 +35,6 @@ return {
       },
       watch_for_changes = true,
     })
-    vim.keymap.set("n", "-", oil.toggle_float, {})
+    vim.keymap.set('n', '-', oil.toggle_float, {})
   end,
 }
