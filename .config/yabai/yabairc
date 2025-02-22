@@ -1,3 +1,12 @@
+# # Yabai - a tiling window manager for macOS
+#
+# See the github page: <https://github.com/koekeishiya/yabai>
+#
+# A great resource: <https://www.josean.com/posts/yabai-setup>
+#
+# Not actually used.
+# Since Yabai cannot be hot-reloaded, it's configured in the nix derivation directly.
+
 yabai -m config                                 \
     external_bar                 off:40:0       \
     menubar_opacity              1.0            \
