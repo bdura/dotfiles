@@ -46,6 +46,7 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
+            btop
             fzf
             lazygit
             mkalias
@@ -58,6 +59,7 @@
             tmux
             unnaturalscrollwheels
             wezterm
+            youtube-music
             zoxide
             # Neovim
             # treesitter
