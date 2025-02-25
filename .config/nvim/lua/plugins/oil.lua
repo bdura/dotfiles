@@ -34,6 +34,9 @@ return {
         end,
       },
       watch_for_changes = true,
+      keymaps = {
+        ['<Esc>'] = { callback = 'actions.close', mode = 'n' },
+      },
     })
     vim.keymap.set('n', '-', oil.toggle_float, {})
   end,
