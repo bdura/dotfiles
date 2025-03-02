@@ -107,9 +107,10 @@
           nix.gc.automatic = true;
           nix.optimise.automatic = true;
 
-          # Enable alternative shell support in nix-darwin.
-          programs.zsh.enable = true;
-          # programs.fish.enable = true;
+          programs = {
+            zsh.enable = true;
+            direnv.enable = true;
+          };
 
           security.pam.services.sudo_local.touchIdAuth = true;
 
