@@ -1,0 +1,3 @@
+font-family = "JetBrains Mono Nerd Font"
+command = "zsh"
+theme = catppuccin-mocha.conf
