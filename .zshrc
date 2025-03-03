@@ -69,3 +69,6 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # Enable starship
 eval "$(starship init zsh)"
+
+# Enable direnv
+eval "$(direnv hook zsh)"
