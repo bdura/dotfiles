@@ -48,6 +48,8 @@
           environment.systemPackages = with pkgs; [
             btop
             fzf
+            git
+            git-lfs
             lazygit
             mkalias
             neovim
