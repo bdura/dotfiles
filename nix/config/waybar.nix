@@ -54,7 +54,7 @@ with lib;
           tooltip = true;
           tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
         };
-        "temperature" = { 
+        "temperature" = {
           format = " {temperatureC}°C";
         };
         "hyprland/window" = {

@@ -529,7 +529,7 @@ keybinding:
     openStatusFilter: <c-b>
     copyFileInfoToClipboard: "y"
     collapseAll: "-"
-    expandAll: =
+    expandAll: "="
   branches:
     createPullRequest: o
     viewPullRequestOptions: O

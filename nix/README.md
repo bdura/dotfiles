@@ -4,7 +4,7 @@
 
 ZaneyOS is a simple way of reproducing my configuration on any NixOS system. This includes the wallpaper, scripts, applications, config files, and more.
 
-<img align="center" width="80%" src="https://gitlab.com/Zaney/zaneyos/-/raw/main/config/demo.png" />    
+<img align="center" width="80%" src="https://gitlab.com/Zaney/zaneyos/-/raw/main/config/demo.png" />
 
 **Inspiration for the Waybar config [here](https://github.com/justinlime/dotfiles).**
 
@@ -97,7 +97,7 @@ nixos-generate-config --show-hardware-config > hosts/<your-desired-hostname>/har
 Run this to enable flakes and install the flake replacing hostname with whatever you put as the hostname:
 
 ```
-NIX_CONFIG="experimental-features = nix-command flakes" 
+NIX_CONFIG="experimental-features = nix-command flakes"
 sudo nixos-rebuild switch --flake .#hostname
 ```
 

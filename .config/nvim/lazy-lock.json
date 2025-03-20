@@ -5,7 +5,7 @@
   },
   "SchemaStore.nvim": {
     "branch": "main",
-    "commit": "39015717d8b25262119df1a8dd4069b17aea8d82"
+    "commit": "a0df1a2a9c960b677bf2dd1610b434fca045056d"
   },
   "blink.cmp": {
     "branch": "main",
@@ -25,7 +25,7 @@
   },
   "conform.nvim": {
     "branch": "master",
-    "commit": "f8929b32acb8712381621b42ef3b0219c3c41efd"
+    "commit": "f9ef25a7ef00267b7d13bfc00b0dea22d78702d5"
   },
   "crates.nvim": {
     "branch": "main",
@@ -81,7 +81,7 @@
   },
   "mini.ai": {
     "branch": "main",
-    "commit": "6e01c0e5a15554852546fac9853960780ac52ed4"
+    "commit": "978ffc65c6b513fde9ef075326d34d89197f1ea5"
   },
   "mini.comment": {
     "branch": "main",
@@ -109,7 +109,7 @@
   },
   "mini.surround": {
     "branch": "main",
-    "commit": "f90069c7441a5fb04c3de42eacf93e16b64dd3eb"
+    "commit": "c92d262deae79545b7674b2069332116461a85f3"
   },
   "neotest": {
     "branch": "master",
@@ -173,7 +173,7 @@
   },
   "oil.nvim": {
     "branch": "master",
-    "commit": "8649818fb29322a8ee24c5cd2cd7b2f6c40258a3"
+    "commit": "4c9bdf0d839932617cdb25ed46a2f7bb1e090f77"
   },
   "persistence.nvim": {
     "branch": "main",
@@ -229,7 +229,7 @@
   },
   "vimtex": {
     "branch": "master",
-    "commit": "ae6d6ce6c962ffcabe6d1776341b055a85b18bd6"
+    "commit": "ffd09d8493712ac8c2c570f8d5370b0572b6c5f6"
   },
   "which-key.nvim": {
     "branch": "main",

@@ -1,6 +1,6 @@
-local comment = require("Comment")
+local comment = require('Comment')
 
-local ts_context_commentstring = require("ts_context_commentstring.integrations.comment_nvim")
+local ts_context_commentstring = require('ts_context_commentstring.integrations.comment_nvim')
 
 -- enable comment
 comment.setup({

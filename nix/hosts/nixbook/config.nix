@@ -405,7 +405,7 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
   hardware.pulseaudio.enable = false;
-  
+
   # Security / Polkit
   security.rtkit.enable = true;
   security.polkit.enable = true;
