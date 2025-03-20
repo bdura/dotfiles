@@ -191,6 +191,7 @@ in
     brightnessctl
     clang
     discord
+    drawio
     duf
     eza
     fd
