@@ -3,11 +3,11 @@ if status is-interactive
 end
 
 function starship_transient_prompt_func
-  starship module character
+    starship module character
 end
 
 function starship_transient_rprompt_func
-  starship module time
+    starship module time
 end
 
 fish_add_path /opt/homebrew/bin/
@@ -17,7 +17,7 @@ fish_add_path $HOME/.cargo/bin/
 set -x POETRY_CONFIG_DIR $HOME/.config/poetry
 
 if test -e $HOME/.local/config.fish
-  source $HOME/.local/config.fish
+    source $HOME/.local/config.fish
 end
 
 # Overwrite fish_greeting with empty message
@@ -31,3 +31,5 @@ enable_transience
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+direnv hook fish | source
