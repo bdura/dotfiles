@@ -145,7 +145,9 @@ in
 
   programs = {
     firefox.enable = true;
-    fish.enable = true;
+    # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
+    zsh.enable = true;
+    direnv.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
