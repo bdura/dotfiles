@@ -2,7 +2,7 @@ require('fine-cmdline').setup({
   cmdline = {
     enable_keymaps = true,
     smart_history = true,
-    prompt = '> '
+    prompt = '> ',
   },
   popup = {
     position = {
@@ -28,6 +28,6 @@ require('fine-cmdline').setup({
     end,
     set_keymaps = function(imap, feedkeys)
       -- code
-    end
-  }
+    end,
+  },
 })

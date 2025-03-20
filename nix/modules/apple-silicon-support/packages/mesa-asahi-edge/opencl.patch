@@ -16,14 +16,14 @@ index 552ff196aa8..9e10156b875 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -1829,7 +1829,7 @@ endif
- 
+
  dep_clang = null_dep
  if with_clc
 -  llvm_libdir = dep_llvm.get_variable(cmake : 'LLVM_LIBRARY_DIR', configtool: 'libdir')
 +  llvm_libdir = get_option('clang-libdir')
- 
+
    dep_clang = cpp.find_library('clang-cpp', dirs : llvm_libdir, required : false)
- 
+
 diff --git a/meson_options.txt b/meson_options.txt
 index c76fa6d3382..d2021f55634 100644
 --- a/meson_options.txt
@@ -31,7 +31,7 @@ index c76fa6d3382..d2021f55634 100644
 @@ -1,6 +1,12 @@
  # Copyright © 2017-2019 Intel Corporation
  # SPDX-License-Identifier: MIT
- 
+
 +option(
 +  'clang-libdir',
 +  type : 'string',
@@ -48,11 +48,11 @@ index 7c14135898e..cbcd67cc443 100644
 @@ -39,7 +39,8 @@ if dep_llvm.version().version_compare('>=10.0.0')
    polly_isl_dep = cpp.find_library('PollyISL', dirs : llvm_libdir, required : false)
  endif
- 
+
 -dep_clang = cpp.find_library('clang-cpp', dirs : llvm_libdir, required : false)
 +clang_libdir = get_option('clang-libdir')
 +dep_clang = cpp.find_library('clang-cpp', dirs : clang_libdir, required : false)
- 
+
  # meson will return clang-cpp from system dirs if it's not found in llvm_libdir
  linker_rpath_arg = '-Wl,--rpath=@0@'.format(llvm_libdir)
 @@ -123,8 +124,7 @@ if with_opencl_icd
@@ -64,7 +64,7 @@ index 7c14135898e..cbcd67cc443 100644
 +    install : false,
      install_dir : join_paths(get_option('sysconfdir'), 'OpenCL', 'vendors'),
    )
- 
+
 diff --git a/src/gallium/targets/rusticl/meson.build b/src/gallium/targets/rusticl/meson.build
 index b2963fe6dfa..2f784bdccd4 100644
 --- a/src/gallium/targets/rusticl/meson.build
@@ -78,7 +78,6 @@ index b2963fe6dfa..2f784bdccd4 100644
 +  install : false,
    install_dir : join_paths(get_option('sysconfdir'), 'OpenCL', 'vendors'),
  )
- 
--- 
-2.40.1
 
+--
+2.40.1

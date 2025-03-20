@@ -1,4 +1,4 @@
-local nvimtree = require("nvim-tree")
+local nvimtree = require('nvim-tree')
 
 -- recommended settings from nvim-tree documentation
 vim.g.loaded_netrw = 1
@@ -17,8 +17,8 @@ nvimtree.setup({
     icons = {
       glyphs = {
         folder = {
-          arrow_closed = "", -- arrow when folder is closed
-          arrow_open = "", -- arrow when folder is open
+          arrow_closed = '', -- arrow when folder is closed
+          arrow_open = '', -- arrow when folder is open
         },
       },
     },
@@ -34,7 +34,7 @@ nvimtree.setup({
     },
   },
   filters = {
-    custom = { ".DS_Store" },
+    custom = { '.DS_Store' },
   },
   git = {
     ignore = false,
@@ -44,4 +44,4 @@ nvimtree.setup({
 -- set keymaps
 local keymap = vim.keymap -- for conciseness
 
-keymap.set("n", "<leader>fe", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
+keymap.set('n', '<leader>fe', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' }) -- toggle file explorer
