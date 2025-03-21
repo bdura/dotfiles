@@ -12,6 +12,13 @@ return {
     jump = {
       autojump = true,
     },
+    label = {
+      rainbow = {
+        enabled = true,
+        -- number between 1 and 9
+        shade = 3,
+      },
+    },
   },
   -- stylua: ignore
   keys = {
