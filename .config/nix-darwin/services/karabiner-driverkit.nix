@@ -4,8 +4,10 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
+
 with lib;
 
 let
@@ -18,16 +20,17 @@ in
 {
   options.services.karabiner-driverkit = {
     enable = mkEnableOption "Karabiner-DriverKit";
+    package = mkPackageOption pkgs "karabiner-elements" { };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ (callPackage ../packages/karabiner-driverkit.nix { }) ];
+    environment.systemPackages = [ cfg.package ];
 
     system.activationScripts.preActivation.text = ''
       rm -rf ${parentAppDir}
       mkdir -p ${parentAppDir}
       # Kernel extensions must reside inside of /Applications, they cannot be symlinks
-      cp -r ${cfg.package}/driver/Applications/.Karabiner-VirtualHIDDevice-Manager.app ${parentAppDir}
+      cp -r ${cfg.package.driver}/Applications/.Karabiner-VirtualHIDDevice-Manager.app ${parentAppDir}
     '';
 
     # system.activationScripts.postActivation.text = ''
@@ -50,13 +53,17 @@ in
       '';
       # serviceConfig.Label = "org.nixos.start_karabiner_daemons";
       serviceConfig.RunAtLoad = true;
+      serviceConfig.StandardOutPath = /tmp/start_karabiner_daemons.out;
+      serviceConfig.StandardErrorPath = /tmp/start_karabiner_daemons.err;
     };
 
     launchd.daemons.Karabiner-DriverKit-VirtualHIDDeviceClient = {
-      command = "\"${cfg.package}/driver/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-DriverKit-VirtualHIDDeviceClient.app/Contents/MacOS/Karabiner-DriverKit-VirtualHIDDeviceClient\"";
+      command = "\"${cfg.package.driver}/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-DriverKit-VirtualHIDDeviceClient.app/Contents/MacOS/Karabiner-DriverKit-VirtualHIDDeviceClient\"";
       serviceConfig.ProcessType = "Interactive";
-      # serviceConfig.Label = "org.pqrs.Karabiner-DriverKit-VirtualHIDDeviceClient";
+      serviceConfig.Label = "org.pqrs.Karabiner-DriverKit-VirtualHIDDeviceClient";
       serviceConfig.KeepAlive = true;
+      serviceConfig.StandardOutPath = /tmp/Karabiner-DriverKit.out;
+      serviceConfig.StandardErrorPath = /tmp/Karabiner-DriverKit.err;
     };
 
     # Normally karabiner_console_user_server calls activate on the manager but
@@ -67,6 +74,8 @@ in
         "activate"
       ];
       serviceConfig.RunAtLoad = true;
+      serviceConfig.StandardOutPath = /tmp/activate_karabiner_system_ext.out;
+      serviceConfig.StandardErrorPath = /tmp/activate_karabiner_system_ext.err;
     };
   };
 }
