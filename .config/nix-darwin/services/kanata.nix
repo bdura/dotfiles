@@ -53,17 +53,17 @@ in
 
     # TODO: make this a user agent.
     launchd.daemons.kanata = {
+      # NOTE: we *need* to use a `command` here, because it wraps the call to kanata
+      # with a `wait4path`, which makes sure that the nix store is mounted.
+      # Without `command`, launchd exits with error code 78 ("function not implemented"),
+      # and does not try to relaunch it even if keepalive is set - since from its point of view
+      # the program does not even exist.
+      command = "${pkgs.kanata}/bin/kanata -c ${configFile}";
       serviceConfig = {
-        ProgramArguments = [
-          "${pkgs.kanata}/bin/kanata"
-          "-c"
-          "${configFile}"
-        ];
         # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
-        KeepAlive = false;
-        RunAtLoad = true;
-        StandardOutPath = /tmp/kanata.out;
-        StandardErrorPath = /tmp/kanata.err;
+        KeepAlive = {
+          SuccessfulExit = false;
+        };
       };
     };
   };
