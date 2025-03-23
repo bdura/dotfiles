@@ -95,6 +95,7 @@
               "bitwarden"
               "the-unarchiver"
               "whatsapp"
+              "launchcontrol"
             ];
           };
 

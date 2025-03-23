@@ -56,8 +56,6 @@ in
         ];
         KeepAlive = true;
         ProcessType = "Interactive";
-        StandardErrorPath = /tmp/karabiner-driverkit.err;
-        StandardOutPath = /tmp/karabiner-driverkit.out;
       };
     };
 
@@ -72,8 +70,6 @@ in
         # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
         KeepAlive = false;
         RunAtLoad = true;
-        StandardErrorPath = /tmp/kanata.err;
-        StandardOutPath = /tmp/kanata.out;
       };
     };
   };
