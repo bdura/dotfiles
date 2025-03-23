@@ -27,7 +27,13 @@ Reading list:
 - [nix derivation for Karabiner-Elements][karabiner-elements] (includes the DriverKit)
 - [karabiner-elements service][karabiner-service]
 
+It looks like we _need_ to [copy the driver in `/Applications`][within-app] to work,
+supposedly because it uses kernel-level privileges. However, at present
+it looks like the `.Nix-Karabiner` folder would _not_ be removed if the
+the service becomes disabled. We should figure out a way to remove it.
+
 [karabiner]: https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice
 [karabiner-readme]: https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice?tab=readme-ov-file#usage
 [karabiner-elements]: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/ka/karabiner-elements/package.nix#L63
 [karabiner-service]: https://github.com/LnL7/nix-darwin/blob/ebb88c3428dcdd95c06dca4d49b9791a65ab777b/modules/services/karabiner-elements/default.nix
+[within-app]: https://github.com/LnL7/nix-darwin/blob/ebb88c3428dcdd95c06dca4d49b9791a65ab777b/modules/services/karabiner-elements/default.nix#L23
