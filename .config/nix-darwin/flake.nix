@@ -175,7 +175,7 @@
         modules = [
           ./services/yabai.nix
           # ./services/skhd.nix
-          ./services/kanata.nix
+          ./services/kanata
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew

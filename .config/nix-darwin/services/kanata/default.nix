@@ -58,7 +58,7 @@ in
       # Without `command`, launchd exits with error code 78 ("function not implemented"),
       # and does not try to relaunch it even if keepalive is set - since from its point of view
       # the program does not even exist.
-      command = "${pkgs.kanata}/bin/kanata -c ${configFile}";
+      command = "${pkgs.kanata}/bin/kanata -c ${./config.kbd}";
       serviceConfig = {
         # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
         KeepAlive = {
