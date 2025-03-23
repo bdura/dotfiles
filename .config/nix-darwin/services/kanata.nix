@@ -51,18 +51,20 @@ in
       };
     };
 
-    # # TODO: make this a user agent.
-    # launchd.daemons.kanata = {
-    #   serviceConfig = {
-    #     ProgramArguments = [
-    #       "${pkgs.kanata}/bin/kanata"
-    #       "-c"
-    #       "${configFile}"
-    #     ];
-    #     # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
-    #     KeepAlive = false;
-    #     RunAtLoad = true;
-    #   };
-    # };
+    # TODO: make this a user agent.
+    launchd.daemons.kanata = {
+      serviceConfig = {
+        ProgramArguments = [
+          "${pkgs.kanata}/bin/kanata"
+          "-c"
+          "${configFile}"
+        ];
+        # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
+        KeepAlive = false;
+        RunAtLoad = true;
+        StandardOutPath = /tmp/kanata.out;
+        StandardErrorPath = /tmp/kanata.err;
+      };
+    };
   };
 }
