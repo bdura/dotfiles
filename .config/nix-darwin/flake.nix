@@ -93,12 +93,9 @@
 
             casks = [
               "bitwarden"
-              # There is an issue with the Karabiner service.
-              # See <https://github.com/LnL7/nix-darwin/issues/1041>
-              # TODO: use the service once it's running again.
-              "karabiner-elements"
               "the-unarchiver"
               "whatsapp"
+              "launchcontrol"
             ];
           };
 
@@ -177,9 +174,8 @@
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
           ./services/yabai.nix
-          ./services/skhd.nix
-          # FIXME: "kanata is marked as broken, refusing to evaluate"
-          # ./services/kanata.nix
+          # ./services/skhd.nix
+          ./services/kanata
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
