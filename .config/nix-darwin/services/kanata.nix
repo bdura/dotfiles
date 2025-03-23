@@ -40,15 +40,17 @@ in
   config = {
     environment.systemPackages = [ pkgs.kanata ];
 
-    launchd.user.agents.kanata = {
+    launchd.daemons.kanata = {
       serviceConfig = {
         ProgramArguments = [
           "${pkgs.kanata}/bin/kanata"
           "-c"
-          "${configFile}"
+          "/Users/basile/.config/kanata/kanata.kbd"
         ];
-        KeepAlive = true;
+        KeepAlive = false;
         RunAtLoad = true;
+        StandardErrorPath = /tmp/kanata.err;
+        StandardOutPath = /tmp/kanata.out;
       };
     };
   };
