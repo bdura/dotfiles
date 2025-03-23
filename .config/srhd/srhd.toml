@@ -3,3 +3,23 @@
 key = "return"
 command = "wezterm cli spawn --new-window"
 mods = ["command"]
+
+# [[bindings]]
+# key = "j"
+# command = "yabai -m window --focus south"
+# mods = ["command", "option"]
+#
+# [[bindings]]
+# key = "k"
+# command = "yabai -m window --focus north"
+# mods = ["command", "option"]
+#
+# [[bindings]]
+# key = "h"
+# command = "yabai -m window --focus west"
+# mods = ["command", "option"]
+#
+# [[bindings]]
+# key = "l"
+# command = "yabai -m window --focus east"
+# mods = ["command", "option"]
