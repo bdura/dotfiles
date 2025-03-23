@@ -68,14 +68,18 @@ in
       '';
       serviceConfig.Label = "org.nixos.start_karabiner_daemons";
       serviceConfig.RunAtLoad = true;
+      serviceConfig.StandardErrorPath = /tmp/karabiner-daemons.err;
+      serviceConfig.StandardOutPath = /tmp/karabiner-daemons.out;
     };
 
     launchd.daemons.Karabiner-DriverKit-VirtualHIDDeviceDaemon = {
-      command = "/Library/Application\ Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon";
+      command = "'/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'";
 
       serviceConfig.ProcessType = "Interactive";
       serviceConfig.Label = "org.pqrs.Karabiner-DriverKit-VirtualHIDDeviceDaemon";
       serviceConfig.KeepAlive = true;
+      serviceConfig.StandardErrorPath = /tmp/karabiner-driverkit.err;
+      serviceConfig.StandardOutPath = /tmp/karabiner-driverkit.out;
     };
 
     # # Normally karabiner_console_user_server calls activate on the manager but
@@ -95,17 +99,16 @@ in
     #   EOF
     # '';
 
-    # # NOTE: this is quite ugly... Since this part is *not* handled by Nix.
-    #
-    # launchd.daemons.karabiner-driverkit = {
-    #   serviceConfig = {
-    #     ProgramArguments = [
-    #       "/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon"
-    #     ];
-    #     KeepAlive = true;
-    #     ProcessType = "Interactive";
-    #   };
-    # };
+    # NOTE: this is quite ugly... Since this part is *not* handled by Nix.
+    launchd.daemons.karabiner = {
+      serviceConfig = {
+        ProgramArguments = [
+          "/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon"
+        ];
+        KeepAlive = true;
+        ProcessType = "Interactive";
+      };
+    };
 
     # TODO: make this a user agent.
     launchd.daemons.kanata = {
