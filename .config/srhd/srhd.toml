@@ -1,0 +1,5 @@
+# srhd.toml
+[[bindings]]
+key = "return"
+command = "wezterm cli spawn --new-window"
+mods = ["command"]

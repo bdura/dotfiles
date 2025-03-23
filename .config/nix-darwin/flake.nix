@@ -76,6 +76,7 @@
             # latexmk
             # bibtex
             biber
+            skhd
           ];
 
           fonts.packages = with pkgs; [
@@ -95,6 +96,7 @@
               "bitwarden"
               "the-unarchiver"
               "whatsapp"
+              "launchcontrol"
             ];
           };
 
@@ -173,7 +175,7 @@
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
           ./services/yabai.nix
-          # ./services/skhd.nix
+          ./services/srhd.nix
           ./services/kanata
           configuration
           mac-app-util.darwinModules.default

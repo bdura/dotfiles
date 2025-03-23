@@ -10,8 +10,19 @@
 # The issue may stem from an inability to listen for hotkeys when launched as a service?
 
 {
+  pkgs,
   ...
 }:
 {
-  services.skhd.enable = true;
+  launchd.user.agents.skhd = {
+    serviceConfig = {
+      ProgramArguments = [
+        "${pkgs.skhd}/bin/skhd"
+        "-V"
+      ];
+      KeepAlive = true;
+      StandardOutPath = /tmp/skhd.out;
+      StandardErrorPath = /tmp/skhd.err;
+    };
+  };
 }
