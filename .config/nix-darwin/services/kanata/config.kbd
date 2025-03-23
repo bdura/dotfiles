@@ -4,7 +4,8 @@
 )
 
 (defsrc
-  caps a s d f j k l ;
+             r
+  caps a s d f h j k l ;
 )
 
 (defvar
@@ -13,6 +14,8 @@
 )
 
 (defalias
+  l_cmd (layer-toggle cmd)
+  r (tap-hold $tap-time $hold-time r @l_cmd)
   escctrl (tap-hold 200 200 esc lctl)
   a (tap-hold $tap-time $hold-time a lmet)
   s (tap-hold $tap-time $hold-time s lalt)
@@ -25,5 +28,11 @@
 )
 
 (deflayer base
-  @escctrl @a @s @d @f @j @k @l @;
+                    @r
+  @escctrl @a @s @d @f h @j @k @l @;
+)
+
+(deflayer cmd
+                    XX
+  XX XX XX XX XX left down up right XX
 )
