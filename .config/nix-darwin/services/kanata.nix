@@ -40,13 +40,37 @@ in
   config = {
     environment.systemPackages = [ pkgs.kanata ];
 
+    # environment.etc."sudoers.d/kanata".source = pkgs.runCommand "sudoers-kanata" { } ''
+    #   KANATA_BIN="${pkgs.kanata}/bin/kanata"
+    #   SHASUM=$(sha256sum "$KANATA_BIN" | cut -d' ' -f1)
+    #   cat <<EOF >"$out"
+    #   %admin ALL=(root) NOPASSWD: sha256:$SHASUM $KANATA_BIN
+    #   EOF
+    # '';
+
+    # NOTE: this is quite ugly... Since this part is *not* handled by Nix.
+    launchd.daemons.karabiner-driverkit = {
+      serviceConfig = {
+        ProgramArguments = [
+          "/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon"
+        ];
+        KeepAlive = true;
+        ProcessType = "Interactive";
+        StandardErrorPath = /tmp/karabiner-driverkit.err;
+        StandardOutPath = /tmp/karabiner-driverkit.out;
+      };
+    };
+
+    # TODO: make this a user agent.
     launchd.daemons.kanata = {
       serviceConfig = {
         ProgramArguments = [
           "${pkgs.kanata}/bin/kanata"
           "-c"
           "/Users/basile/.config/kanata/kanata.kbd"
+          "-d"
         ];
+        # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
         KeepAlive = false;
         RunAtLoad = true;
         StandardErrorPath = /tmp/kanata.err;
