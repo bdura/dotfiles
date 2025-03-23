@@ -67,8 +67,7 @@ in
         ProgramArguments = [
           "${pkgs.kanata}/bin/kanata"
           "-c"
-          "/Users/basile/.config/kanata/kanata.kbd"
-          "-d"
+          "${configFile}"
         ];
         # NOTE: this allows ctrl + space + esc to be used as an escape hatch.
         KeepAlive = false;

@@ -174,8 +174,7 @@
         modules = [
           ./services/yabai.nix
           ./services/skhd.nix
-          # FIXME: "kanata is marked as broken, refusing to evaluate"
-          # ./services/kanata.nix
+          ./services/kanata.nix
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
