@@ -1,8 +1,8 @@
 # srhd.toml
 [[bindings]]
 key = "return"
-command = "wezterm cli spawn --new-window"
-mods = ["command"]
+command = "wezterm cli spawn --new-window || open '/Applications/Nix Trampolines/WezTerm.app'"
+mods = ["control", "option", "shift"]
 
 # [[bindings]]
 # key = "j"
