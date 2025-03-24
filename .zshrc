@@ -58,6 +58,8 @@ alias c="clear"
 # Paths
 # export PATH="$PATH:/opt/homebrew/bin"
 
+export PATH="$PATH:$HOME/.local/bin"
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
