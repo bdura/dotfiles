@@ -19,3 +19,9 @@ __pycache__
 
 # Scratch space
 scratch*
+
+# Drawio
+.$*
+
+# Nix & direnv
+.direnv/
