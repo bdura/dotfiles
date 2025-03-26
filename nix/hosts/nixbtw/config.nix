@@ -356,6 +356,7 @@ in
       enable = true;
       keyboards = {
         internalKeyboard = {
+          extraDefCfg = "process-unmapped-keys yes";
           config = builtins.readFile ../../config/kanata.kbd;
         };
       };
