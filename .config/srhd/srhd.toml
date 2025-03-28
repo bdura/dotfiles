@@ -4,22 +4,22 @@ key = "return"
 command = "wezterm cli spawn --new-window || open '/Applications/Nix Trampolines/WezTerm.app'"
 mods = ["control", "option", "shift"]
 
-# [[bindings]]
-# key = "j"
-# command = "yabai -m window --focus south"
-# mods = ["command", "option"]
-#
-# [[bindings]]
-# key = "k"
-# command = "yabai -m window --focus north"
-# mods = ["command", "option"]
-#
-# [[bindings]]
-# key = "h"
-# command = "yabai -m window --focus west"
-# mods = ["command", "option"]
-#
-# [[bindings]]
-# key = "l"
-# command = "yabai -m window --focus east"
-# mods = ["command", "option"]
+[[bindings]]
+key = "j"
+command = "yabai -m window --focus south"
+mods = ["control", "option", "shift"]
+
+[[bindings]]
+key = "k"
+command = "yabai -m window --focus north"
+mods = ["control", "option", "shift"]
+
+[[bindings]]
+key = "h"
+command = "yabai -m window --focus west"
+mods = ["control", "option", "shift"]
+
+[[bindings]]
+key = "l"
+command = "yabai -m window --focus east"
+mods = ["control", "option", "shift"]
