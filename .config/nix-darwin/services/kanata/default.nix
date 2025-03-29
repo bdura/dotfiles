@@ -30,6 +30,8 @@
         KeepAlive = {
           SuccessfulExit = false;
         };
+        StandardOutPath = /tmp/kanata.out;
+        StandardErrorPath = /tmp/kanata.err;
       };
     };
   };
