@@ -51,14 +51,19 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
+# Some useful variables
+export EDITOR="nvim"
+
 # Aliases
 alias ls="eza -alh --git"
 alias c="clear"
+alias zshconfig="$EDITOR $HOME/.zshrc"
 
 # Paths
-# export PATH="$PATH:/opt/homebrew/bin"
-
 export PATH="$PATH:$HOME/.local/bin"
+
+# Sourcing
+source "$HOME/.ghcup/env"
 
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
