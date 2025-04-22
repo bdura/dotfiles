@@ -17,6 +17,7 @@ return {
       TEST = { icon = '⏲ ', color = 'test', alt = { 'TESTING', 'PASSED', 'FAILED' } },
       SAFETY = { icon = ' ', color = 'info' },
       UNSAFE = { icon = ' ', color = 'warning' },
+      QUESTION = { icon = ' ', color = 'warning' },
     },
     colors = {
       error = { 'DiagnosticError', 'ErrorMsg', '#DC2626' },
