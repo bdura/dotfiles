@@ -57,7 +57,6 @@
             pre-commit
             ripgrep
             starship
-            signal-desktop
             tmux
             unnaturalscrollwheels
             wezterm
