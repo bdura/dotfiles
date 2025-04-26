@@ -17,6 +17,11 @@ using Nix has been extremely tedious, and as of yet still hinges on manual steps
 2. Run `darwin-rebuild` to install and configure kanata. If not prompted to do so,
    allow input monitoring to your `kanata` installation
 
+## Troubleshooting
+
+- On update, you may need to manually allow input monitoring for the new
+  `kanata` version
+
 ## Todos
 
 We can obviously do better, first and foremost by managing the installation of
