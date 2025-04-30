@@ -204,11 +204,13 @@ in
     greetd.tuigreet
     grim
     gcc
+    gh
     htop
     hyprpicker
     imv
     inkscape
     inxi
+    jq
     kanata
     killall
     lazygit
