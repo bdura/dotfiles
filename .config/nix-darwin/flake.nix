@@ -56,6 +56,7 @@
             nixfmt-rfc-style
             pre-commit
             ripgrep
+            signal-desktop-bin
             starship
             tmux
             unnaturalscrollwheels
