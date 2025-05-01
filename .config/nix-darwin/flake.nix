@@ -63,6 +63,7 @@
             youtube-music
             musescore
             openscad-unstable
+            drawio
           ];
 
           # Packages installed through brew
