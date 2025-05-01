@@ -62,6 +62,7 @@
             # Misc
             youtube-music
             musescore
+            openscad-unstable
           ];
 
           # Packages installed through brew
