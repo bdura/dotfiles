@@ -1,6 +1,9 @@
+# # "System" configuration
+#
+# Uses different `nix-darwin` options to configure the machine.
+
 { ... }:
 {
-
   time.timeZone = "Europe/Paris";
 
   security.pam.services.sudo_local.touchIdAuth = true;

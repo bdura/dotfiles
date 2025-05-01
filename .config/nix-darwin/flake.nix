@@ -46,37 +46,15 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
-            btop
-            git
-            git-lfs
-            lazygit
-            neovim
-            nixfmt-rfc-style
-            pre-commit
-            ripgrep
-            signal-desktop-bin
             tmux
-            unnaturalscrollwheels
             wezterm
-            youtube-music
-            # Neovim
-            # treesitter
-            cmake
-            lua
-            luarocks
-            imagemagick # Image conversion
-            ghostscript # PDF files
-            tectonic # Render LaTeX expressions
-            mermaid-cli # Render mermaid diagrams
-            fd # Faster find
-            # latexmk
-            # bibtex
-            biber
-            skhd
-          ];
 
-          fonts.packages = with pkgs; [
-            nerd-fonts.jetbrains-mono
+            # macOS does not let you natively configure different
+            # scroll directions for trackpad & mouse...
+            unnaturalscrollwheels
+
+            youtube-music
+            signal-desktop-bin
           ];
 
           # Packages installed through brew
