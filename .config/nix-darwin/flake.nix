@@ -47,22 +47,18 @@
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
             btop
-            fzf
             git
             git-lfs
             lazygit
-            mkalias
             neovim
             nixfmt-rfc-style
             pre-commit
             ripgrep
             signal-desktop-bin
-            starship
             tmux
             unnaturalscrollwheels
             wezterm
             youtube-music
-            zoxide
             # Neovim
             # treesitter
             cmake
@@ -108,7 +104,6 @@
           nix.optimise.automatic = true;
 
           programs = {
-            zsh.enable = true;
             direnv.enable = true;
           };
 
