@@ -46,6 +46,9 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
+            firefox
+
+            # Development apps
             tmux
             wezterm
 
@@ -53,8 +56,11 @@
             # scroll directions for trackpad & mouse...
             unnaturalscrollwheels
 
-            youtube-music
+            # Messaging
             signal-desktop-bin
+
+            # Misc
+            youtube-music
           ];
 
           # Packages installed through brew
