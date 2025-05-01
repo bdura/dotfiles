@@ -61,6 +61,7 @@
 
             # Misc
             youtube-music
+            musescore
           ];
 
           # Packages installed through brew
