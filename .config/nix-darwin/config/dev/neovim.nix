@@ -11,7 +11,6 @@
     git-lfs
     lazygit
     nixfmt-rfc-style
-    pre-commit
     ripgrep
     fd # Faster find
 

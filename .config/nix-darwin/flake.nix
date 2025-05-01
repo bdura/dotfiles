@@ -130,7 +130,8 @@
           ./services/srhd.nix
           ./services/kanata
           ./config/system.nix
-          ./config/neovim.nix
+          ./config/shell.nix
+          ./config/dev
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew

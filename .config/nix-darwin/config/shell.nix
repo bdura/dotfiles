@@ -2,6 +2,7 @@
 #
 # Only installs required packages. The actual configuration happens
 # in a `stow`-managed dotfile, for faster iteration.
+
 {
   pkgs,
   ...
