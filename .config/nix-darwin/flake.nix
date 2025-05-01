@@ -66,12 +66,21 @@
               # autoUpdate = true;
             };
 
+            taps = [
+              "homebrew/cask"
+            ];
+
             casks = [
-              "bitwarden"
               "the-unarchiver"
               "whatsapp"
               "launchcontrol"
             ];
+
+            masApps = {
+              # Bitwarden should be installed as a Mac App Store app to allow touch ID
+              # authentication from Firefox.
+              Bitwarden = 1352778147;
+            };
           };
 
           # Necessary for using flakes on this system.
