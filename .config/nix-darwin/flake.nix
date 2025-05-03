@@ -64,6 +64,7 @@
             musescore
             openscad-unstable
             drawio
+            the-unarchiver
           ];
 
           # Packages installed through brew
@@ -80,7 +81,6 @@
             ];
 
             casks = [
-              "the-unarchiver"
               "whatsapp"
               "launchcontrol"
             ];
