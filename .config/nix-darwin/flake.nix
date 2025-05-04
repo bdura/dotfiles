@@ -59,10 +59,12 @@
             # Messaging
             signal-desktop-bin
 
+            # CAD
+            openscad-unstable
+
             # Misc
             youtube-music
             musescore
-            openscad-unstable
             drawio
             the-unarchiver
           ];
