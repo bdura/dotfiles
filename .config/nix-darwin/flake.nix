@@ -102,7 +102,10 @@
           nix.optimise.automatic = true;
 
           programs = {
-            direnv.enable = true;
+            direnv = {
+              enable = true;
+              silent = true;
+            };
           };
 
           # Set Git commit hash for darwin-version.
