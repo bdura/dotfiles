@@ -17,5 +17,10 @@
 
   programs = {
     zsh.enable = true;
+
+    direnv = {
+      enable = true;
+      silent = true;
+    };
   };
 }

@@ -101,13 +101,6 @@
           nix.gc.automatic = true;
           nix.optimise.automatic = true;
 
-          programs = {
-            direnv = {
-              enable = true;
-              silent = true;
-            };
-          };
-
           # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
 
