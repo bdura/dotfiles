@@ -46,41 +46,27 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
-            btop
-            fzf
-            git
-            git-lfs
-            lazygit
-            mkalias
-            neovim
-            nixfmt-rfc-style
-            pre-commit
-            ripgrep
-            signal-desktop-bin
-            starship
-            tmux
-            unnaturalscrollwheels
-            wezterm
-            youtube-music
-            zoxide
-            # Neovim
-            # treesitter
-            cmake
-            lua
-            luarocks
-            imagemagick # Image conversion
-            ghostscript # PDF files
-            tectonic # Render LaTeX expressions
-            mermaid-cli # Render mermaid diagrams
-            fd # Faster find
-            # latexmk
-            # bibtex
-            biber
-            skhd
-          ];
+            firefox
 
-          fonts.packages = with pkgs; [
-            nerd-fonts.jetbrains-mono
+            # Development apps
+            tmux
+            wezterm
+
+            # macOS does not let you natively configure different
+            # scroll directions for trackpad & mouse...
+            unnaturalscrollwheels
+
+            # Messaging
+            signal-desktop-bin
+
+            # CAD
+            openscad-unstable
+
+            # Misc
+            youtube-music
+            musescore
+            drawio
+            the-unarchiver
           ];
 
           # Packages installed through brew
@@ -92,12 +78,20 @@
               # autoUpdate = true;
             };
 
+            taps = [
+              "homebrew/cask"
+            ];
+
             casks = [
-              "bitwarden"
-              "the-unarchiver"
               "whatsapp"
               "launchcontrol"
             ];
+
+            masApps = {
+              # Bitwarden should be installed as a Mac App Store app to allow touch ID
+              # authentication from Firefox.
+              Bitwarden = 1352778147;
+            };
           };
 
           # Necessary for using flakes on this system.
@@ -107,60 +101,12 @@
           nix.gc.automatic = true;
           nix.optimise.automatic = true;
 
-          programs = {
-            zsh.enable = true;
-            direnv.enable = true;
-          };
-
-          security.pam.services.sudo_local.touchIdAuth = true;
-
           # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
 
           # Used for backwards compatibility, please read the changelog before changing.
           # $ darwin-rebuild changelog
           system.stateVersion = 6;
-
-          time.timeZone = "Europe/Paris";
-
-          system.startup.chime = false;
-          system.defaults = {
-            screencapture.target = "clipboard";
-            # Faster transitions
-            # universalaccess.reduceMotion = true;
-            loginwindow.GuestEnabled = false;
-            # Each display has its own spaces
-            spaces.spans-displays = false;
-            menuExtraClock = {
-              Show24Hour = true;
-              ShowSeconds = true;
-            };
-            finder = {
-              FXPreferredViewStyle = "Nlsv";
-              ShowPathbar = true;
-              ShowStatusBar = true;
-            };
-            NSGlobalDomain = {
-              AppleICUForce24HourTime = true;
-              AppleInterfaceStyle = "Dark";
-              "com.apple.mouse.tapBehavior" = 1;
-              # Natural scroll direction
-              "com.apple.swipescrolldirection" = true;
-              NSAutomaticSpellingCorrectionEnabled = false;
-              # Auto-hide menu bar. Useful if we use sketchybar
-              _HIHideMenuBar = false;
-              KeyRepeat = 2;
-            };
-            trackpad = {
-              TrackpadThreeFingerDrag = true;
-              # tap to click
-              Clicking = true;
-              # two-finger-tap right click
-              TrackpadRightClick = true;
-            };
-            # Disable most recently used apps in the dock
-            dock.mru-spaces = false;
-          };
 
           # Allow unfree apps:
           nixpkgs.config.allowUnfree = true;
@@ -177,6 +123,9 @@
           ./services/yabai.nix
           ./services/srhd.nix
           ./services/kanata
+          ./config/system.nix
+          ./config/shell.nix
+          ./config/dev
           configuration
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
