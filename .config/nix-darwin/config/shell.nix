@@ -12,6 +12,11 @@
     fzf
     ripgrep
     starship
+
+    yazi
+    yaziPlugins.git
+    yaziPlugins.sudo
+
     zoxide
   ];
 
