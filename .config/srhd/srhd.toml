@@ -5,7 +5,7 @@ mods = ["control", "option", "shift"]
 
 [[bindings]]
 key = "w"
-command = "open '/Applications/Firefox.app'"
+command = "open -n '/Applications/Nix Trampolines/Firefox.app'"
 mods = ["control", "option", "shift"]
 
 [[bindings]]

@@ -51,6 +51,7 @@
             # Development apps
             tmux
             wezterm
+            podman
 
             # macOS does not let you natively configure different
             # scroll directions for trackpad & mouse...
