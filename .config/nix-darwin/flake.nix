@@ -124,8 +124,10 @@
           ./services/yabai.nix
           ./services/srhd.nix
           ./services/kanata
+          ./config/git.nix
           ./config/system.nix
           ./config/shell.nix
+          ./config/direnv.nix
           ./config/dev
           configuration
           mac-app-util.darwinModules.default
