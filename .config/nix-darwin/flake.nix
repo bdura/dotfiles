@@ -102,6 +102,10 @@
           nix.gc.automatic = true;
           nix.optimise.automatic = true;
 
+          # This is a transition mechanism as nix-darwin reorganizes its option.
+          # See https://nix-darwin.github.io/nix-darwin/manual/#opt-system.primaryUser
+          system.primaryUser = "basile";
+
           # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
 
