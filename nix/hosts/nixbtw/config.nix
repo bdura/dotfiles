@@ -13,6 +13,7 @@ in
   imports = [
     ./hardware.nix
     ./users.nix
+    ../../config/direnv.nix
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
@@ -147,7 +148,6 @@ in
     firefox.enable = true;
     # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
     zsh.enable = true;
-    direnv.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
