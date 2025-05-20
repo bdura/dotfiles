@@ -1,11 +1,11 @@
 {
   description = "ZaneyOS";
 
+  # tst
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:danth/stylix";
+    home-manager.url = "github:nix-community/home-manager";
+    stylix.url = "github:nix-community/stylix";
     fine-cmdline = {
       url = "github:VonHeikemen/fine-cmdline.nvim";
       flake = false;
@@ -13,7 +13,12 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      home-manager,
+      stylix,
+      ...
+    }@inputs:
     let
       system = "aarch64-linux";
       host = "nixbtw";
@@ -30,7 +35,7 @@
           };
           modules = [
             ./hosts/${host}/config.nix
-            inputs.stylix.nixosModules.stylix
+            stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {

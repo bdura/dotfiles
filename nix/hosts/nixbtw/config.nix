@@ -60,6 +60,8 @@ in
   # Styling Options
   stylix = {
     enable = true;
+    # See https://discourse.nixos.org/t/stylix-and-nixpkgs-version-mismatch/64416/4
+    enableReleaseChecks = false;
     image = ../../config/wallpapers/beautifulmountainscape.jpg;
     # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
@@ -89,7 +91,7 @@ in
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
@@ -239,7 +241,7 @@ in
     networkmanagerapplet
     nh
     ninja
-    nixFlakes
+    # nixFlakes
     nixfmt-rfc-style
     openssl
     pavucontrol
@@ -273,16 +275,14 @@ in
     zoxide
   ];
 
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts-emoji
-      noto-fonts-cjk
-      font-awesome
-      # Commenting Symbola out to fix install this will need to be fixed or an alternative found.
-      # symbola
-      material-icons
-    ];
-  };
+  fonts.packages = with pkgs; [
+    noto-fonts-emoji
+    noto-fonts-cjk-sans
+    font-awesome
+    # Commenting Symbola out to fix install this will need to be fixed or an alternative found.
+    # symbola
+    material-icons
+  ];
 
   environment.variables = {
     ZANEYOS_VERSION = "2.2";

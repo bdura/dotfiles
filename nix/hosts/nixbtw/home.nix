@@ -77,25 +77,24 @@ in
   # Styling Options
   stylix.targets.waybar.enable = false;
   stylix.targets.rofi.enable = false;
-  stylix.targets.hyprland.enable = false;
-  gtk = {
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-  };
+  stylix.targets.hyprland.enable = true;
+  # gtk = {
+  #   iconTheme = {
+  #     name = "Papirus-Dark";
+  #     package = pkgs.papirus-icon-theme;
+  #   };
+  #   gtk3.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  #   gtk4.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  # };
   qt = {
     enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "gtk3";
+    # style.name = "adwaita-dark";
+    # platformTheme.name = "gtk3";
   };
-
 
   # Scripts
   home.packages = [
@@ -123,7 +122,7 @@ in
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
           lock_cmd = "hyprlock";
-          };
+        };
         listener = [
           {
             timeout = 120;
@@ -163,10 +162,10 @@ in
         inactive_tab_font_style bold
       '';
     };
-     starship = {
-            enable = true;
-            package = pkgs.starship;
-     };
+    starship = {
+      enable = true;
+      package = pkgs.starship;
+    };
     home-manager.enable = true;
     hyprlock = {
       enable = true;
@@ -177,17 +176,17 @@ in
           hide_cursor = true;
           ignore_empty_input = true;
         };
-        background = [
-          {
-            path = "";
-            color = "rgb(1e1e2e)";
-          }
-        ];
+        # background = [
+        #   {
+        #     path = "";
+        #     color = "rgb(1e1e2e)";
+        #   }
+        # ];
         label = [
           {
             monitor = "";
             text = "$TIME";
-            color = "rgb(cdd6f4)";
+            # color = "rgb(cdd6f4)";
             font_size = 90;
             font_family = "JetBrainsMono Nerd Font";
             position = "-30, 0";
@@ -197,7 +196,7 @@ in
           {
             monitor = "";
             text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
-            color = "rgb(cdd6f4)";
+            # color = "rgb(cdd6f4)";
             font_size = 25;
             font_family = "JetBrainsMono Nerd Font";
             position = "-30, -150";
@@ -205,21 +204,21 @@ in
             valign = "top";
           }
         ];
-        input-field = [
-          {
-            size = "300, 50";
-            position = "0, 0";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(CFE6F4)";
-            inner_color = "rgb(657DC2)";
-            outer_color = "rgb(0D0E15)";
-            outline_thickness = 5;
-            placeholder_text = "Password...";
-            shadow_passes = 2;
-          }
-        ];
+        # input-field = [
+        #   {
+        #     size = "300, 50";
+        #     position = "0, 0";
+        #     monitor = "";
+        #     dots_center = true;
+        #     fade_on_empty = false;
+        #     # font_color = "rgb(CFE6F4)";
+        #     # inner_color = "rgb(657DC2)";
+        #     # outer_color = "rgb(0D0E15)";
+        #     outline_thickness = 5;
+        #     placeholder_text = "Password...";
+        #     shadow_passes = 2;
+        #   }
+        # ];
       };
     };
   };
