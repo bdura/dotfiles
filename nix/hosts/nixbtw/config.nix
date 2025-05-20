@@ -172,6 +172,18 @@ in
 
   };
 
+  # Direnv
+  programs = {
+    direnv = {
+      enable = true;
+    };
+  };
+
+  environment.etc."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+  '';
+
   nixpkgs.config.allowUnfree = true;
 
   users = {
@@ -216,7 +228,6 @@ in
     lazygit
     libnotify
     libvirt
-    libvirt
     lm_sensors
     lshw
     luarocks
@@ -225,19 +236,16 @@ in
     mpv
     ncdu
     neovide
-    neovim
     networkmanagerapplet
     nh
     ninja
     nixFlakes
     nixfmt-rfc-style
-    nodejs
     openssl
     pavucontrol
     pciutils
     pkg-config
     playerctl
-    pnpm
     podman-compose
     prettierd
     python312
@@ -260,6 +268,7 @@ in
     wget
     wl-clipboard
     yad
+    yazi
     ydotool
     zoxide
   ];
