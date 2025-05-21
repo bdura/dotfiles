@@ -11,6 +11,8 @@
   environment.systemPackages = with pkgs; [
     git
     git-lfs
+    delta
+    bat
     serie
     lazygit
     pre-commit

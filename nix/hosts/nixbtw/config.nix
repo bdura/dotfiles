@@ -14,6 +14,7 @@ in
     ./hardware.nix
     ./users.nix
     ../../config/direnv.nix
+    ../../config/git.nix
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
@@ -198,7 +199,6 @@ in
     ffmpeg
     file-roller
     fzf
-    git
     go
     google-chrome
     greetd.tuigreet
@@ -213,7 +213,6 @@ in
     jq
     kanata
     killall
-    lazygit
     libnotify
     libvirt
     libvirt
