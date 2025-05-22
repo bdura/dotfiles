@@ -54,6 +54,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Some useful variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR="nvim"
+export SHELL=$(which zsh)
 
 # Aliases
 alias ls="eza -alh --git"

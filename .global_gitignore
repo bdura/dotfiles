@@ -25,3 +25,6 @@ scratch*
 
 # Nix & direnv
 .direnv/
+# NOTE: for project where the Nix configuration is allowed,
+# I would use a flake anyway.
+shell.nix
