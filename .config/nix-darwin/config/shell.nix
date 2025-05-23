@@ -14,6 +14,7 @@
     starship
     yazi
     zoxide
+    atuin
   ];
 
   programs = {
