@@ -50,6 +50,7 @@
 
             # Development apps
             tmux
+            zellij
             wezterm
             podman
 
