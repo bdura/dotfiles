@@ -90,3 +90,6 @@ eval "$(starship init zsh)"
 
 # Enable direnv
 eval "$(direnv hook zsh)"
+
+# Enable atuin
+eval "$(atuin init zsh)"

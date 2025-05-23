@@ -9,11 +9,20 @@
 }:
 {
   environment.systemPackages = with pkgs; [
+    # Command-line fuzzy-finder: <https://github.com/junegunn/fzf>
     fzf
+    # Faster grep: <https://github.com/BurntSushi/ripgrep>
     ripgrep
+    # Cross-shell prompt: <https://starship.rs/>
     starship
+    # Filesystem explorer: <https://yazi-rs.github.io/>
     yazi
+    # Better cd: <https://github.com/ajeetdsouza/zoxide>
     zoxide
+    # A simple and fast alternative to find: <https://github.com/sharkdp/fd>
+    fd
+    # Better shell history: <https://atuin.sh/>
+    atuin
   ];
 
   programs = {
