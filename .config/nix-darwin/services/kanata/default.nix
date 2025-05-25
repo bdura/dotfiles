@@ -6,6 +6,13 @@
   config = {
     environment.systemPackages = [ pkgs.kanata ];
 
+    system.activationScripts.postUserActivation.text = ''
+      echo ""
+      echo -e "\033[0;32m\033[1m✅ nix-darwin rebuild completed!\033[0m"
+      echo -e "\033[1;33mRemember to check Input Monitoring permissions if needed.\033[0m"
+      echo ""
+    '';
+
     # NOTE: this is quite ugly... Since this part is *not* handled by Nix.
     launchd.daemons.karabiner_driver = {
       serviceConfig = {
