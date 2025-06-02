@@ -2,9 +2,22 @@
   pkgs,
   ...
 }:
+let
+  colorReset = "\\033[0m";
+  colorBold = "\\033[1m";
+  colorGreen = "\\033[0;32m";
+  colorYellow = "\\033[1;33m";
+in
 {
   config = {
     environment.systemPackages = [ pkgs.kanata ];
+
+    system.activationScripts.postUserActivation.text = ''
+      echo ""
+      echo -e "${colorGreen}${colorBold}✅ nix-darwin rebuild completed!${colorReset}"
+      echo -e "${colorYellow}Remember to check Input Monitoring permissions if needed.${colorReset}"
+      echo ""
+    '';
 
     # NOTE: this is quite ugly... Since this part is *not* handled by Nix.
     launchd.daemons.karabiner_driver = {
