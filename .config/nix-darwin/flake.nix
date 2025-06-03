@@ -116,6 +116,9 @@
 
           # The platform the configuration will be used on.
           nixpkgs.hostPlatform = "aarch64-darwin";
+
+          # See <https://github.com/nix-darwin/nix-darwin/blob/44a7d0e687a87b73facfe94fba78d323a6686a90/modules/system/primary-user.nix>
+          system.primaryUser = "basile";
         };
     in
     {
