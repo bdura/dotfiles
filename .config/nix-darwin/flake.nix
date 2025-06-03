@@ -52,6 +52,7 @@
             tmux
             zellij
             wezterm
+            ghostty-bin
             podman
 
             # macOS does not let you natively configure different
