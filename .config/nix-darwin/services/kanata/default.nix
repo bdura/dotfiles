@@ -12,7 +12,7 @@ in
   config = {
     environment.systemPackages = [ pkgs.kanata ];
 
-    system.activationScripts.checkKanataPermissions.text = ''
+    system.activationScripts.postActivation.text = ''
       echo ""
       echo -e "${colorGreen}${colorBold}✅ nix-darwin rebuild completed!${colorReset}"
       echo -e "${colorYellow}Remember to check Input Monitoring permissions if needed.${colorReset}"
