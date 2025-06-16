@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
@@ -13,7 +14,12 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      ...
+    }@inputs:
     let
       system = "aarch64-linux";
       host = "nixbtw";
@@ -43,6 +49,19 @@
               home-manager.backupFileExtension = "backup";
               home-manager.users.${username} = import ./hosts/${host}/home.nix;
             }
+            (
+              { config, pkgs, ... }:
+              let
+                unstable = import nixpkgs-unstable {
+                  system = "x86_64-linux";
+                  config = config.nixpkgs.config;
+                };
+              in
+              {
+
+                environment.systemPackages = [ unstable.neovim-unwrapped ];
+              }
+            )
           ];
         };
       };

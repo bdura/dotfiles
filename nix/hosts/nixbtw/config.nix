@@ -149,10 +149,10 @@ in
     firefox.enable = true;
     # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
     zsh.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    # };
     starship.enable = true;
     dconf.enable = true;
     # seahorse.enable = true;
@@ -224,7 +224,7 @@ in
     mpv
     ncdu
     neovide
-    neovim
+    # neovim
     networkmanagerapplet
     nh
     ninja
