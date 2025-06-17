@@ -213,6 +213,7 @@ in
     jq
     kanata
     killall
+    kitty
     libnotify
     libvirt
     libvirt

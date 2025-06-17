@@ -59,7 +59,10 @@
               in
               {
 
-                environment.systemPackages = [ unstable.neovim-unwrapped ];
+                environment.systemPackages = [
+                  unstable.neovim-unwrapped
+                  unstable.zellij
+                ];
               }
             )
           ];
