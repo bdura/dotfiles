@@ -162,10 +162,10 @@ in
     #     inactive_tab_font_style bold
     #   '';
     # };
-    starship = {
-      enable = true;
-      package = pkgs.starship;
-    };
+    # starship = {
+    #   enable = true;
+    #   package = pkgs.starship;
+    # };
     home-manager.enable = true;
     hyprlock = {
       enable = true;
