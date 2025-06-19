@@ -21,9 +21,13 @@
       ...
     }@inputs:
     let
-      system = "aarch64-linux";
+      system = "x86_64-linux";
       host = "nixbtw";
       username = "basile";
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       nixosConfigurations = {
@@ -33,6 +37,7 @@
             inherit inputs;
             inherit username;
             inherit host;
+            inherit unstable;
           };
           modules = [
             ./hosts/${host}/config.nix
@@ -49,22 +54,6 @@
               home-manager.backupFileExtension = "backup";
               home-manager.users.${username} = import ./hosts/${host}/home.nix;
             }
-            (
-              { config, pkgs, ... }:
-              let
-                unstable = import nixpkgs-unstable {
-                  system = "x86_64-linux";
-                  config = config.nixpkgs.config;
-                };
-              in
-              {
-
-                environment.systemPackages = [
-                  unstable.neovim-unwrapped
-                  unstable.zellij
-                ];
-              }
-            )
           ];
         };
       };
