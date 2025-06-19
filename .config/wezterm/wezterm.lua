@@ -7,9 +7,6 @@ local wezterm = require('wezterm')
 -- help provide clearer error messages
 local config = wezterm.config_builder()
 
--- Change shell
-config.default_prog = { 'zsh' }
-
 -- For example, changing the color scheme:
 config.color_scheme = 'catppuccin-mocha'
 config.font = wezterm.font('JetBrainsMono Nerd Font')
