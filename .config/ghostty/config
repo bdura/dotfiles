@@ -2,6 +2,7 @@ font-family = "JetBrains Mono"
 command = zsh
 title = ""
 window-decoration = auto
+macos-titlebar-style = hidden
 window-padding-x = 8
 theme = catppuccin-mocha
 quit-after-last-window-closed=true
