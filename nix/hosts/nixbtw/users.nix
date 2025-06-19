@@ -1,8 +1,4 @@
-{
-  pkgs,
-  username,
-  ...
-}:
+{ unstable, username, ... }:
 
 let
   inherit (import ./variables.nix) gitUsername;
@@ -21,9 +17,9 @@ in
         "lp"
         "uinput"
       ];
-      shell = pkgs.fish;
+      shell = unstable.fish;
       ignoreShellProgramCheck = true;
-      packages = [];
+      packages = [ ];
     };
   };
 }

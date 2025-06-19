@@ -96,7 +96,6 @@ in
     platformTheme.name = "gtk3";
   };
 
-
   # Scripts
   home.packages = [
     (import ../../scripts/emopicker9000.nix { inherit pkgs; })
@@ -123,7 +122,7 @@ in
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
           lock_cmd = "hyprlock";
-          };
+        };
         listener = [
           {
             timeout = 120;
@@ -147,26 +146,26 @@ in
         vim_keys = true;
       };
     };
-    kitty = {
-      enable = true;
-      package = pkgs.kitty;
-      settings = {
-        scrollback_lines = 2000;
-        wheel_scroll_min_lines = 1;
-        window_padding_width = 4;
-        confirm_os_window_close = 0;
-      };
-      extraConfig = ''
-        tab_bar_style fade
-        tab_fade 1
-        active_tab_font_style   bold
-        inactive_tab_font_style bold
-      '';
-    };
-     starship = {
-            enable = true;
-            package = pkgs.starship;
-     };
+    # kitty = {
+    #   enable = true;
+    #   package = pkgs.kitty;
+    #   settings = {
+    #     scrollback_lines = 2000;
+    #     wheel_scroll_min_lines = 1;
+    #     window_padding_width = 4;
+    #     confirm_os_window_close = 0;
+    #   };
+    #   extraConfig = ''
+    #     tab_bar_style fade
+    #     tab_fade 1
+    #     active_tab_font_style   bold
+    #     inactive_tab_font_style bold
+    #   '';
+    # };
+    # starship = {
+    #   enable = true;
+    #   package = pkgs.starship;
+    # };
     home-manager.enable = true;
     hyprlock = {
       enable = true;
