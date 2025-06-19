@@ -26,6 +26,15 @@
   ];
 
   programs = {
-    zsh.enable = true;
+    fish.enable = true;
   };
+
+  environment.variables = {
+    SHELL = "fish";
+  };
+
+  # Note: on macOS at least, you'll need to run the following command:
+  # `chsh -s $(which fish)`
+  # to make fish your login shell
+  environment.shells = [ pkgs.fish ];
 }

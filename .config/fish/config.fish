@@ -1,35 +1,28 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    atuin init fish | source
 end
 
-function starship_transient_prompt_func
-    starship module character
-end
-
-function starship_transient_rprompt_func
-    starship module time
-end
-
-fish_add_path /opt/homebrew/bin/
 fish_add_path $HOME/.local/bin/
 fish_add_path $HOME/.cargo/bin/
-
-set -x POETRY_CONFIG_DIR $HOME/.config/poetry
 
 if test -e $HOME/.local/config.fish
     source $HOME/.local/config.fish
 end
 
+alias ls="eza -alh --git"
+alias c=clear
+alias gl=serie
+alias lg=lazygit
+
 # Overwrite fish_greeting with empty message
 set fish_greeting
 
-zoxide init fish | source
+fzf --fish | source
+
+direnv hook fish | source
 
 starship init fish | source
 enable_transience
 
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
-direnv hook fish | source
+zoxide init --cmd cd fish | source

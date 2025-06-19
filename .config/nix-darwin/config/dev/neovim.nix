@@ -4,7 +4,7 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    neovim
+    neovim-unwrapped
 
     fzf
     git
@@ -30,4 +30,8 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+  };
 }
