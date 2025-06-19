@@ -15,6 +15,7 @@ in
     ./users.nix
     ../../config/direnv.nix
     ../../config/git.nix
+    ../../config/dev.nix
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
@@ -153,7 +154,7 @@ in
     #   enable = true;
     #   defaultEditor = true;
     # };
-    starship.enable = true;
+    # starship.enable = true;
     dconf.enable = true;
     # seahorse.enable = true;
     # fuse.userAllowOther = true;
@@ -187,30 +188,21 @@ in
 
   environment.systemPackages = with pkgs; [
     appimage-run
-    bat
-    bun
     brightnessctl
-    clang
     discord
     drawio
     duf
-    eza
-    fd
     ffmpeg
     file-roller
-    fzf
     go
     google-chrome
     greetd.tuigreet
     grim
-    gcc
     gh
-    htop
     hyprpicker
     imv
     inkscape
     inxi
-    jq
     kanata
     killall
     kitty
@@ -225,7 +217,6 @@ in
     mpv
     ncdu
     neovide
-    # neovim
     networkmanagerapplet
     nh
     ninja
@@ -240,8 +231,6 @@ in
     pnpm
     podman-compose
     prettierd
-    python312
-    ripgrep
     rustup
     slurp
     socat
@@ -249,7 +238,6 @@ in
     swappy
     swaynotificationcenter
     swww
-    tmux
     tree
     tree-sitter
     unrar
@@ -261,7 +249,6 @@ in
     wl-clipboard
     yad
     ydotool
-    zoxide
   ];
 
   fonts = {
@@ -279,6 +266,7 @@ in
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
     FLAKE = "/home/${username}/.dotfiles/nix";
+    EDITOR = "nvim";
   };
 
   # Extra Portal Configuration
