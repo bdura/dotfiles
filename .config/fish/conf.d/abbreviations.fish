@@ -7,3 +7,7 @@ abbr -a -- lg lazygit
 abbr -a -- .. 'cd ..'
 
 abbr -a -- rmf 'rm -rf'
+
+# Direnv
+abbr -a -- da 'direnv allow'
+abbr -a -- de 'direnv edit'
