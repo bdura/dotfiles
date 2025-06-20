@@ -1,5 +1,3 @@
-abbr -a -- ls 'eza -alh --git'
-
 abbr -a -- c clear
 abbr -a -- gl serie
 abbr -a -- lg lazygit
