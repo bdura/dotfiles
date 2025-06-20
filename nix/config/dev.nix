@@ -1,8 +1,10 @@
 { unstable, ... }:
 {
   environment.systemPackages = with unstable; [
-    zoxide
     neovim-unwrapped
+    nodejs-slim
+
+    zoxide
     zellij
     atuin
     starship
@@ -15,4 +17,6 @@
     ripgrep
     tmux
   ];
+
+  environment.variables.EDITOR = "nvim";
 }

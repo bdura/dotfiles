@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  unstable,
   host,
   username,
   options,
@@ -148,11 +149,15 @@ in
 
   programs = {
     firefox.enable = true;
+    firefox.package = unstable.firefox;
+
     # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
-    zsh.enable = true;
+    # zsh.enable = true;
+
     # neovim = {
     #   enable = true;
     #   defaultEditor = true;
+    #   package =
     # };
     # starship.enable = true;
     dconf.enable = true;
@@ -189,12 +194,10 @@ in
   environment.systemPackages = with pkgs; [
     appimage-run
     brightnessctl
-    discord
     drawio
     duf
     ffmpeg
     file-roller
-    go
     google-chrome
     greetd.tuigreet
     grim
@@ -211,7 +214,6 @@ in
     libvirt
     lm_sensors
     lshw
-    luarocks
     lxqt.lxqt-policykit
     meson
     mpv
@@ -222,7 +224,6 @@ in
     ninja
     nixFlakes
     nixfmt-rfc-style
-    nodejs
     openssl
     pavucontrol
     pciutils
@@ -266,7 +267,6 @@ in
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
     FLAKE = "/home/${username}/.dotfiles/nix";
-    EDITOR = "nvim";
   };
 
   # Extra Portal Configuration
