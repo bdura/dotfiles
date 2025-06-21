@@ -127,9 +127,10 @@
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
           ./services/yabai.nix
-          ./services/srhd.nix
+          # ./services/srhd.nix
           ./services/kanata
           ./config/git.nix
+          ./config/skhd.nix
           ./config/system.nix
           ./config/shell.nix
           ./config/direnv.nix
