@@ -148,3 +148,6 @@ cmd - return : wezterm cli spawn --new-window
 
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
+
+control + option + shift - return : open -n '/Applications/Nix Trampolines/Ghostty.app'
+cmd + shift - return : wezterm cli spawn --new-window || open '/Applications/Nix Trampolines/WezTerm.app'
