@@ -3,12 +3,8 @@ if status is-interactive
     atuin init fish | source
 end
 
-fish_add_path $HOME/.local/bin/
-fish_add_path $HOME/.cargo/bin/
-
-if test -e $HOME/.local/config.fish
-    source $HOME/.local/config.fish
-end
+# Enable Vi keybindings
+set -g fish_key_bindings fish_vi_key_bindings
 
 # Overwrite fish_greeting with empty message
 set fish_greeting
