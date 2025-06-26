@@ -96,12 +96,12 @@ in
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
+        package = pkgs.roboto;
+        name = "Roboto";
       };
       serif = {
-        package = pkgs.montserrat;
-        name = "Montserrat";
+        package = pkgs.roboto;
+        name = "Roboto";
       };
       sizes = {
         applications = 12;
