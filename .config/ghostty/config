@@ -1,8 +1,19 @@
 font-family = "JetBrains Mono"
-title = ""
+
+# Remove titlebar
 window-decoration = auto
 macos-titlebar-style = hidden
+
+# Window padding
 window-padding-x = 8
 window-padding-y = 8
+
 theme = catppuccin-mocha
-quit-after-last-window-closed=true
+
+# Otherwise selections become invisible.
+cursor-text = black
+cursor-color = #f5e0dc
+
+# Miscellaneous
+quit-after-last-window-closed = true
+mouse-hide-while-typing = true
