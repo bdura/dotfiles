@@ -1,8 +1,14 @@
 font-family = "JetBrains Mono"
-title = ""
+theme = catppuccin-mocha.conf
+
+# Remove titlebar
 window-decoration = auto
 macos-titlebar-style = hidden
+
+# Window padding
 window-padding-x = 8
 window-padding-y = 8
-theme = catppuccin-mocha
-quit-after-last-window-closed=true
+
+# Miscellaneous
+quit-after-last-window-closed = true
+mouse-hide-while-typing = true
