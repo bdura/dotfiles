@@ -124,7 +124,7 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .
-      darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."nix-darwin-btw" = nix-darwin.lib.darwinSystem {
         modules = [
           ./services/yabai.nix
           ./services/srhd.nix
