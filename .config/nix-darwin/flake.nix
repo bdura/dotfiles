@@ -70,6 +70,9 @@
             musescore
             drawio
             the-unarchiver
+
+            # Nix management
+            nh
           ];
 
           # Packages installed through brew
@@ -97,11 +100,16 @@
             };
           };
 
+          services.tailscale.enable = true;
+
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
 
           # Recurrent clean up & optimisation
-          nix.gc.automatic = true;
+          nix.gc = {
+            automatic = true;
+            options = "--delete-older-than 7d";
+          };
           nix.optimise.automatic = true;
 
           # Set Git commit hash for darwin-version.
