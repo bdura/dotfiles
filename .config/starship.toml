@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 # A minimal left prompt
-format = """$username$character"""
+format = """$username$hostname$character"""
 
 # move the rest of the prompt to the right
 right_format = """
@@ -16,16 +16,9 @@ palette = 'catppuccin_mocha'
 
 [directory]
 style = "peach"
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "…/"
 read_only = " 󰌾"
-
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
 
 [direnv]
 disabled = false
@@ -156,6 +149,7 @@ symbol = " "
 symbol = " "
 
 [hostname]
+format = "[$ssh_symbol$hostname]($style) "
 ssh_symbol = " "
 
 [java]
