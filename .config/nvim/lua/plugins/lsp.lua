@@ -4,6 +4,7 @@ return {
     ensure_installed = {
       'openscad-lsp',
       'clang-format',
+      'wgsl-analyzer',
     },
   },
 }
