@@ -191,6 +191,8 @@ in
     # here, NOT in environment.systemPackages
   ];
 
+  console.font = "Lat2-Terminus16";
+
   environment.systemPackages = with pkgs; [
     appimage-run
     brightnessctl
@@ -267,6 +269,10 @@ in
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
     FLAKE = "/home/${username}/.dotfiles/nix";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_STATE_HOME = "$HOME/.local/state";
   };
 
   # Extra Portal Configuration
@@ -286,6 +292,10 @@ in
 
   # Services to start
   services = {
+    tailscale = {
+      enable = true;
+      package = unstable.tailscale;
+    };
     xserver = {
       enable = false;
       xkb = {
