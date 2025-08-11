@@ -195,6 +195,7 @@ in
 
   environment.systemPackages = with pkgs; [
     appimage-run
+    unstable.bitwarden-desktop
     brightnessctl
     drawio
     duf
