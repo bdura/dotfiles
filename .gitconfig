@@ -1,7 +1,7 @@
 [user]
     name = Basile Dura
     email = basile@bdura.me
-    signingkey = ~/.ssh/id_ed25519
+    signingkey = ~/.ssh/signing.pub
 [gpg]
     format = ssh
 [commit]
