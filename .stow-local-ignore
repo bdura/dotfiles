@@ -9,6 +9,10 @@
 # Linters
 \.stylua\.toml
 
+# Flake
+\.envrc
+shell.nix
+
 # Nix
 nix
 
