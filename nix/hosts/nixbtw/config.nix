@@ -274,6 +274,7 @@ in
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_STATE_HOME = "$HOME/.local/state";
+    SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
   # Extra Portal Configuration
