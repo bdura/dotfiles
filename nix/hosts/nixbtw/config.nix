@@ -185,6 +185,7 @@ in
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
+    tlrc
     appimage-run
     unstable.bitwarden-desktop
     hypridle
