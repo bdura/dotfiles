@@ -151,15 +151,6 @@ in
     firefox.enable = true;
     firefox.package = unstable.firefox;
 
-    # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
-    # zsh.enable = true;
-
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   package =
-    # };
-    # starship.enable = true;
     dconf.enable = true;
     # seahorse.enable = true;
     # fuse.userAllowOther = true;
@@ -196,6 +187,7 @@ in
   environment.systemPackages = with pkgs; [
     appimage-run
     unstable.bitwarden-desktop
+    hypridle
     brightnessctl
     drawio
     duf

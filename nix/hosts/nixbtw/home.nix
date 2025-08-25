@@ -117,6 +117,7 @@ in
 
   services = {
     hypridle = {
+      enable = true;
       settings = {
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
@@ -125,13 +126,22 @@ in
         };
         listener = [
           {
+            timeout = 60;
+            on-timeout = "brightnessctl -s set 20"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
+            on-resume = "brightnessctl -r"; # monitor backlight restore.
+          }
+          {
             timeout = 120;
             on-timeout = "hyprlock";
           }
           {
-            timeout = 1200;
+            timeout = 180;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 600;
+            on-timeout = "systemctl suspend";
           }
         ];
       };
