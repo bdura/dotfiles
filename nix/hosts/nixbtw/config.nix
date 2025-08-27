@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  unstable,
   host,
   username,
   options,
@@ -13,6 +11,7 @@ in
 {
   imports = [
     ./hardware.nix
+    ./disko.nix
     ./users.nix
     ../../config/direnv.nix
     ../../config/git.nix
@@ -45,17 +44,7 @@ in
     # Make /tmp a tmpfs
     tmp = {
       useTmpfs = true;
-      tmpfsSize = "30%";
       cleanOnBoot = true;
-    };
-    # Appimage Support
-    binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
     };
     plymouth.enable = true;
   };
@@ -149,7 +138,6 @@ in
 
   programs = {
     firefox.enable = true;
-    firefox.package = unstable.firefox;
 
     dconf.enable = true;
     # seahorse.enable = true;
@@ -187,7 +175,7 @@ in
   environment.systemPackages = with pkgs; [
     tlrc
     appimage-run
-    unstable.bitwarden-desktop
+    bitwarden-desktop
     hypridle
     brightnessctl
     drawio
@@ -288,7 +276,6 @@ in
   services = {
     tailscale = {
       enable = true;
-      package = unstable.tailscale;
     };
     xserver = {
       enable = false;
