@@ -74,10 +74,14 @@
                       ];
                     };
                     "@swap" = {
-                      mountpoint = "none";
-                      swap = {
-                        size = "20G";
-                      };
+                      mountpoint = "/swap";
+                      mountOptions = [
+                        "nodatacow"
+                        "noatime"
+                        "nodev"
+                        "nosuid"
+                        "noexec"
+                      ];
                     };
                   };
                 };

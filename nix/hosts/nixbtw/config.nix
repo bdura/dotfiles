@@ -45,9 +45,18 @@ in
     tmp = {
       useTmpfs = true;
       cleanOnBoot = true;
+      tmpfsSize = "8G";
     };
     plymouth.enable = true;
   };
+
+  # swapfile on @swap subvolume
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16 * 1024; # 16 GiB
+    }
+  ];
 
   # Styling Options
   stylix = {
