@@ -45,7 +45,7 @@ in
     tmp = {
       useTmpfs = true;
       cleanOnBoot = true;
-      tmpfsSize = "8G";
+      tmpfsSize = "30%";
     };
     plymouth.enable = true;
   };
