@@ -1,6 +1,6 @@
-{ unstable, ... }:
+{ pkgs, ... }:
 {
-  environment.systemPackages = with unstable; [
+  environment.systemPackages = with pkgs; [
     neovim-unwrapped
     nodejs-slim
 

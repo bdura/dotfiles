@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
@@ -11,23 +10,24 @@
       url = "github:VonHeikemen/fine-cmdline.nvim";
       flake = false;
     };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
+      disko,
+      stylix,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
       host = "nixbtw";
       username = "basile";
-      unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       nixosConfigurations = {
@@ -37,11 +37,11 @@
             inherit inputs;
             inherit username;
             inherit host;
-            inherit unstable;
           };
           modules = [
             ./hosts/${host}/config.nix
-            inputs.stylix.nixosModules.stylix
+            disko.nixosModules.disko
+            stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {
