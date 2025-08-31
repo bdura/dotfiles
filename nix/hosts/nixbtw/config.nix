@@ -194,7 +194,7 @@ in
     # google-chrome
     tuigreet
     # grim
-    gh
+    # gh
     # hyprpicker
     # imv
     # inkscape
@@ -202,8 +202,8 @@ in
     kanata
     # killall
     kitty
-    libnotify
-    libvirt
+    # libnotify
+    # libvirt
     # lm_sensors
     # lshw
     # lxqt.lxqt-policykit
@@ -219,9 +219,9 @@ in
     pavucontrol
     # pciutils
     # pkg-config
-    playerctl
-    podman-compose
-    rustup
+    # playerctl
+    # podman-compose
+    # rustup
     # slurp
     # socat
     # stow
