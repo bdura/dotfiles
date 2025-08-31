@@ -254,7 +254,7 @@ in
   environment.variables = {
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
-    FLAKE = "/home/${username}/.dotfiles/nix";
+    NH_FLAKE = "/home/${username}/.dotfiles/nix";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_CACHE_HOME = "$HOME/.cache";
