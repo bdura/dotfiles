@@ -119,7 +119,7 @@ in
     nvidiaBusID = "";
   };
   drivers.intel.enable = false;
-  vm.guest-services.enable = false;
+  # vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
   # Enable networking
@@ -148,14 +148,14 @@ in
   programs = {
     firefox.enable = true;
 
-    dconf.enable = true;
+    # dconf.enable = true;
     # seahorse.enable = true;
     # fuse.userAllowOther = true;
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+    # mtr.enable = true;
+    # gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
     # virt-manager.enable = true;
     thunar = {
       enable = true;
@@ -170,7 +170,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   users = {
-    mutableUsers = true;
+    mutableUsers = false;
   };
 
   programs.nix-ld.enable = true;
@@ -182,66 +182,62 @@ in
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
-    tlrc
-    appimage-run
+    # tlrc
+    # appimage-run
     bitwarden-desktop
     hypridle
     brightnessctl
-    drawio
-    duf
-    ffmpeg
-    file-roller
-    google-chrome
+    # drawio
+    # duf
+    # ffmpeg
+    # file-roller
+    # google-chrome
     tuigreet
-    grim
+    # grim
     gh
-    hyprpicker
-    imv
-    inkscape
-    inxi
+    # hyprpicker
+    # imv
+    # inkscape
+    # inxi
     kanata
-    killall
+    # killall
     kitty
     libnotify
     libvirt
-    libvirt
-    lm_sensors
-    lshw
-    lxqt.lxqt-policykit
-    meson
-    mpv
-    ncdu
-    neovide
+    # lm_sensors
+    # lshw
+    # lxqt.lxqt-policykit
+    # meson
+    # mpv
+    # ncdu
+    # neovide
     networkmanagerapplet
     nh
-    ninja
+    # ninja
     nixfmt-rfc-style
     openssl
     pavucontrol
-    pciutils
-    pkg-config
+    # pciutils
+    # pkg-config
     playerctl
-    pnpm
     podman-compose
-    prettierd
     rustup
-    slurp
-    socat
-    stow
-    swappy
+    # slurp
+    # socat
+    # stow
+    # swappy
     swaynotificationcenter
-    swww
-    tree
-    tree-sitter
-    unrar
-    unzip
-    uv
-    v4l-utils
-    virt-viewer
+    # swww
+    # tree
+    # unrar
+    # unzip
+    # uv
+    # v4l-utils
+    # virt-viewer
     wget
     wl-clipboard
-    yad
-    ydotool
+    # yad
+    # ydotool
   ];
 
   fonts = {
@@ -266,32 +262,32 @@ in
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
-  # Extra Portal Configuration
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
-    ];
-  };
+  # # Extra Portal Configuration
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal
+  #   ];
+  #   configPackages = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-hyprland
+  #     pkgs.xdg-desktop-portal
+  #   ];
+  # };
 
   # Services to start
   services = {
     tailscale = {
       enable = true;
     };
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "${keyboardLayout}";
-      };
-    };
+    # xserver = {
+    #   enable = false;
+    #   xkb = {
+    #     layout = "${keyboardLayout}";
+    #   };
+    # };
     greetd = {
       enable = true;
       settings = {
@@ -305,42 +301,42 @@ in
         };
       };
     };
-    smartd = {
-      enable = false;
-      autodetect = true;
-    };
-    libinput.enable = true;
-    fstrim.enable = true;
-    gvfs.enable = true;
+    # smartd = {
+    #   enable = false;
+    #   autodetect = true;
+    # };
+    # libinput.enable = true;
+    # fstrim.enable = true;
+    # gvfs.enable = true;
     openssh.enable = true;
-    flatpak.enable = false;
-    printing = {
-      enable = true;
-      drivers = [
-        # pkgs.hplipWithPlugin
-      ];
-    };
-    gnome.gnome-keyring.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-    ipp-usb.enable = true;
+    # flatpak.enable = false;
+    # printing = {
+    #   enable = true;
+    #   drivers = [
+    #     # pkgs.hplipWithPlugin
+    #   ];
+    # };
+    # gnome.gnome-keyring.enable = true;
+    # avahi = {
+    #   enable = true;
+    #   nssmdns4 = true;
+    #   openFirewall = true;
+    # };
+    # ipp-usb.enable = true;
     # syncthing = {
     #   enable = false;
     #   user = "${username}";
     #   dataDir = "/home/${username}";
     #   configDir = "/home/${username}/.config/syncthing";
     # };
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-    rpcbind.enable = false;
-    nfs.server.enable = false;
+    # pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = true;
+    #   pulse.enable = true;
+    # };
+    # rpcbind.enable = false;
+    # nfs.server.enable = false;
     kanata = {
       enable = true;
       keyboards = {
@@ -351,49 +347,49 @@ in
       };
     };
   };
-  systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-  hardware.sane = {
-    enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
-    disabledDefaultBackends = [ "escl" ];
-  };
+  # systemd.services.flatpak-repo = {
+  #   path = [ pkgs.flatpak ];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
+  # hardware.sane = {
+  #   enable = true;
+  #   extraBackends = [ pkgs.sane-airscan ];
+  #   disabledDefaultBackends = [ "escl" ];
+  # };
 
   # Extra Logitech Support
-  hardware.logitech.wireless.enable = false;
-  hardware.logitech.wireless.enableGraphical = false;
+  # hardware.logitech.wireless.enable = false;
+  # hardware.logitech.wireless.enableGraphical = false;
 
   # Bluetooth Support
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
+  # hardware.bluetooth.enable = true;
+  # hardware.bluetooth.powerOnBoot = true;
+  # services.blueman.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
 
   # Security / Polkit
-  security.rtkit.enable = true;
-  security.polkit.enable = true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (
-        subject.isInGroup("users")
-          && (
-            action.id == "org.freedesktop.login1.reboot" ||
-            action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-            action.id == "org.freedesktop.login1.power-off" ||
-            action.id == "org.freedesktop.login1.power-off-multiple-sessions"
-          )
-        )
-      {
-        return polkit.Result.YES;
-      }
-    })
-  '';
+  # security.rtkit.enable = true;
+  # security.polkit.enable = true;
+  # security.polkit.extraConfig = ''
+  #   polkit.addRule(function(action, subject) {
+  #     if (
+  #       subject.isInGroup("users")
+  #         && (
+  #           action.id == "org.freedesktop.login1.reboot" ||
+  #           action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+  #           action.id == "org.freedesktop.login1.power-off" ||
+  #           action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+  #         )
+  #       )
+  #     {
+  #       return polkit.Result.YES;
+  #     }
+  #   })
+  # '';
   security.pam.services.swaylock = {
     text = ''
       auth include login
@@ -419,12 +415,12 @@ in
   };
 
   # Virtualization / Containers
-  virtualisation.libvirtd.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  #   defaultNetwork.settings.dns_enabled = true;
+  # };
 
   # OpenGL
   hardware.graphics = {
@@ -445,5 +441,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
