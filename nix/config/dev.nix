@@ -8,6 +8,7 @@
     python313
     clang
     rustup
+    nixfmt-rfc-style
 
     unzip
 

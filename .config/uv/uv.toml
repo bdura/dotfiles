@@ -1,0 +1,4 @@
+python-preference = "only-managed"
+extra-index-url = [
+  "https://gitlab.dotblocks.fr/api/v4/projects/33/packages/pypi/simple",
+]
