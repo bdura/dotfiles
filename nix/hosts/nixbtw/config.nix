@@ -95,7 +95,7 @@ in
         name = "Roboto";
       };
       sizes = {
-        applications = 14;
+        applications = 12;
         terminal = 15;
         desktop = 11;
         popups = 12;
@@ -140,16 +140,6 @@ in
 
   programs = {
     firefox.enable = true;
-
-    # dconf.enable = true;
-    # seahorse.enable = true;
-    # fuse.userAllowOther = true;
-    # mtr.enable = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-    # virt-manager.enable = true;
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
