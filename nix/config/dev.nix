@@ -2,7 +2,15 @@
 {
   environment.systemPackages = with pkgs; [
     neovim-unwrapped
-    nodejs-slim
+
+    # Requirements for plugins
+    nodejs
+    python313
+    clang
+    rustup
+    ghcup # Haskel
+
+    unzip
 
     zoxide
     zellij
@@ -16,6 +24,8 @@
     jq
     ripgrep
     tmux
+
+    tlrc
   ];
 
   environment.variables.EDITOR = "nvim";

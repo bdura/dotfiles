@@ -215,7 +215,7 @@ in
     nh
     # ninja
     nixfmt-rfc-style
-    openssl
+    # openssl
     pavucontrol
     # pciutils
     # pkg-config
@@ -234,7 +234,7 @@ in
     # uv
     # v4l-utils
     # virt-viewer
-    wget
+    # wget
     wl-clipboard
     # yad
     # ydotool
@@ -364,12 +364,12 @@ in
   # hardware.logitech.wireless.enableGraphical = false;
 
   # Bluetooth Support
-  # hardware.bluetooth.enable = true;
-  # hardware.bluetooth.powerOnBoot = true;
-  # services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   # Enable sound with pipewire.
-  # services.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # Security / Polkit
   # security.rtkit.enable = true;
