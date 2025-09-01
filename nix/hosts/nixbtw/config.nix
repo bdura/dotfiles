@@ -175,54 +175,23 @@ in
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
-    # tlrc
-    # appimage-run
+    slack
+
     bitwarden-desktop
     hypridle
     brightnessctl
-    # drawio
-    # duf
-    # ffmpeg
-    # file-roller
-    # google-chrome
     tuigreet
-    # grim
-    # gh
-    # hyprpicker
-    # imv
-    # inkscape
-    # inxi
     kanata
-    # killall
     kitty
-    # libnotify
-    # libvirt
-    # lm_sensors
-    # lshw
-    # lxqt.lxqt-policykit
-    # meson
-    # mpv
-    # ncdu
-    # neovide
     networkmanagerapplet
     nh
     pavucontrol
-    # playerctl
-    # rustup
-    # slurp
-    # socat
     swaynotificationcenter
-    # swww
-    # tree
-    # unrar
-    # unzip
-    # uv
-    # v4l-utils
-    # virt-viewer
-    # wget
+
+    hyprpicker
+    slurp
+    grim
     wl-clipboard
-    # yad
-    # ydotool
   ];
 
   fonts = {
@@ -238,6 +207,9 @@ in
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_STATE_HOME = "$HOME/.local/state";
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
+
+    # Wayland apps (see <https://wiki.nixos.org/wiki/Slack>)
+    NIXOS_OZONE_WL = "1";
   };
 
   # Services to start
@@ -339,5 +311,11 @@ in
     ];
     dates = "02:00";
     randomizedDelaySec = "45min";
+  };
+
+  # Enable screen-sharing
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 }
