@@ -8,7 +8,6 @@
     python313
     clang
     rustup
-    ghcup # Haskel
 
     unzip
 
