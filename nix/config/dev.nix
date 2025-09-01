@@ -1,8 +1,15 @@
-{ unstable, ... }:
+{ pkgs, ... }:
 {
-  environment.systemPackages = with unstable; [
+  environment.systemPackages = with pkgs; [
     neovim-unwrapped
-    nodejs-slim
+
+    # Requirements for plugins
+    nodejs
+    python313
+    clang
+    rustup
+
+    unzip
 
     zoxide
     zellij
@@ -16,6 +23,8 @@
     jq
     ripgrep
     tmux
+
+    tlrc
   ];
 
   environment.variables.EDITOR = "nvim";

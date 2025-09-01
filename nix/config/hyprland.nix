@@ -47,7 +47,11 @@ with lib;
           exec-once = nm-applet --indicator
           exec-once = lxqt-policykit-agent
           exec-once = sleep 1.5 && swww img /home/${username}/Pictures/Wallpapers/beautifulmountainscape.jpg
+
+          exec-once = hypridle
+
           ${extraMonitorSettings}
+
           general {
             gaps_in = 6
             gaps_out = 8
@@ -71,17 +75,17 @@ with lib;
             sensitivity = 0.5 # -1.0 - 1.0, 0 means no modification.
             accel_profile = flat
           }
-          windowrule = noborder,^(wofi)$
-          windowrule = center,^(wofi)$
-          windowrule = center,^(steam)$
-          windowrule = float, nm-connection-editor|blueman-manager
-          windowrule = float, swayimg|vlc|Viewnior|pavucontrol
-          windowrule = float, nwg-look|qt5ct|mpv
-          windowrule = float, zoom
-          windowrulev2 = stayfocused, title:^()$,class:^(steam)$
-          windowrulev2 = minsize 1 1, title:^()$,class:^(steam)$
-          windowrulev2 = opacity 0.9 0.7, class:^(Brave)$
-          windowrulev2 = opacity 0.9 0.7, class:^(thunar)$
+          windowrule = noborder,class:^(wofi)$
+          windowrule = center,class:^(wofi)$
+          windowrule = center,class:^(steam)$
+          windowrule = float, class:nm-connection-editor|blueman-manager
+          windowrule = float, class:swayimg|vlc|Viewnior|pavucontrol
+          windowrule = float, class:nwg-look|qt5ct|mpv
+          windowrule = float, class:zoom
+          windowrule = stayfocused, title:^()$,class:^(steam)$
+          windowrule = minsize 1 1, title:^()$,class:^(steam)$
+          windowrule = opacity 0.9 0.7, class:^(Brave)$
+          windowrule = opacity 0.9 0.7, class:^(thunar)$
           gestures {
             workspace_swipe = true
             workspace_swipe_fingers = 3
@@ -107,10 +111,6 @@ with lib;
           }
           decoration {
             rounding = 10
-            drop_shadow = true
-            shadow_range = 4
-            shadow_render_power = 3
-            col.shadow = rgba(1a1a1aee)
             blur {
                 enabled = true
                 size = 5

@@ -90,11 +90,11 @@ in
       gtk-application-prefer-dark-theme = 1;
     };
   };
-  qt = {
-    enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "gtk3";
-  };
+  # qt = {
+  #   enable = true;
+  #   style.name = "adwaita-dark";
+  #   platformTheme.name = "gtk3";
+  # };
 
   # Scripts
   home.packages = [
@@ -117,6 +117,7 @@ in
 
   services = {
     hypridle = {
+      enable = true;
       settings = {
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
@@ -125,13 +126,22 @@ in
         };
         listener = [
           {
+            timeout = 60;
+            on-timeout = "brightnessctl -s set 20"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
+            on-resume = "brightnessctl -r"; # monitor backlight restore.
+          }
+          {
             timeout = 120;
             on-timeout = "hyprlock";
           }
           {
-            timeout = 1200;
+            timeout = 180;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 600;
+            on-timeout = "systemctl suspend";
           }
         ];
       };
@@ -176,12 +186,12 @@ in
           hide_cursor = true;
           ignore_empty_input = true;
         };
-        background = [
-          {
-            path = "";
-            color = "rgb(1e1e2e)";
-          }
-        ];
+        # background = [
+        #   {
+        #     path = "";
+        #     color = "rgb(1e1e2e)";
+        #   }
+        # ];
         label = [
           {
             monitor = "";
@@ -204,21 +214,21 @@ in
             valign = "top";
           }
         ];
-        input-field = [
-          {
-            size = "300, 50";
-            position = "0, 0";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(CFE6F4)";
-            inner_color = "rgb(657DC2)";
-            outer_color = "rgb(0D0E15)";
-            outline_thickness = 5;
-            placeholder_text = "Password...";
-            shadow_passes = 2;
-          }
-        ];
+        # input-field = [
+        #   {
+        #     size = "300, 50";
+        #     position = "0, 0";
+        #     monitor = "";
+        #     dots_center = true;
+        #     fade_on_empty = false;
+        #     # font_color = "rgb(CFE6F4)";
+        #     # inner_color = "rgb(657DC2)";
+        #     # outer_color = "rgb(0D0E15)";
+        #     outline_thickness = 5;
+        #     placeholder_text = "Password...";
+        #     shadow_passes = 2;
+        #   }
+        # ];
       };
     };
   };

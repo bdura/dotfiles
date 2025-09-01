@@ -1,7 +1,6 @@
 {
-  config,
+  inputs,
   pkgs,
-  unstable,
   host,
   username,
   options,
@@ -13,6 +12,7 @@ in
 {
   imports = [
     ./hardware.nix
+    ./disko.nix
     ./users.nix
     ../../config/direnv.nix
     ../../config/git.nix
@@ -27,14 +27,14 @@ in
 
   boot = {
     # Kernel
-    kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_zen;
     # This is for OBS Virtual Cam Support
-    kernelModules = [ "v4l2loopback" ];
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    # kernelModules = [ "v4l2loopback" ];
+    # extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     # Needed For Some Steam Games
-    kernel.sysctl = {
-      "vm.max_map_count" = 2147483642;
-    };
+    # kernel.sysctl = {
+    #   "vm.max_map_count" = 2147483642;
+    # };
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
@@ -45,25 +45,24 @@ in
     # Make /tmp a tmpfs
     tmp = {
       useTmpfs = true;
-      tmpfsSize = "30%";
       cleanOnBoot = true;
-    };
-    # Appimage Support
-    binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
+      tmpfsSize = "30%";
     };
     plymouth.enable = true;
   };
 
+  # swapfile on @swap subvolume
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16 * 1024; # 16 GiB
+    }
+  ];
+
   # Styling Options
   stylix = {
     enable = true;
-    image = ../../config/wallpapers/beautifulmountainscape.jpg;
+    # image = ../../config/wallpapers/beautifulmountainscape.jpg;
     # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
     # looks like it's broken.
@@ -92,7 +91,7 @@ in
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font Mono";
       };
       sansSerif = {
@@ -121,7 +120,7 @@ in
     nvidiaBusID = "";
   };
   drivers.intel.enable = false;
-  vm.guest-services.enable = false;
+  # vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
   # Enable networking
@@ -149,25 +148,15 @@ in
 
   programs = {
     firefox.enable = true;
-    firefox.package = unstable.firefox;
 
-    # NOTE: for some reason enabling fish does not play nice with tmux (long start-up times)
-    # zsh.enable = true;
-
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   package =
-    # };
-    # starship.enable = true;
-    dconf.enable = true;
+    # dconf.enable = true;
     # seahorse.enable = true;
     # fuse.userAllowOther = true;
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+    # mtr.enable = true;
+    # gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
     # virt-manager.enable = true;
     thunar = {
       enable = true;
@@ -182,7 +171,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   users = {
-    mutableUsers = true;
+    mutableUsers = false;
   };
 
   programs.nix-ld.enable = true;
@@ -194,71 +183,68 @@ in
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
-    appimage-run
-    unstable.bitwarden-desktop
+    # tlrc
+    # appimage-run
+    bitwarden-desktop
+    hypridle
     brightnessctl
-    drawio
-    duf
-    ffmpeg
-    file-roller
-    google-chrome
-    greetd.tuigreet
-    grim
-    gh
-    hyprpicker
-    imv
-    inkscape
-    inxi
+    # drawio
+    # duf
+    # ffmpeg
+    # file-roller
+    # google-chrome
+    tuigreet
+    # grim
+    # gh
+    # hyprpicker
+    # imv
+    # inkscape
+    # inxi
     kanata
-    killall
+    # killall
     kitty
-    libnotify
-    libvirt
-    libvirt
-    lm_sensors
-    lshw
-    lxqt.lxqt-policykit
-    meson
-    mpv
-    ncdu
-    neovide
+    # libnotify
+    # libvirt
+    # lm_sensors
+    # lshw
+    # lxqt.lxqt-policykit
+    # meson
+    # mpv
+    # ncdu
+    # neovide
     networkmanagerapplet
     nh
-    ninja
-    nixFlakes
+    # ninja
     nixfmt-rfc-style
-    openssl
+    # openssl
     pavucontrol
-    pciutils
-    pkg-config
-    playerctl
-    pnpm
-    podman-compose
-    prettierd
-    rustup
-    slurp
-    socat
-    stow
-    swappy
+    # pciutils
+    # pkg-config
+    # playerctl
+    # podman-compose
+    # rustup
+    # slurp
+    # socat
+    # stow
+    # swappy
     swaynotificationcenter
-    swww
-    tree
-    tree-sitter
-    unrar
-    unzip
-    uv
-    v4l-utils
-    virt-viewer
-    wget
+    # swww
+    # tree
+    # unrar
+    # unzip
+    # uv
+    # v4l-utils
+    # virt-viewer
+    # wget
     wl-clipboard
-    yad
-    ydotool
+    # yad
+    # ydotool
   ];
 
   fonts = {
     packages = with pkgs; [
       noto-fonts-emoji
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       font-awesome
       # Commenting Symbola out to fix install this will need to be fixed or an alternative found.
       # symbola
@@ -269,7 +255,7 @@ in
   environment.variables = {
     ZANEYOS_VERSION = "2.2";
     ZANEYOS = "true";
-    FLAKE = "/home/${username}/.dotfiles/nix";
+    NH_FLAKE = "/home/${username}/.dotfiles/nix";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_CACHE_HOME = "$HOME/.cache";
@@ -277,36 +263,34 @@ in
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
-  # Extra Portal Configuration
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal
-    ];
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal
-    ];
-  };
+  # # Extra Portal Configuration
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal
+  #   ];
+  #   configPackages = [
+  #     pkgs.xdg-desktop-portal-gtk
+  #     pkgs.xdg-desktop-portal-hyprland
+  #     pkgs.xdg-desktop-portal
+  #   ];
+  # };
 
   # Services to start
   services = {
     tailscale = {
       enable = true;
-      package = unstable.tailscale;
     };
-    xserver = {
-      enable = false;
-      xkb = {
-        layout = "${keyboardLayout}";
-      };
-    };
+    # xserver = {
+    #   enable = false;
+    #   xkb = {
+    #     layout = "${keyboardLayout}";
+    #   };
+    # };
     greetd = {
       enable = true;
-      vt = 3;
       settings = {
         default_session = {
           # Wayland Desktop Manager is installed only for user ryan via home-manager!
@@ -314,46 +298,46 @@ in
           # .wayland-session is a script generated by home-manager, which links to the current wayland compositor(sway/hyprland or others).
           # with such a vendor-no-locking script, we can switch to another wayland compositor without modifying greetd's config here.
           # command = "$HOME/.wayland-session"; # start a wayland session directly without a login manager
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
         };
       };
     };
-    smartd = {
-      enable = false;
-      autodetect = true;
-    };
-    libinput.enable = true;
-    fstrim.enable = true;
-    gvfs.enable = true;
+    # smartd = {
+    #   enable = false;
+    #   autodetect = true;
+    # };
+    # libinput.enable = true;
+    # fstrim.enable = true;
+    # gvfs.enable = true;
     openssh.enable = true;
-    flatpak.enable = false;
-    printing = {
-      enable = true;
-      drivers = [
-        # pkgs.hplipWithPlugin
-      ];
-    };
-    gnome.gnome-keyring.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-    ipp-usb.enable = true;
+    # flatpak.enable = false;
+    # printing = {
+    #   enable = true;
+    #   drivers = [
+    #     # pkgs.hplipWithPlugin
+    #   ];
+    # };
+    # gnome.gnome-keyring.enable = true;
+    # avahi = {
+    #   enable = true;
+    #   nssmdns4 = true;
+    #   openFirewall = true;
+    # };
+    # ipp-usb.enable = true;
     # syncthing = {
     #   enable = false;
     #   user = "${username}";
     #   dataDir = "/home/${username}";
     #   configDir = "/home/${username}/.config/syncthing";
     # };
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-    rpcbind.enable = false;
-    nfs.server.enable = false;
+    # pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = true;
+    #   pulse.enable = true;
+    # };
+    # rpcbind.enable = false;
+    # nfs.server.enable = false;
     kanata = {
       enable = true;
       keyboards = {
@@ -364,21 +348,21 @@ in
       };
     };
   };
-  systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-  hardware.sane = {
-    enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
-    disabledDefaultBackends = [ "escl" ];
-  };
+  # systemd.services.flatpak-repo = {
+  #   path = [ pkgs.flatpak ];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
+  # hardware.sane = {
+  #   enable = true;
+  #   extraBackends = [ pkgs.sane-airscan ];
+  #   disabledDefaultBackends = [ "escl" ];
+  # };
 
   # Extra Logitech Support
-  hardware.logitech.wireless.enable = false;
-  hardware.logitech.wireless.enableGraphical = false;
+  # hardware.logitech.wireless.enable = false;
+  # hardware.logitech.wireless.enableGraphical = false;
 
   # Bluetooth Support
   hardware.bluetooth.enable = true;
@@ -386,27 +370,27 @@ in
   services.blueman.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   # Security / Polkit
-  security.rtkit.enable = true;
-  security.polkit.enable = true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (
-        subject.isInGroup("users")
-          && (
-            action.id == "org.freedesktop.login1.reboot" ||
-            action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-            action.id == "org.freedesktop.login1.power-off" ||
-            action.id == "org.freedesktop.login1.power-off-multiple-sessions"
-          )
-        )
-      {
-        return polkit.Result.YES;
-      }
-    })
-  '';
+  # security.rtkit.enable = true;
+  # security.polkit.enable = true;
+  # security.polkit.extraConfig = ''
+  #   polkit.addRule(function(action, subject) {
+  #     if (
+  #       subject.isInGroup("users")
+  #         && (
+  #           action.id == "org.freedesktop.login1.reboot" ||
+  #           action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+  #           action.id == "org.freedesktop.login1.power-off" ||
+  #           action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+  #         )
+  #       )
+  #     {
+  #       return polkit.Result.YES;
+  #     }
+  #   })
+  # '';
   security.pam.services.swaylock = {
     text = ''
       auth include login
@@ -432,12 +416,12 @@ in
   };
 
   # Virtualization / Containers
-  virtualisation.libvirtd.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  #   defaultNetwork.settings.dns_enabled = true;
+  # };
 
   # OpenGL
   hardware.graphics = {
@@ -458,5 +442,16 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
+
+  # See <https://wiki.nixos.org/wiki/Automatic_system_upgrades>
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--print-build-logs"
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
 }
