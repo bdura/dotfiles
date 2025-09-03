@@ -182,6 +182,8 @@ in
     slurp
     grim
     wl-clipboard
+    # Background
+    swww
   ];
 
   fonts = {

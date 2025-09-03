@@ -9,6 +9,8 @@
     clang
     rustup
     nixfmt-rfc-style
+    lua
+    luarocks
 
     unzip
 
