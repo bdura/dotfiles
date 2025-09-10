@@ -179,9 +179,13 @@ in
     swaynotificationcenter
 
     hyprpicker
-    slurp
     grim
     wl-clipboard
+
+    # Screenshooting
+    slurp
+    swappy
+
     # Background
     swww
   ];

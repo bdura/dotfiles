@@ -30,5 +30,8 @@
     tlrc
   ];
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables = {
+    EDITOR = "nvim";
+    MANPAGER = "nvim +Man!";
+  };
 }

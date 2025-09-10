@@ -80,6 +80,7 @@ with lib;
           windowrule = center,class:^(steam)$
           windowrule = float, class:nm-connection-editor|blueman-manager
           windowrule = float, class:swayimg|vlc|Viewnior|pavucontrol
+          windowrule = float, class:^Bitwarden$
           windowrule = float, class:nwg-look|qt5ct|mpv
           windowrule = float, class:zoom
           windowrule = stayfocused, title:^()$,class:^(steam)$
