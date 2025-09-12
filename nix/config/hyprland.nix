@@ -157,6 +157,10 @@ with lib;
           bind = ${modifier}SHIFT,l,movewindow,r
           bind = ${modifier}SHIFT,k,movewindow,u
           bind = ${modifier}SHIFT,j,movewindow,d
+          bind = ${modifier}ALT,h,resizeactive,-30 0
+          bind = ${modifier}ALT,l,resizeactive,30 0
+          bind = ${modifier}ALT,k,resizeactive,0 -30
+          bind = ${modifier}ALT,j,resizeactive,0 30
           bind = ${modifier},left,movefocus,l
           bind = ${modifier},right,movefocus,r
           bind = ${modifier},up,movefocus,u
