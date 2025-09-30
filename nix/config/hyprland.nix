@@ -87,10 +87,7 @@ with lib;
           windowrule = minsize 1 1, title:^()$,class:^(steam)$
           windowrule = opacity 0.9 0.7, class:^(Brave)$
           windowrule = opacity 0.9 0.7, class:^(thunar)$
-          gestures {
-            workspace_swipe = true
-            workspace_swipe_fingers = 3
-          }
+          gesture = 3, horizontal, workspace
           misc {
             initial_workspace_tracking = 0
             mouse_move_enables_dpms = true
