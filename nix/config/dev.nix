@@ -26,6 +26,7 @@
     jq
     ripgrep
     tmux
+    tomlq
 
     tlrc
   ];
