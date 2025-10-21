@@ -166,6 +166,7 @@ in
 
   environment.systemPackages = with pkgs; [
     slack
+    obsidian
 
     bitwarden-desktop
     hypridle
