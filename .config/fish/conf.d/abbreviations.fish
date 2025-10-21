@@ -17,4 +17,4 @@ abbr -a -- watcht 'watchexec -c --no-vcs-ignore -w src/ -w uv.lock -w tests/ --n
 abbr -a -- watchs 'watchexec -c --no-vcs-ignore -w src/ -w uv.lock stubtest --allowlist .stubtest-allowlist'
 
 # Bat colorisation
-abbr -a --position anywhere -- --help '--help | bat -p -l help'
+abbr -a --position anywhere -- --helpc '--help | bat -p -l help'
