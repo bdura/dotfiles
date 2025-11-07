@@ -8,3 +8,9 @@ set -g fish_key_bindings fish_vi_key_bindings
 
 # Overwrite fish_greeting with empty message
 set fish_greeting
+
+# Source the HM session vars
+if test -f ~/.profile
+    # Convert bash exports to fish syntax
+    bass source ~/.profile
+end
