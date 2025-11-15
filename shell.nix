@@ -1,4 +1,9 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
-pkgs.mkShell { buildInputs = with pkgs; [ stow ]; }
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+    stow
+    kdlfmt
+  ];
+}

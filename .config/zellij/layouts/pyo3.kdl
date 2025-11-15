@@ -1,0 +1,50 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane split_direction="vertical" {
+        pane {
+            command "nvim"
+            size "66%"
+        }
+        pane split_direction="horizontal" {
+            pane stacked=true {
+                direnv {
+                    name "cargo check"
+                    args "cargo" "check"
+                }
+                direnv {
+                    name "cargo test"
+                    args "cargo" "test"
+                }
+                direnv {
+                    name "maturin develop"
+                    args "maturin" "develop" "--uv" "-r"
+                }
+                direnv {
+                    name "pytest"
+                    args "pytest"
+                }
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+    pane_template name="direnv" {
+        command "direnv-exec"
+        start_suspended true
+    }
+    pane_template name="cargo" {
+        direnv {
+            command "cargo"
+            start_suspended true
+        }
+    }
+    pane_template name="watch" {
+        direnv {
+            command "watchexec"
+            start_suspended true
+        }
+    }
+}
