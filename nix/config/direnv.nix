@@ -1,11 +1,21 @@
-{ ... }:
 {
-  programs.direnv = {
-    enable = true;
+  pkgs,
+  ...
+}:
+let
+  direnv-exec = pkgs.writeShellScriptBin "direnv-exec" ''
+    direnv exec . "$@"
+  '';
+in
+{
+  programs = {
+    direnv = {
+      enable = true;
+      silent = true;
+    };
   };
 
-  environment.etc."direnv/direnv.toml".text = ''
-    [global]
-    hide_env_diff = true
-  '';
+  environment.systemPackages = [
+    direnv-exec
+  ];
 }
