@@ -192,6 +192,11 @@ in
     swww
   ];
 
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
+
   fonts = {
     packages = with pkgs; [
       font-awesome
