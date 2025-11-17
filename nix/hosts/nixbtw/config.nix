@@ -104,14 +104,15 @@ in
   };
 
   # Extra Module Options
-  drivers.amdgpu.enable = true;
+  drivers.amdgpu.enable = false;
   drivers.nvidia.enable = false;
   drivers.nvidia-prime = {
     enable = false;
     intelBusID = "";
     nvidiaBusID = "";
   };
-  drivers.intel.enable = false;
+  drivers.intel.enable = true;
+
   # vm.guest-services.enable = false;
   local.hardware-clock.enable = false;
 
@@ -296,10 +297,10 @@ in
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
+  # # OpenGL
+  # hardware.graphics = {
+  #   enable = true;
+  # };
 
   console.keyMap = "${keyboardLayout}";
 
