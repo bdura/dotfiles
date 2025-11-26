@@ -491,5 +491,5 @@ simplified_ui true
 //
 theme "catppuccin-mocha"
 default_mode "locked"
-show_startup_tips true
+show_startup_tips false
 pane_frames false
