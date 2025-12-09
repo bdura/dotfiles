@@ -6,7 +6,7 @@ return {
     view_options = { show_hidden = true },
   },
   -- Optional dependencies
-  dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+  dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
   config = function()
     local oil = require('oil')
 

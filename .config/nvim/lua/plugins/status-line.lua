@@ -7,5 +7,5 @@ return {
     'nvim-lualine/lualine.nvim',
     enabled = false,
   },
-  { 'echasnovski/mini.statusline', version = '*', opts = {} },
+  { 'nvim-mini/mini.statusline', version = '*', opts = {} },
 }
