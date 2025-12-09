@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    helix
     neovim-unwrapped
 
     # Requirements for plugins
