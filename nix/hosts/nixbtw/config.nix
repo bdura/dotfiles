@@ -170,6 +170,8 @@ in
     slack
     obsidian
 
+    vscode
+
     bitwarden-desktop
     hypridle
     brightnessctl
