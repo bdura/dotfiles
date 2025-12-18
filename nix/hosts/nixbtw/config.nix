@@ -54,7 +54,7 @@ in
   stylix = {
     enable = true;
     enableReleaseChecks = false;
-    image = ../../config/wallpapers/mountainscapedark.jpg;
+    image = ../../config/wallpapers/gigamoon.jpg;
     # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
     # looks like it's broken.
