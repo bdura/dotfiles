@@ -54,6 +54,7 @@ in
   stylix = {
     enable = true;
     enableReleaseChecks = false;
+    # Taken from <https://www.reddit.com/r/space/comments/11jburq/i_took_an_absurdly_high_resolution_photo_of_the/>
     image = ../../config/wallpapers/gigamoon.jpg;
     # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
