@@ -1,0 +1,11 @@
+[language-server.confit-lsp]
+command = "confit-lsp"
+
+[[language]]
+name = "confit"
+scope = "text.toml"
+injection-regex = "toml"
+file-types = ["toml"]
+comment-tokens = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["confit-lsp"]
