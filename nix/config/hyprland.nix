@@ -74,18 +74,18 @@ with lib;
             sensitivity = 0.5 # -1.0 - 1.0, 0 means no modification.
             accel_profile = flat
           }
-          windowrule = noborder,class:^(wofi)$
-          windowrule = center,class:^(wofi)$
-          windowrule = center,class:^(steam)$
-          windowrule = float, class:nm-connection-editor|blueman-manager
-          windowrule = float, class:swayimg|vlc|Viewnior|pavucontrol
-          windowrule = float, class:^Bitwarden$
-          windowrule = float, class:nwg-look|qt5ct|mpv
-          windowrule = float, class:zoom
-          windowrule = stayfocused, title:^()$,class:^(steam)$
-          windowrule = minsize 1 1, title:^()$,class:^(steam)$
-          windowrule = opacity 0.9 0.7, class:^(Brave)$
-          windowrule = opacity 0.9 0.7, class:^(thunar)$
+          windowrule = border_size 0, match:class ^(wofi)$
+          windowrule = center on, match:class ^(wofi)$
+          windowrule = center on, match:class ^(steam)$
+          windowrule = float on, match:class nm-connection-editor|blueman-manager
+          windowrule = float on, match:class swayimg|vlc|Viewnior|pavucontrol
+          windowrule = float on, match:class ^Bitwarden$
+          windowrule = float on, match:class nwg-look|qt5ct|mpv
+          windowrule = float on, match:class zoom
+          windowrule = stay_focused on, match:title ^()$,match:class ^(steam)$
+          windowrule = min_size 1 1, match:title ^()$,match:class ^(steam)$
+          windowrule = opacity 0.9 0.7, match:class ^(Brave)$
+          windowrule = opacity 0.9 0.7, match:class ^(thunar)$
           gesture = 3, horizontal, workspace
           misc {
             initial_workspace_tracking = 0
