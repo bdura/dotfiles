@@ -1,6 +1,5 @@
 {
   lib,
-  username,
   host,
   config,
   ...

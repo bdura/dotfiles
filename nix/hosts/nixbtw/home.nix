@@ -52,6 +52,14 @@ in
     fill_shape=false
   '';
 
+  home.file.".config/hypr/hyprpaper.conf".text = ''
+    wallpaper {
+        monitor = 
+        path = ${../../config/wallpapers/gigamoon.jpg}
+        fit_mode = cover
+    }
+  '';
+
   # Install & Configure Git
   programs.git = {
     enable = true;
@@ -149,12 +157,12 @@ in
       };
     };
 
-    hyprpaper = {
-      enable = true;
-      settings = {
-        splash = false;
-      };
-    };
+    # hyprpaper = {
+    #   enable = true;
+    #   settings = {
+    #     splash = false;
+    #   };
+    # };
   };
 
   programs = {
