@@ -172,6 +172,7 @@ in
     obsidian
 
     vscode
+
     hyprpaper
 
     bitwarden-desktop
@@ -195,6 +196,9 @@ in
 
     # Background
     swww
+
+    # Scanning tool
+    simple-scan
   ];
 
   environment.pathsToLink = [

@@ -9,7 +9,7 @@
     python313
     clang
     rustup
-    nixfmt-rfc-style
+    nixfmt
     lua
     luarocks
 
