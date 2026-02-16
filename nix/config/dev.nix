@@ -5,7 +5,6 @@
     neovim-unwrapped
 
     # Requirements for plugins
-    nodejs
     python313
     clang
     rustup
@@ -28,6 +27,7 @@
     ripgrep
     tmux
     tomlq
+    tree-sitter
 
     tlrc
   ];
