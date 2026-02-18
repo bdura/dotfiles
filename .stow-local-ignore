@@ -16,5 +16,8 @@ shell.nix
 # Nix
 nix
 
+# Direnv
+\.direnv
+
 # Temporary exclude
 .config/hypr
