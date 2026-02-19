@@ -6,3 +6,7 @@ local set = vim.opt
 
 set.list = true
 set.listchars = { tab = '» ', trail = '·', nbsp = '␣', lead = '·', multispace = '·' }
+
+vim.filetype.add({
+  extension = { wesl = 'wgsl' },
+})
