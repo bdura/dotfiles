@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; [
     helix
     neovim-unwrapped
+    opencode
 
     # Requirements for plugins
     python313
