@@ -14,6 +14,7 @@ in
     ./hardware.nix
     ./disko.nix
     ./users.nix
+    ./envvar.nix
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
