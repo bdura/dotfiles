@@ -4,6 +4,7 @@
     helix
     neovim-unwrapped
     opencode
+    claude-code
 
     # Requirements for plugins
     python313
