@@ -172,8 +172,6 @@ in
     slack
     obsidian
 
-    vscode
-
     hyprpaper
 
     bitwarden-desktop

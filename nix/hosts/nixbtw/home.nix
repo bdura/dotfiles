@@ -60,14 +60,14 @@ in
     }
   '';
 
-  # Install & Configure Git
-  programs.git = {
-    enable = true;
-    settings.user = {
-      name = "${gitUsername}";
-      email = "${gitEmail}";
-    };
-  };
+  # # Install & Configure Git
+  # programs.git = {
+  #   enable = true;
+  #   settings.user = {
+  #     name = "${gitUsername}";
+  #     email = "${gitEmail}";
+  #   };
+  # };
 
   # Create XDG Dirs
   xdg = {
