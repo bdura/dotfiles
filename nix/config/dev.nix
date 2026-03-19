@@ -36,6 +36,6 @@
 
   environment.variables = {
     EDITOR = "nvim";
-    MANPAGER = "nvim +Man!";
+    MANPAGER = "nvim --cmd 'set laststatus=0 ' +'set statuscolumn= nowrap laststatus=0' +Man\!";
   };
 }
