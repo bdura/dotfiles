@@ -28,3 +28,5 @@ scratch*
 # NOTE: for project where the Nix configuration is allowed,
 # I would use a flake anyway.
 shell.nix
+
+**/.claude/settings.local.json
