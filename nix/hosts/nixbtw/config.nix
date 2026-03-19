@@ -252,7 +252,10 @@ in
       enable = true;
       keyboards = {
         internalKeyboard = {
-          extraDefCfg = "process-unmapped-keys yes";
+          extraDefCfg = ''
+            process-unmapped-keys yes
+            concurrent-tap-hold true
+          '';
           config = builtins.readFile ../../config/kanata.kbd;
         };
       };

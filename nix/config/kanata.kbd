@@ -14,6 +14,13 @@
 ;; Key combos
 (defalias
   meh  (multi ctl alt sft)
+  cw   (caps-word 2000)
+)
+
+;; Caps Word — press both Shifts simultaneously to activate.
+;; Letters are auto-shifted; deactivates on space, enter, etc.
+(defchordsv2
+  (d k) @cw 200 first-release ()
 )
 
 ;; Layer triggers.
