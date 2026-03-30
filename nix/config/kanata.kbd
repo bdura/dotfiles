@@ -17,10 +17,12 @@
   cw   (caps-word 2000)
 )
 
-;; Caps Word — press both Shifts simultaneously to activate.
-;; Letters are auto-shifted; deactivates on space, enter, etc.
+;; Chords definition
 (defchordsv2
-  (d k) @cw 200 first-release ()
+  ;; Activate caps word
+  (d k)     @cw         200 first-release ()
+  ;; Toggle between Colemak-DH & QWERTY
+  (q w e r) @tog_layout 200 first-release ()
 )
 
 ;; Layer triggers.
@@ -76,4 +78,46 @@
   XX   XX   XX   XX   XX   XX   XX   4    5    6    XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX   XX   7    8    9    0    XX
   XX        XX   XX             XX        XX   XX
+)
+
+;; Layer switching — permanently changes the base layer (unlike layer-toggle).
+;;
+;; `tog_layout` uses a `switch` to inspect the active layer at press time,
+;; so a single chord entry can serve both directions of the toggle.
+(defalias
+  to_cm      (layer-switch colemak)
+  to_base    (layer-switch base)
+  tog_layout (switch
+    ((layer colemak)) @to_base break
+    ()                @to_cm   break
+  )
+)
+
+;; Colemak-DH home-row mods.
+(defalias
+  cm_a  (tap-hold $tap-time $hold-time a    lmet)
+  cm_r  (tap-hold $tap-time $hold-time r    lalt)
+  cm_s  (tap-hold $tap-time $hold-time s    lsft)
+  cm_t  (tap-hold $tap-time $hold-time t    lctl)
+  cm_g  (tap-hold $tap-time $hold-time g    lalt)
+  cm_m  (tap-hold $tap-time $hold-time m    ralt)
+  cm_n  (tap-hold $tap-time $hold-time n    rctl)
+  cm_e  (tap-hold $tap-time $hold-time e    rsft)
+  cm_i  (tap-hold $tap-time $hold-time i    lalt)
+  cm_o  (tap-hold $tap-time $hold-time o    rmet)
+)
+
+;; Colemak-DH layer triggers
+(defalias
+  cm_f  (tap-hold $tap-time $hold-time f    @l_num)
+  cm_p  (tap-hold $tap-time $hold-time p    @l_cmd)
+)
+
+;; Colemak-DH layer.
+(deflayer colemak
+  grv     1     2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab     q     w     @cm_f @cm_p b     j     l     u     y     ;     [     ]
+  @caps   @cm_a @cm_r @cm_s @cm_t @cm_g @cm_m @cm_n @cm_e @cm_i @cm_o '     \     ret
+  lsft    z     x     c     d     v     k     h     ,     .     /     rsft
+  lctl          lmet  lalt              @spc        ralt  rctl
 )
