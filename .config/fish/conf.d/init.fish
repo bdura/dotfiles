@@ -1,8 +1,10 @@
-fzf --fish | source
+type -q fzf && fzf --fish | source
 
-direnv hook fish | source
+type -q direnv && direnv hook fish | source
 
-starship init fish | source
-enable_transience
+if type -q starship
+    starship init fish | source
+    enable_transience
+end
 
-zoxide init --cmd cd fish | source
+type -q zoxide && zoxide init --cmd cd fish | source
