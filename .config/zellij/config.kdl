@@ -5,17 +5,32 @@ keybinds clear-defaults=true {
         }
     }
     shared {
-        bind "Ctrl h" {
-            MoveFocus "left"
+      bind "Ctrl h" {
+            MessagePlugin "zellij-nav" {
+                name "move_focus";
+                payload "left";
+            };
         }
-        bind "Ctrl l" {
-            MoveFocus "right"
-        }
+
         bind "Ctrl j" {
-            MoveFocus "down"
+            MessagePlugin "zellij-nav" {
+                name "move_focus";
+                payload "down";
+            };
         }
+
         bind "Ctrl k" {
-            MoveFocus "up"
+            MessagePlugin "zellij-nav" {
+                name "move_focus";
+                payload "up";
+            };
+        }
+
+        bind "Ctrl l" {
+            MessagePlugin "zellij-nav" {
+                name "move_focus";
+                payload "right";
+            };
         }
     }
     normal {
@@ -473,6 +488,7 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    zellij-nav location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
 }
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
