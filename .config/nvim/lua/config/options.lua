@@ -8,5 +8,9 @@ set.list = true
 set.listchars = { tab = '» ', trail = '·', nbsp = '␣', lead = '·', multispace = '·' }
 
 vim.filetype.add({
+  extension = { kbd = 'scheme' },
+})
+
+vim.filetype.add({
   extension = { wesl = 'wgsl' },
 })
