@@ -14,3 +14,9 @@ vim.filetype.add({
 vim.filetype.add({
   extension = { wesl = 'wgsl' },
 })
+
+vim.lsp.config['confit-lsp'] = {
+  cmd = { 'confit-lsp' },
+  filetypes = { 'toml', 'yaml' },
+  root_markers = { { 'pyproject.toml' }, '.git' },
+}
