@@ -1,10 +1,8 @@
 abbr -a -- c clear
-abbr -a -- gl serie
-abbr -a -- lg lazygit
 
 abbr -a -- .. 'cd ..'
 
-abbr -a -- rmf 'rm -rf'
+abbr -a -- rmr 'rm -r'
 
 # Direnv
 abbr -a -- da 'direnv allow'
@@ -18,3 +16,8 @@ abbr -a -- watchs 'watchexec -c --no-vcs-ignore -w src/ -w uv.lock stubtest --al
 
 # Bat colorisation
 abbr -a --position anywhere -- --helpc '--help | bat -p -l help'
+
+# Tools
+abbr -a -- gl serie
+abbr -a -- lg lazygit
+abbr -a -- zj zellij
