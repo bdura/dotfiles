@@ -6,7 +6,15 @@
       "context": "Chat",
       "bindings": {
         "ctrl+g": null,
-        "alt+v": "chat:externalEditor"
+        "alt+v": "chat:externalEditor",
+      }
+    },
+    {
+      "context": "Autocomplete",
+      "bindings": {
+        "tab": null,
+        "enter": null,
+        "ctrl+y": "autocomplete:accept"
       }
     }
   ]
