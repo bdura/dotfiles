@@ -1,0 +1,24 @@
+{
+  "model": "opus",
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true,
+    "rust-skills@rust-skills": true,
+    "fullstack-dev-skills@fullstack-dev-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "rust-skills": {
+      "source": {
+        "source": "github",
+        "repo": "actionbook/rust-skills"
+      }
+    },
+    "fullstack-dev-skills": {
+      "source": {
+        "source": "github",
+        "repo": "jeffallan/claude-skills"
+      }
+    }
+  }
+}
