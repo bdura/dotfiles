@@ -74,6 +74,7 @@ in
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = false;
     };
   };
 
@@ -99,6 +100,7 @@ in
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
+    gtk4.theme = null;
   };
   # qt = {
   #   enable = true;

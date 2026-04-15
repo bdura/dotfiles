@@ -193,9 +193,6 @@ in
     slurp
     swappy
 
-    # Background
-    swww
-
     # Scanning tool
     simple-scan
   ];
