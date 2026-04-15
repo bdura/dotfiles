@@ -124,11 +124,10 @@ with lib;
             preserve_split = true
           }
           bind = ${modifier},Return,exec,${terminal}
-          bind = ${modifier}SHIFT,Return,exec,rofi-launcher
-          bind = ${modifier}SHIFT,W,exec,web-search
-          bind = ${modifier}ALT,W,exec,wallsetter
+          bind = ${modifier}SHIFT,Return,exec,${browser}
+          bind = ${modifier},SPACE,exec,rofi-launcher
           bind = ${modifier}SHIFT,N,exec,swaync-client -rs
-          bind = ${modifier},W,exec,${browser}
+          bind = ${modifier},W,killactive,
           bind = ${modifier},E,exec,emopicker9000
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier},D,exec,discord
@@ -138,7 +137,6 @@ with lib;
           bind = ${modifier}SHIFT,G,exec,godot4
           bind = ${modifier},T,exec,thunar
           bind = ${modifier},M,exec,spotify
-          bind = ${modifier},Q,killactive,
           bind = ${modifier},P,pseudo,
           bind = ${modifier}SHIFT,I,togglesplit,
           bind = ${modifier},F,fullscreen,
@@ -174,8 +172,8 @@ with lib;
           bind = ${modifier},8,workspace,8
           bind = ${modifier},9,workspace,9
           bind = ${modifier},0,workspace,10
-          bind = ${modifier}SHIFT,SPACE,movetoworkspace,special
-          bind = ${modifier},SPACE,togglespecialworkspace
+          # bind = ${modifier}SHIFT,SPACE,movetoworkspace,special
+          # bind = ${modifier},SPACE,togglespecialworkspace
           bind = ${modifier}SHIFT,1,movetoworkspace,1
           bind = ${modifier}SHIFT,2,movetoworkspace,2
           bind = ${modifier}SHIFT,3,movetoworkspace,3
