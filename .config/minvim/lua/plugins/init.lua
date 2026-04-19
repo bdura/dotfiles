@@ -1,0 +1,5 @@
+require('plugins.flash')
+require('plugins.oil')
+require('plugins.snacks')
+require('plugins.which-key')
+require('plugins.zellij-nav')
