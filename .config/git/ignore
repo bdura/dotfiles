@@ -30,3 +30,5 @@ scratch*
 shell.nix
 
 **/.claude/settings.local.json
+
+/SESSION.md
