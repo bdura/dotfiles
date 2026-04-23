@@ -1,5 +1,8 @@
+require('plugins.conform')
 require('plugins.flash')
+require('plugins.gitsigns')
 require('plugins.oil')
 require('plugins.snacks')
+require('plugins.treesitter')
 require('plugins.which-key')
 require('plugins.zellij-nav')

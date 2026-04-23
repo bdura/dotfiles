@@ -1,16 +1,19 @@
 vim.pack.add({
-  "https://github.com/folke/snacks.nvim",
-	"https://github.com/nvim-tree/nvim-web-devicons",
+  'https://github.com/folke/snacks.nvim',
+  'https://github.com/nvim-tree/nvim-web-devicons',
 })
 
-local Snacks = require("snacks")
+local Snacks = require('snacks')
 
 local map = vim.keymap.set
 
-map("n", "<leader><space>", function() Snacks.picker.smart() end, { desc = "(Smart) find files" })
-map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find files" })
+map('n', '<leader><space>', Snacks.picker.smart, { desc = '(Smart) find files' })
+map('n', '<leader>ff', Snacks.picker.files, { desc = 'Find files' })
+map('n', '<leader>:', Snacks.picker.command_history, { desc = 'Command History' })
 
-map("n", "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
+map('n', '<leader>sd', Snacks.picker.diagnostics, { desc = 'Diagnostics' })
+
+-- { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
 
 -- -- Top Pickers & Explorer
 -- { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },

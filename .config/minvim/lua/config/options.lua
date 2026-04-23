@@ -23,8 +23,8 @@ opt.incsearch = true -- Show matches as you type
 
 -- Visual settings
 opt.termguicolors = true -- Enable 24-bit colors
-opt.signcolumn = "yes" -- Always show sign column
-opt.colorcolumn = "88"
+opt.signcolumn = 'yes' -- Always show sign column
+opt.colorcolumn = '88'
 opt.showmatch = true -- Highlight matching brackets
 opt.matchtime = 2 -- How long to show matching bracket
 opt.cmdheight = 1 -- Command line height
@@ -32,13 +32,13 @@ opt.showmode = false -- Don't show mode in command line
 opt.pumheight = 10 -- Popup menu height
 opt.pumblend = 10 -- Popup menu transparency
 opt.winblend = 0 -- Floating window transparency
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = 'menu,menuone,noselect'
 -- opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.concealcursor = "" -- Don't hide cursor line markup
+opt.concealcursor = '' -- Don't hide cursor line markup
 -- opt.synmaxcol = 300 -- Syntax highlighting limit
 opt.ruler = false -- Disable the default ruler
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
 opt.winminwidth = 5 -- Minimum window width
 
 -- File handling
@@ -55,18 +55,18 @@ opt.autowrite = true -- Auto save
 -- Behavior settings
 opt.hidden = true -- Allow hidden buffers
 opt.errorbells = false -- No error bells
-opt.backspace = "indent,eol,start" -- Better backspace behavior
+opt.backspace = 'indent,eol,start' -- Better backspace behavior
 opt.autochdir = false -- Don't auto change directory
-opt.iskeyword:append("-") -- Treat dash as part of word
-opt.path:append("**") -- include subdirectories in search
-opt.selection = "exclusive" -- Selection behavior
-opt.mouse = "a" -- Enable mouse support
+opt.iskeyword:append('-') -- Treat dash as part of word
+opt.path:append('**') -- include subdirectories in search
+opt.selection = 'exclusive' -- Selection behavior
+opt.mouse = 'a' -- Enable mouse support
 opt.modifiable = true -- Allow buffer modifications
-opt.encoding = "UTF-8" -- Set encoding
+opt.encoding = 'UTF-8' -- Set encoding
 
 -- Folding settings
 opt.smoothscroll = true
-vim.wo.foldmethod = "expr"
+vim.wo.foldmethod = 'expr'
 opt.foldlevel = 99 -- Start with all folds open
 -- opt.formatoptions = "jcroqlnt" -- tcqj
 -- opt.grepformat = "%f:%l:%c:%m"
@@ -75,34 +75,34 @@ opt.foldlevel = 99 -- Start with all folds open
 -- Split behavior
 opt.splitbelow = true -- Horizontal splits go below
 opt.splitright = true -- Vertical splits go right
-opt.splitkeep = "screen"
+opt.splitkeep = 'screen'
 
 -- Command-line completion
 opt.wildmenu = true
-opt.wildmode = "longest:full,full"
-opt.wildignore:append({ "*.o", "*.obj", "*.pyc", "*.class", "*.jar" })
+opt.wildmode = 'longest:full,full'
+opt.wildignore:append({ '*.o', '*.obj', '*.pyc', '*.class', '*.jar' })
 
 -- Better diff options
-opt.diffopt:append("linematch:60")
+opt.diffopt:append('linematch:60')
 
 -- Performance improvements
 opt.redrawtime = 10000
 opt.maxmempattern = 20000
 
 -- Create undo directory if it doesn't exist
-local undodir = vim.fn.expand("~/.vim/undodir")
+local undodir = vim.fn.expand('~/.vim/undodir')
 if vim.fn.isdirectory(undodir) == 0 then
-  vim.fn.mkdir(undodir, "p")
+  vim.fn.mkdir(undodir, 'p')
 end
 
 vim.g.autoformat = true
 vim.g.trouble_lualine = true
 
 opt.fillchars = {
-  eob = " ",
+  eob = ' ',
 }
 
-opt.jumpoptions = "view"
+opt.jumpoptions = 'view'
 opt.laststatus = 3 -- global statusline
 opt.list = false
 opt.linebreak = true -- Wrap lines at convenient points
@@ -115,18 +115,18 @@ vim.g.markdown_recommended_style = 0
 
 vim.filetype.add({
   extension = {
-    env = "dotenv",
+    env = 'dotenv',
   },
   filename = {
-    [".env"] = "dotenv",
-    ["env"] = "dotenv",
+    ['.env'] = 'dotenv',
+    ['env'] = 'dotenv',
   },
   pattern = {
-    ["[jt]sconfig.*.json"] = "jsonc",
-    ["%.env%.[%w_.-]+"] = "dotenv",
+    ['[jt]sconfig.*.json'] = 'jsonc',
+    ['%.env%.[%w_.-]+'] = 'dotenv',
   },
 })
 
 vim.schedule(function()
-	opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+  opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
 end)
