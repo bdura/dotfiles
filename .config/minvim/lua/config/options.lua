@@ -33,11 +33,11 @@ opt.incsearch = true
 -- Visual settings
 opt.termguicolors = true
 opt.signcolumn = 'yes'
-opt.completeopt = 'menu,menuone,noselect'
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.winborder = 'single'
 
 opt.list = true
 opt.listchars = {
-  -- NOTE
   tab = '» ',
   trail = '·',
   nbsp = '␣',
