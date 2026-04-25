@@ -9,16 +9,17 @@ vim.pack.add({
   },
 })
 
-local parsers = require('nvim-treesitter.parsers')
-
-parsers.kanata = {
-  install_info = {
-    url = 'https://github.com/postsolar/tree-sitter-kanata',
-    files = { 'src/parser.c' },
-    revision = 'master',
-  },
-  filetype = 'kanata',
-}
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TSUpdate',
+  callback = function()
+    require('nvim-treesitter.parsers').kanata = {
+      install_info = {
+        url = 'https://github.com/postsolar/tree-sitter-kanata',
+        branch = 'master',
+      },
+    }
+  end,
+})
 
 local nvim_ts = require('nvim-treesitter')
 
