@@ -6,7 +6,7 @@ vim.pack.add({
 require('mini.icons').setup({})
 
 local oil = require('oil')
-local hidden = {
+local always_hidden = {
   '..',
   '.git',
   '.ipynb_checkpoints',
@@ -20,7 +20,7 @@ oil.setup({
   view_options = {
     show_hidden = true,
     is_always_hidden = function(name, _)
-      for _, n in ipairs(hidden) do
+      for _, n in ipairs(always_hidden) do
         if n == name then
           return true
         end
@@ -31,6 +31,9 @@ oil.setup({
   watch_for_changes = true,
   keymaps = {
     ['q'] = { callback = 'actions.close', mode = 'n' },
+    ['-'] = { 'actions.parent', mode = 'n' },
   },
+  use_default_keymaps = true,
 })
+
 vim.keymap.set('n', '-', oil.toggle_float, {})

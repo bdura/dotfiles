@@ -9,7 +9,19 @@ vim.pack.add({
   },
 })
 
+local parsers = require('nvim-treesitter.parsers')
+
+parsers.kanata = {
+  install_info = {
+    url = 'https://github.com/postsolar/tree-sitter-kanata',
+    files = { 'src/parser.c' },
+    revision = 'master',
+  },
+  filetype = 'kanata',
+}
+
 local nvim_ts = require('nvim-treesitter')
+
 nvim_ts.setup({})
 nvim_ts.install({
   'bash',
@@ -27,6 +39,7 @@ nvim_ts.install({
   'jsdoc',
   'json',
   'just',
+  'kanata',
   'lua',
   'luadoc',
   'luap',
