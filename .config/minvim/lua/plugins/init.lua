@@ -1,6 +1,7 @@
 require('plugins.conform')
 require('plugins.flash')
 require('plugins.gitsigns')
+require('plugins.mini')
 require('plugins.oil')
 require('plugins.snacks')
 require('plugins.treesitter')
