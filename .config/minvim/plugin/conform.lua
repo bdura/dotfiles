@@ -1,31 +1,52 @@
+-- # conform.nvim
+--
+-- Formatting utility with support for non-LSP formatters.
+-- More efficient than most formatters thanks to automatic diffing.
+-- Falls back on LSP formatting.
+
 vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
+
+local ignore_filetypes = {}
+local ignore_paths = {
+  '/node_modules/',
+  '/venv',
+}
+
+---@param bufnr integer
+local function format_on_save(bufnr)
+  if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+    return
+  end
+  if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+    return
+  end
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  for _, pattern in ipairs(ignore_paths) do
+    if bufname:match(pattern) then
+      return
+    end
+  end
+  return { timeout_ms = 500, lsp_format = 'fallback' }
+end
 
 require('conform').setup({
   formatters_by_ft = {
     lua = { 'stylua' },
-    python = { 'ruff_format', 'ruff_fix', 'ruff_organize_imports', stop_after_first = false },
+    python = {
+      'ruff_format',
+      'ruff_fix',
+      'ruff_organize_imports',
+      stop_after_first = false,
+    },
+    rust = { 'rustfmt' },
     toml = { 'taplo' },
+    sh = { 'shellcheck', 'shfmt' },
+    markdown = { 'rumdl', 'injected' },
   },
   default_format_opts = {
     lsp_format = 'fallback',
   },
-  format_on_save = function(bufnr)
-    local ignore_filetypes = { 'sql', 'yaml', 'yml' }
-    if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-      return
-    end
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-      return
-    end
-    local bufname = vim.api.nvim_buf_get_name(bufnr)
-    if bufname:match('/node_modules/') then
-      return
-    end
-    if bufname:match('/.venv/') then
-      return
-    end
-    return { timeout_ms = 500, lsp_format = 'fallback' }
-  end,
+  format_on_save = format_on_save,
 })
 
 vim.api.nvim_create_user_command('FormatDisable', function(opts)
