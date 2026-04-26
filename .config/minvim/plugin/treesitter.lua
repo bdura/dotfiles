@@ -33,6 +33,9 @@ nvim_ts.install({
   'fish',
   'gitcommit',
   'gitignore',
+  'git_config',
+  'git_rebase',
+  'gitattributes',
   'go',
   'html',
   'ini',
@@ -40,7 +43,6 @@ nvim_ts.install({
   'jsdoc',
   'json',
   'just',
-  'kanata',
   'lua',
   'luadoc',
   'luap',
@@ -58,11 +60,13 @@ nvim_ts.install({
   'typescript',
   'xml',
   'yaml',
+  -- External grammars
+  'kanata',
 })
 
-local to = require('nvim-treesitter-textobjects')
+local textobjects = require('nvim-treesitter-textobjects')
 
-to.setup({
+textobjects.setup({
   select = {
     enable = true,
     lookahead = true,
