@@ -24,6 +24,10 @@ opt.expandtab = true
 opt.smartindent = true
 opt.autoindent = true
 
+-- Fold settings
+opt.foldmethod = 'expr'
+opt.foldlevel = 99
+
 -- Search settings
 opt.ignorecase = true
 opt.smartcase = true
