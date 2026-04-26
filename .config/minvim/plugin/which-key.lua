@@ -9,5 +9,7 @@ wk.setup({
 })
 
 wk.add({
-  { '<leader>c', group = 'code' },
+  { '<leader>c', group = 'Code' },
+  { ']', group = 'Next' },
+  { '[', group = 'Previous' },
 })
