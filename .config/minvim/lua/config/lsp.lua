@@ -1,4 +1,6 @@
 vim.lsp.enable({
+  -- Rust
+  'rust-analyzer',
   -- Lua
   'lua-language-server',
   -- Python
