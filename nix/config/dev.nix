@@ -1,8 +1,14 @@
 { pkgs, ... }:
+let
+  minvim = pkgs.writeShellScriptBin "minvim" ''
+    NVIM_APPNAME=minvim ${pkgs.neovim-unwrapped}/bin/nvim
+  '';
+in
 {
   environment.systemPackages = with pkgs; [
     helix
     neovim-unwrapped
+    minvim
     opencode
     claude-code
 
