@@ -88,6 +88,7 @@ in
   # Styling Options
   stylix.targets.waybar.enable = false;
   stylix.targets.rofi.enable = false;
+  stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
   gtk = {
     iconTheme = {
