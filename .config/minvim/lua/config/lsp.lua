@@ -19,7 +19,6 @@ local map = vim.keymap.set
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Actions' })
 map('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Code Rename' })
 map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover)' })
-map('n', 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' })
 
 -- Cycle: hybrid -> text -> lines -> hybrid
 local diagnostic_modes = { 'hybrid', 'text', 'lines' }

@@ -3,6 +3,29 @@ vim.pack.add({
 })
 
 local Snacks = require('snacks')
+local excludes = {
+  '**/.git/*',
+  '**/node_modules/*',
+  '**/.yarn/cache/*',
+  '**/.yarn/install*',
+  '**/.yarn/releases/*',
+  '**/.pnpm-store/*',
+  '**/.idea/*',
+  '**/.venv/*',
+  '**/__pycache__/*',
+  '**/.*_cache/*',
+  '**/*.egg-info/*',
+  '**/.hypothesis/*',
+  '**/.direnv/**',
+  '**/.DS_Store',
+  'build/*',
+  'coverage/*',
+  'dist/*',
+  '**/target/*',
+  '**/public/*',
+  '**/digest*.txt',
+  '**/.node-gyp/**',
+}
 
 Snacks.setup({
   bigfile = { enabled = true },
@@ -31,24 +54,7 @@ Snacks.setup({
           },
         },
 
-        exclude = {
-          '**/.git/*',
-          '**/node_modules/*',
-          '**/.yarn/cache/*',
-          '**/.yarn/install*',
-          '**/.yarn/releases/*',
-          '**/.pnpm-store/*',
-          '**/.idea/*',
-          '**/.DS_Store',
-          'build/*',
-          'coverage/*',
-          'dist/*',
-          'hodor-types/*',
-          '**/target/*',
-          '**/public/*',
-          '**/digest*.txt',
-          '**/.node-gyp/**',
-        },
+        exclude = excludes,
       },
       grep = {
         hidden = true,
@@ -62,27 +68,7 @@ Snacks.setup({
             },
           },
         },
-        exclude = {
-          '**/.git/*',
-          '**/node_modules/*',
-          '**/.yarn/cache/*',
-          '**/.yarn/install*',
-          '**/.yarn/releases/*',
-          '**/.pnpm-store/*',
-          '**/.venv/*',
-          '**/.idea/*',
-          '**/.DS_Store',
-          '**/yarn.lock',
-          'build*/*',
-          'coverage/*',
-          'dist/*',
-          'certificates/*',
-          'hodor-types/*',
-          '**/target/*',
-          '**/public/*',
-          '**/digest*.txt',
-          '**/.node-gyp/**',
-        },
+        exclude = excludes,
       },
       grep_buffers = {},
       explorer = {
@@ -104,6 +90,9 @@ Snacks.setup({
           '.git',
           '.pnpm-store',
           '.venv',
+          '.hypothesis/',
+          '.ruff_cache/',
+          '.direnv',
           '.DS_Store',
           '**/.node-gyp/**',
         },
@@ -154,19 +143,19 @@ vim.api.nvim_create_autocmd('VimEnter', {
       Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')
       Snacks.toggle.line_number():map('<leader>ul')
       Snacks.toggle
-          .option('conceallevel', {
-            off = 0,
-            on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
-            name = 'Conceal Level',
-          })
-          :map('<leader>uc')
+        .option('conceallevel', {
+          off = 0,
+          on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2,
+          name = 'Conceal Level',
+        })
+        :map('<leader>uc')
       Snacks.toggle
-          .option('showtabline', {
-            off = 0,
-            on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
-            name = 'Tabline',
-          })
-          :map('<leader>uA')
+        .option('showtabline', {
+          off = 0,
+          on = vim.o.showtabline > 0 and vim.o.showtabline or 2,
+          name = 'Tabline',
+        })
+        :map('<leader>uA')
       Snacks.toggle.indent():map('<leader>ug')
       Snacks.toggle.profiler():map('<leader>dpp')
       Snacks.toggle.profiler_highlights():map('<leader>dph')
