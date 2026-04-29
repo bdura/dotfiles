@@ -1,5 +1,5 @@
 local function reload_workspace(bufnr)
-  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'rust_analyzer' })
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = 'rust-analyzer' })
   for _, client in ipairs(clients) do
     vim.notify('Reloading Cargo Workspace')
     ---@diagnostic disable-next-line:param-type-mismatch
@@ -13,11 +13,11 @@ local function reload_workspace(bufnr)
 end
 
 local function user_sysroot_src()
-  return vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
+  return vim.tbl_get(vim.lsp.config['rust-analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysrootSrc')
 end
 
 local function default_sysroot_src()
-  local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
+  local sysroot = vim.tbl_get(vim.lsp.config['rust-analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
     local rustc = os.getenv('RUSTC') or 'rustc'
     local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
@@ -52,7 +52,7 @@ local function is_library(fname)
 
   for _, item in ipairs({ toolchains, registry, git_registry, sysroot_src }) do
     if item and vim.fs.relpath(item, fname) then
-      local clients = vim.lsp.get_clients({ name = 'rust_analyzer' })
+      local clients = vim.lsp.get_clients({ name = 'rust-analyzer' })
       return #clients > 0 and clients[#clients].config.root_dir or nil
     end
   end
@@ -76,7 +76,7 @@ return {
     if cargo_crate_dir == nil then
       on_dir(
         vim.fs.root(fname, { 'rust-project.json' })
-          or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
       )
       return
     end
@@ -103,7 +103,7 @@ return {
         on_dir(cargo_workspace_root or cargo_crate_dir)
       else
         vim.schedule(function()
-          vim.notify(('[rust_analyzer] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
+          vim.notify(('[rust-analyzer] cmd failed with code %d: %s\n%s'):format(output.code, cmd, output.stderr))
         end)
       end
     end)
@@ -120,7 +120,7 @@ return {
       },
     },
   },
-  ---@type lspconfig.settings.rust_analyzer
+  ---@type lspconfig.settings.rust-analyzer
   settings = {
     ['rust-analyzer'] = {
       lens = {
