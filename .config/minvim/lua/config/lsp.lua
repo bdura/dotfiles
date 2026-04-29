@@ -10,6 +10,8 @@ vim.lsp.enable({
   'rumdl',
   -- Nix
   'nixd',
+  -- WGSL & WESL
+  'wgsl-analyzer'
 })
 
 local map = vim.keymap.set

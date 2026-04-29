@@ -12,10 +12,18 @@ vim.pack.add({
 vim.api.nvim_create_autocmd('User', {
   pattern = 'TSUpdate',
   callback = function()
-    require('nvim-treesitter.parsers').kanata = {
+    local parsers = require('nvim-treesitter.parsers')
+    parsers.kanata = {
       install_info = {
         url = 'https://github.com/postsolar/tree-sitter-kanata',
         branch = 'master',
+      },
+    }
+
+    parsers.wesl = {
+      install_info = {
+        url = 'https://github.com/wgsl-tooling-wg/tree-sitter-wesl',
+        branch = 'main',
       },
     }
   end,
@@ -58,6 +66,8 @@ nvim_ts.install({
   'toml',
   'tsx',
   'typescript',
+  'wgsl',
+  'wesl',
   'xml',
   'yaml',
   -- External grammars
@@ -72,7 +82,7 @@ textobjects.setup({
     lookahead = true,
     selection_modes = {
       ['@parameter.outer'] = 'v', -- charwise
-      ['@function.outer'] = 'V', -- linewise
+      ['@function.outer'] = 'V',  -- linewise
       ['@class.outer'] = '<c-v>', -- blockwise
     },
     include_surrounding_whitespace = false,
@@ -103,15 +113,15 @@ end
 -- MOVE keymaps
 local mv = require('nvim-treesitter-textobjects.move')
 for _, map in ipairs({
-  { { 'n', 'x', 'o' }, ']f', mv.goto_next_start, '@function.outer' },
+  { { 'n', 'x', 'o' }, ']f', mv.goto_next_start,     '@function.outer' },
   { { 'n', 'x', 'o' }, '[f', mv.goto_previous_start, '@function.outer' },
-  { { 'n', 'x', 'o' }, ']c', mv.goto_next_start, '@class.outer' },
+  { { 'n', 'x', 'o' }, ']c', mv.goto_next_start,     '@class.outer' },
   { { 'n', 'x', 'o' }, '[c', mv.goto_previous_start, '@class.outer' },
-  { { 'n', 'x', 'o' }, ']F', mv.goto_next_end, '@function.outer' },
-  { { 'n', 'x', 'o' }, '[F', mv.goto_previous_end, '@function.outer' },
-  { { 'n', 'x', 'o' }, ']C', mv.goto_next_end, '@class.outer' },
-  { { 'n', 'x', 'o' }, '[C', mv.goto_previous_end, '@class.outer' },
-  { { 'n', 'x', 'o' }, ']o', mv.goto_next_start, { '@loop.inner', '@loop.outer' } },
+  { { 'n', 'x', 'o' }, ']F', mv.goto_next_end,       '@function.outer' },
+  { { 'n', 'x', 'o' }, '[F', mv.goto_previous_end,   '@function.outer' },
+  { { 'n', 'x', 'o' }, ']C', mv.goto_next_end,       '@class.outer' },
+  { { 'n', 'x', 'o' }, '[C', mv.goto_previous_end,   '@class.outer' },
+  { { 'n', 'x', 'o' }, ']o', mv.goto_next_start,     { '@loop.inner', '@loop.outer' } },
   { { 'n', 'x', 'o' }, '[o', mv.goto_previous_start, { '@loop.inner', '@loop.outer' } },
 }) do
   local modes, lhs, fn, query = map[1], map[2], map[3], map[4]
