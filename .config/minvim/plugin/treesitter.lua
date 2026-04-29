@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-fields
+
 vim.pack.add({
   {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
@@ -51,6 +53,7 @@ nvim_ts.install({
   'jsdoc',
   'json',
   'just',
+  'kdl',
   'lua',
   'luadoc',
   'luap',
@@ -82,7 +85,7 @@ textobjects.setup({
     lookahead = true,
     selection_modes = {
       ['@parameter.outer'] = 'v', -- charwise
-      ['@function.outer'] = 'V',  -- linewise
+      ['@function.outer'] = 'V', -- linewise
       ['@class.outer'] = '<c-v>', -- blockwise
     },
     include_surrounding_whitespace = false,
@@ -113,15 +116,15 @@ end
 -- MOVE keymaps
 local mv = require('nvim-treesitter-textobjects.move')
 for _, map in ipairs({
-  { { 'n', 'x', 'o' }, ']f', mv.goto_next_start,     '@function.outer' },
+  { { 'n', 'x', 'o' }, ']f', mv.goto_next_start, '@function.outer' },
   { { 'n', 'x', 'o' }, '[f', mv.goto_previous_start, '@function.outer' },
-  { { 'n', 'x', 'o' }, ']c', mv.goto_next_start,     '@class.outer' },
+  { { 'n', 'x', 'o' }, ']c', mv.goto_next_start, '@class.outer' },
   { { 'n', 'x', 'o' }, '[c', mv.goto_previous_start, '@class.outer' },
-  { { 'n', 'x', 'o' }, ']F', mv.goto_next_end,       '@function.outer' },
-  { { 'n', 'x', 'o' }, '[F', mv.goto_previous_end,   '@function.outer' },
-  { { 'n', 'x', 'o' }, ']C', mv.goto_next_end,       '@class.outer' },
-  { { 'n', 'x', 'o' }, '[C', mv.goto_previous_end,   '@class.outer' },
-  { { 'n', 'x', 'o' }, ']o', mv.goto_next_start,     { '@loop.inner', '@loop.outer' } },
+  { { 'n', 'x', 'o' }, ']F', mv.goto_next_end, '@function.outer' },
+  { { 'n', 'x', 'o' }, '[F', mv.goto_previous_end, '@function.outer' },
+  { { 'n', 'x', 'o' }, ']C', mv.goto_next_end, '@class.outer' },
+  { { 'n', 'x', 'o' }, '[C', mv.goto_previous_end, '@class.outer' },
+  { { 'n', 'x', 'o' }, ']o', mv.goto_next_start, { '@loop.inner', '@loop.outer' } },
   { { 'n', 'x', 'o' }, '[o', mv.goto_previous_start, { '@loop.inner', '@loop.outer' } },
 }) do
   local modes, lhs, fn, query = map[1], map[2], map[3], map[4]
