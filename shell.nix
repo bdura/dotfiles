@@ -9,5 +9,6 @@ pkgs.mkShell {
     alejandra
     kdlfmt
     lua-language-server
+    rustup
   ];
 }
