@@ -45,6 +45,7 @@ require('conform').setup({
     markdown = { 'rumdl', 'injected' },
     kdl = { 'kdlfmt' },
     nix = { 'alejandra' },
+    openscad = { 'clang-format' },
   },
   default_format_opts = {
     lsp_format = 'fallback',
