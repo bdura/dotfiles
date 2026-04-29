@@ -1,9 +1,6 @@
 vim.pack.add({
   'https://github.com/stevearc/oil.nvim',
-  'https://github.com/nvim-mini/mini.icons',
 })
-
-require('mini.icons').setup({})
 
 local oil = require('oil')
 local always_hidden = {
