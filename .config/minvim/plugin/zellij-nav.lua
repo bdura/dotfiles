@@ -1,10 +1,11 @@
 vim.pack.add({ 'https://github.com/swaits/zellij-nav.nvim' })
 
-require('zellij-nav').setup()
+local zellij = require('zellij-nav')
+zellij.setup()
 
 local map = vim.keymap.set
 
-map({ 'n', 'i', 'v' }, '<c-h>', '<cmd>ZellijNavigateLeft<cr>', { silent = true, desc = 'Navigate left' })
-map({ 'n', 'i', 'v' }, '<c-j>', '<cmd>ZellijNavigateDown<cr>', { silent = true, desc = 'Navigate down' })
-map({ 'n', 'i', 'v' }, '<c-k>', '<cmd>ZellijNavigateUp<cr>', { silent = true, desc = 'Navigate up' })
-map({ 'n', 'i', 'v' }, '<c-l>', '<cmd>ZellijNavigateRight<cr>', { silent = true, desc = 'Navigate right' })
+map({ 'n', 'i', 'v' }, '<C-h>', zellij.left, { silent = true, desc = 'Navigate left' })
+map({ 'n', 'i', 'v' }, '<C-j>', zellij.down, { silent = true, desc = 'Navigate down' })
+map({ 'n', 'i', 'v' }, '<C-k>', zellij.up, { silent = true, desc = 'Navigate up' })
+map({ 'n', 'i', 'v' }, '<C-l>', zellij.right, { silent = true, desc = 'Navigate right' })
