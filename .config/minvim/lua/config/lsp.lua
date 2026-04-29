@@ -10,6 +10,8 @@ vim.lsp.enable({
   'rumdl',
   -- Nix
   'nixd',
+  -- OpenSCAD
+  'openscad-lsp',
   -- WGSL & WESL
   'wgsl-analyzer',
 })
