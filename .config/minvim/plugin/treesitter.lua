@@ -28,6 +28,14 @@ vim.api.nvim_create_autocmd('User', {
         branch = 'main',
       },
     }
+
+    parsers.openscad = {
+      install_info = {
+        url = 'https://github.com/bollian/tree-sitter-openscad',
+        branch = 'master',
+        queries = 'queries',
+      },
+    }
   end,
 })
 
@@ -70,11 +78,12 @@ nvim_ts.install({
   'tsx',
   'typescript',
   'wgsl',
-  'wesl',
   'xml',
   'yaml',
   -- External grammars
   'kanata',
+  'openscad',
+  'wesl',
 })
 
 local textobjects = require('nvim-treesitter-textobjects')
