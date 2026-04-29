@@ -2,7 +2,7 @@ vim.lsp.enable({
   -- Rust
   'rust-analyzer',
   -- Lua
-  'lua-language-server',
+  'lua_ls',
   -- Python
   'ty',
   'ruff',
@@ -11,7 +11,7 @@ vim.lsp.enable({
   -- Nix
   'nixd',
   -- WGSL & WESL
-  'wgsl-analyzer'
+  'wgsl-analyzer',
 })
 
 local map = vim.keymap.set
