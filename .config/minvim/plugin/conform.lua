@@ -9,7 +9,8 @@ vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
 local ignore_filetypes = {}
 local ignore_paths = {
   '/node_modules/',
-  '/venv',
+  '/.venv/',
+  '/target/',
 }
 
 ---@param bufnr integer
@@ -42,6 +43,8 @@ require('conform').setup({
     toml = { 'taplo' },
     sh = { 'shellcheck', 'shfmt' },
     markdown = { 'rumdl', 'injected' },
+    kdl = { 'kdlfmt' },
+    nix = { 'alejandra' },
   },
   default_format_opts = {
     lsp_format = 'fallback',
