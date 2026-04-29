@@ -216,6 +216,11 @@ return {
   },
   settings = {
     ['rust-analyzer'] = {
+      checkOnSave = {
+        command = 'clippy',
+        allTargets = true,
+        allFeatures = true,
+      },
       lens = {
         debug = { enable = true },
         enable = true,
