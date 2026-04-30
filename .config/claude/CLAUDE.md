@@ -11,10 +11,12 @@
 
 While working, if you come across any bugs, missing features, or other
 oddities about the implementation, structure, or workflow, **add a
-concise description of them to SESSION.md** to defer solving such
-incidental tasks until later. You do not need to fix them all straight
-away unless they block your progress; writing them down is often
-sufficient. **Do not write your accomplishments into this file.**
+concise description of them to `SESSION.md` at the root of the
+repository being worked on** to defer solving such incidental tasks
+until later. The file is already covered by my global gitignore, so
+just create it if it doesn't exist. You do not need to fix the entries
+straight away unless they block your progress; writing them down
+is often sufficient. **Do not write your accomplishments into this file.**
 
 ## Rust guidelines
 
@@ -57,10 +59,34 @@ fails for the correct reason. Remove the temporary example after.
 
 ## Python guidelines
 
-- always use `uv` as the package manager
-- PyO3 projects are properly setup, so there is no need to compile the
-  project before testing it: just run `uv run pytest` (possibly with options).
-  `uv` will take care of re-compiling.
+- Always use `uv` as the package manager (`uv add`, `uv run`,
+  `uv sync`). Never invoke `pip` directly.
+- PyO3 projects are properly set up, so there is no need to compile
+  before testing: just run `uv run pytest`. `uv` will recompile as
+  needed.
+
+### Testing
+
+- Use `pytest`, not `unittest`.
+- **Use on `pytest.mark.parametrize` for any test that varies only
+  by input/expected output.** If you catch yourself writing `test_foo_a`,
+  `test_foo_b`, `test_foo_c`, stop and parametrize.
+- **Use `hypothesis` for property-based testing whenever an
+  obviously-correct comparison or invariant exists** (round-trip
+  serialization, idempotence, ordering invariants, equivalence
+  against a slow reference implementation). Use `@given` strategies;
+  let `hypothesis` shrink failures rather than crafting fixtures by hand.
+- Combine the two when it fits: `@pytest.mark.parametrize` over
+  scenarios, `@given` over input space within each scenario.
+
+### Style
+
+- Type-annotate all public functions and class attributes. Type-check
+  with `ty`, format & lint with `ruff`: `ty check`, `ruff format`,
+  `ruff check --fix`.
+- Prefer `pathlib.Path` over `os.path` string manipulation.
+- Use `dataclasses` or `pydantic` models over ad-hoc dicts at API
+  boundaries.
 
 ## Git workflow
 
@@ -98,89 +124,39 @@ to add, support, or implement right away.
 
 ### Literate Programming
 
-Apply literate programming principles to make code self-documenting and
-maintainable across all languages:
+For code with non-trivial logic — multi-phase algorithms, business
+rules, integration points — write it to read top-down like a narrative:
 
-#### Core Principles
+- **Explain the why.** Comments should cover business logic, design
+  decisions, and constraints — not restate what the code obviously
+  does.
+- **Use section banners** to mark logical phases, with a short prose
+  lead-in before the code:
 
-1. **Explain the Why, Not Just the What**: Focus on business logic,
-   design decisions, and reasoning rather than describing what the
-   code obviously does.
+  ```rust
+  // ==============================================================================
+  // Plugin Configuration Extraction
+  // ==============================================================================
+  // First, we extract plugin metadata from Cargo.toml to determine
+  // what files we need to build and where to put them.
+  ```
 
-2. **Top-Down Narrative Flow**: Structure code to read like a story with clear
-   sections that build logically:
+- **Put context next to code**, not in a header docblock far away:
 
-   ```rust
-   // ==============================================================================
-   // Plugin Configuration Extraction
-   // ==============================================================================
-   // First, we extract plugin metadata from Cargo.toml to determine
-   // what files we need to build and where to put them.
-   ```
+  ```python
+  # Convert timestamps to UTC for consistent comparison across time zones.
+  # This prevents edge cases where local time changes affect rebuild detection.
+  utc_timestamp = datetime.utcfromtimestamp(file_stat.st_mtime)
+  ```
 
-3. **Inline Context**: Place explanatory comments immediately before relevant
-   code blocks, explaining the purpose and any important considerations:
+- **Prefer well-commented inline code over premature decomposition.**
+  Extract a function for genuine reuse, not for file organization.
 
-   ```python
-   # Convert timestamps to UTC for consistent comparison across time zones.
-   # This prevents edge cases where local time changes affect rebuild detection.
-   utc_timestamp = datetime.utcfromtimestamp(file_stat.st_mtime)
-   ```
-
-4. **Avoid Over-Abstraction**: Prefer clear, well-documented inline code over
-   excessive function decomposition when logic is sequential and context-dependent.
-   Functions should serve genuine reusability, not just file organization.
-
-5. **Self-Contained When Practical**: Reduce dependencies on external shared
-   utilities when the logic is straightforward enough to inline with good documentation.
-
-#### Implementation Benefits
-
-- **Maintainability**: Future developers can quickly understand both
-  implementation and design rationale
-- **Debugging**: When code fails, documentation helps identify which logical
-  step failed and why
-- **Knowledge Transfer**: Code serves as documentation of the problem domain,
-  not just the solution
-- **Reduced Cognitive Load**: Readers don't need to mentally reconstruct the
-  author's reasoning
-
-#### When to Apply
-
-Use literate programming for:
-
-- Complex algorithms with multiple phases or decision points
-- Code implementing business logic rather than simple plumbing
-- Code where the "why" is not immediately obvious from the "what"
-- Integration points between systems where context matters
-
-Avoid over-documenting:
-
-- Simple utility functions where intent is clear from the signature
-- Trivial getters/setters or obvious wrapper code
-- Code that's primarily syntactic sugar over well-known patterns
+Skip this style for plumbing, trivial wrappers, and code whose intent
+is already clear from the signature — over-commenting obvious code is
+its own kind of noise.
 
 ## Claude Code sandbox insights
-
-### Pipe workaround (trailing `;`)
-
-The sandbox has a [known issue][cc-16305] where data is silently
-dropped in shell pipes between commands. Appending a trailing `;` to
-the command fixes this:
-
-```sh
-# Broken (downstream receives no input):
-diff <(jq -S . a.json) <(jq -S . b.json)
-
-# Fixed — append `;`:
-diff <(jq -S . a.json) <(jq -S . b.json);
-echo "abc" | grep "abc";
-```
-
-This affects pipes (`|`), process substitution (`<(...)`), and any
-command that connects stdout of one process to stdin of another.
-
-[cc-16305]: https://github.com/anthropics/claude-code/issues/16305
 
 ### `!` (negation) workaround
 
@@ -239,41 +215,12 @@ permission prompts in sub-agents.
 
 ### The XY Problem
 
-The XY problem occurs when someone asks about their attempted solution (Y)
-instead of their actual underlying problem (X).
+A user with goal X often asks about their attempted solution Y rather
+than X itself. Answering Y literally then wastes time on a suboptimal
+path. Watch for narrow, oddly-specific, or roundabout requests with
+no stated motivation — classic tell: "how do I get the last 3
+characters of a filename?" when they want the file extension.
 
-#### The Pattern
-
-1. User wants to accomplish goal X
-2. User thinks Y is the best approach to solve X
-3. User asks specifically about Y, not X
-4. Helper becomes confused by the odd/narrow request
-5. Time is wasted on suboptimal solutions
-
-#### Warning Signs to Watch For
-
-- Focus on a specific technical method without explaining why
-- Resistance to providing broader context when asked
-- Rejecting alternative approaches outright
-- Questions that seem oddly narrow or convoluted
-- "How do I get the last 3 characters of a filename?" (when they want file extension)
-
-#### How to Avoid It (As Helper)
-
-- **Ask probing questions**: "What are you trying to accomplish overall?"
-- **Request context**: "Can you explain the bigger picture?"
-- **Challenge assumptions**: "Why do you think this approach will work?"
-- **Offer alternatives**: "Have you considered...?"
-
-#### Red Flags in User Requests
-
-- Very specific technical questions without motivation
-- Unusual or roundabout approaches to common problems
-- Dismissal of "why do you want to do that?" questions
-- Focus on implementation details before problem definition
-
-#### Key Principle
-
-Always try to understand the fundamental problem (X) before helping with the
-proposed solution (Y). The user's approach may not be optimal or may indicate
-they're solving the wrong problem entirely.
+When you spot the signal, ask about the underlying goal before
+answering ("what are you trying to accomplish overall?", "have you
+considered ...?") and be willing to propose a different approach.
