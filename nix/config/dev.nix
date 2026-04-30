@@ -1,10 +1,12 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     helix
     neovim-unwrapped
     opencode
+
+    # Claude & friends
     claude-code
+    rtk
 
     # Requirements for plugins
     python313

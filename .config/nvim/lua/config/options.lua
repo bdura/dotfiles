@@ -1,22 +1,65 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
+-- # Neovim options
+--
+-- Inspirations:
+--
+-- - https://tduyng.com/blog/neovim-basic-setup/
+-- - https://github.com/vieitesss/nvim
 
-local set = vim.opt
+local opt = vim.opt
 
-set.list = true
-set.listchars = { tab = '» ', trail = '·', nbsp = '␣', lead = '·', multispace = '·' }
+-- Numbering & basic navigation
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.wrap = false
+opt.linebreak = true
+opt.scrolloff = 10
+opt.sidescrolloff = 8
 
-vim.filetype.add({
-  extension = { kbd = 'scheme' },
-})
+-- Indentation
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.expandtab = true
+opt.smartindent = true
+opt.autoindent = true
 
-vim.filetype.add({
-  extension = { wesl = 'wgsl' },
-})
+-- Fold settings
+opt.foldmethod = 'expr'
+opt.foldlevel = 99
 
-vim.lsp.config['confit-lsp'] = {
-  cmd = { 'confit-lsp' },
-  filetypes = { 'toml', 'yaml' },
-  root_markers = { { 'pyproject.toml' }, '.git' },
+-- Search settings
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
+opt.incsearch = true
+
+-- Visual settings
+opt.termguicolors = true
+opt.signcolumn = 'yes'
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.winborder = 'single'
+
+opt.list = true
+opt.listchars = {
+  tab = '» ',
+  trail = '·',
+  nbsp = '␣',
+  lead = ' ',
+  multispace = '·',
 }
+opt.fillchars = {
+  eob = ' ',
+}
+
+-- File handling
+opt.backup = false
+opt.writebackup = false
+opt.swapfile = false
+opt.undofile = true
+opt.undolevels = 10000
+opt.autoread = true
+opt.autowrite = false
+
+-- Misc
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'

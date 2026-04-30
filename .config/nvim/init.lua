@@ -1,2 +1,4 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require('config.lazy')
+vim.pack.add({ { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' } })
+vim.cmd.colorscheme('catppuccin-nvim')
+
+require('config')
