@@ -1,6 +1,7 @@
 # Configurations
 
-This repo contains the configuration files for my system, which I manage with GNU Stow.
+This repo contains the configuration files for my system,
+which I manage with GNU Stow.
 
 ## Installation
 
@@ -19,8 +20,8 @@ stow .
 
 ## NixOS
 
-I'm using NixOS on my work laptop - every aspect is managed within the [`nix`](./nix) folder.
-For now it's basically a "fork" of the great [ZaneyOS project](https://gitlab.com/Zaney/zaneyos).
+I'm using NixOS on my work laptop - every aspect is managed within
+the [`nix`](./nix) folder.
 
 ## To dos
 
