@@ -161,6 +161,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
       Snacks.toggle.profiler_highlights():map('<leader>dph')
       Snacks.toggle.zoom():map('<leader>wm'):map('<leader>uZ')
       Snacks.toggle.zen():map('<leader>uz')
+      Snacks.toggle.inlay_hints():map('<leader>uh')
     end)
   end,
 })
