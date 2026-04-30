@@ -5,6 +5,7 @@ pkgs.mkShell {
     nixd
     nixfmt
     kdlfmt
+    rumdl
     stylua
     alejandra
     kdlfmt
