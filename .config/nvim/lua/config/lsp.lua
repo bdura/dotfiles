@@ -20,6 +20,19 @@ map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Actions' })
 map('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Code Rename' })
 map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover)' })
 
+vim.api.nvim_create_autocmd('LspProgress', {
+  pattern = 'end',
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client or not client:supports_method('textDocument/inlayHint') then
+      return
+    end
+    for bufnr in pairs(client.attached_buffers) do
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+  end,
+})
+
 -- Cycle: hybrid -> text -> lines -> hybrid
 local diagnostic_modes = { 'hybrid', 'text', 'lines' }
 local diagnostic_mode_index = 1
