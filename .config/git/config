@@ -26,6 +26,14 @@
     process = git-lfs filter-process
     required = true
     clean = git-lfs clean -- %f
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
+    conflictstyle = zdiff3
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED \
+          -c '$wincmd w' -c 'wincmd J'
 
 [include]
     # delta configuration
