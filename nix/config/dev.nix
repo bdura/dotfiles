@@ -1,16 +1,12 @@
-{ pkgs, ... }:
-let
-  minvim = pkgs.writeShellScriptBin "minvim" ''
-    NVIM_APPNAME=minvim ${pkgs.neovim-unwrapped}/bin/nvim
-  '';
-in
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     helix
     neovim-unwrapped
-    minvim
     opencode
+
+    # Claude & friends
     claude-code
+    rtk
 
     # Requirements for plugins
     python313
