@@ -44,6 +44,22 @@
       "rev": "4f6f84a96b076747b736d100388a8d7844771d7d",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "nvim-dap": {
+      "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
+      "src": "https://codeberg.org/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-python": {
+      "rev": "1808458eba2b18f178f990e01376941a42c7f93b",
+      "src": "https://codeberg.org/mfussenegger/nvim-dap-python"
+    },
+    "nvim-dap-view": {
+      "rev": "e8199a2c2202415785b65799fa92e1a1cd2f4d4f",
+      "src": "https://github.com/igorlfs/nvim-dap-view"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
+    },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
