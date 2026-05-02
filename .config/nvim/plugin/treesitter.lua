@@ -70,11 +70,11 @@ nvim_ts.install({
   'tsx',
   'typescript',
   'wgsl',
-  'wesl',
   'xml',
   'yaml',
   -- External grammars
   'kanata',
+  'wesl',
 })
 
 local textobjects = require('nvim-treesitter-textobjects')
