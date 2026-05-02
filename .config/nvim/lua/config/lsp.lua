@@ -12,6 +12,8 @@ vim.lsp.enable({
   'nixd',
   -- WGSL & WESL
   'wgsl-analyzer',
+  -- TOML
+  'taplo',
 })
 
 local map = vim.keymap.set
