@@ -14,6 +14,8 @@ vim.lsp.enable({
   'wgsl-analyzer',
   -- TOML
   'taplo',
+  -- YAML
+  'yaml-language-server',
 })
 
 local map = vim.keymap.set
