@@ -2,24 +2,33 @@ vim.pack.add({
   'https://github.com/saecki/crates.nvim',
 })
 
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
+local crates = require('crates')
+crates.setup({
+  lsp = {
+    enabled = true,
+    actions = true,
+    completion = true,
+    -- NOTE: setting hover hijacks the LSP capabilities for the entire buffer.
+    -- Since we want to keep taplo working for attributes that are not
+    -- crates.io-related, we disable hover and activate it in an autocmd directly
+    -- (see below)
+    hover = false,
+  },
+})
 
-local group = augroup('CratesSetup', { clear = true })
-
--- Highlight when yanking (copying) text
-autocmd('BufRead', {
+-- On Cargo.toml, rebind K so crates.nvim's popup wins when the cursor is on a
+-- crate/version line, and the LSP hover (taplo) handles everything else.
+vim.api.nvim_create_autocmd('BufRead', {
   pattern = 'Cargo.toml',
-  desc = 'Setup crates.nvim',
-  group = group,
-  callback = function()
-    require('crates').setup({
-      lsp = {
-        enabled = true,
-        actions = true,
-        completion = true,
-        hover = true,
-      },
-    })
+  desc = 'crates.nvim hover with LSP fallback',
+  group = vim.api.nvim_create_augroup('CratesHover', { clear = true }),
+  callback = function(args)
+    vim.keymap.set('n', 'K', function()
+      if crates.popup_available() then
+        crates.show_popup()
+      else
+        vim.lsp.buf.hover()
+      end
+    end, { buffer = args.buf, desc = 'crates.nvim popup or LSP hover' })
   end,
 })
