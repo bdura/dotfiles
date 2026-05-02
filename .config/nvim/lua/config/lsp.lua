@@ -16,6 +16,8 @@ vim.lsp.enable({
   'taplo',
   -- YAML
   'yaml-language-server',
+  -- OpenSCAD
+  'openscad',
 })
 
 local map = vim.keymap.set
