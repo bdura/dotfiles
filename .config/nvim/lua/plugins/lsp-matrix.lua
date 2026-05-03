@@ -43,9 +43,8 @@ local CAPABILITY_SECTIONS = {
 }
 -- stylua: ignore end
 
-local FIRST_COLUMN_MARGIN = 3
+local CAPABILITY_COLUMN_MARGIN = 3
 local SERVER_MARGIN = 3
-local UI_MARGIN = 2
 
 --- Pad a string to a minimum width with spaces.
 ---@param s string The string to pad (converted to string if not already).
@@ -86,7 +85,7 @@ local function show_lsp_matrix(opts)
       capability_w = math.max(capability_w, #capability.label)
     end
   end
-  capability_w = capability_w + FIRST_COLUMN_MARGIN
+  capability_w = capability_w + CAPABILITY_COLUMN_MARGIN
 
   -- Column widths
   local widths = {}
@@ -165,14 +164,16 @@ local function show_lsp_matrix(opts)
   vim.bo[buf].buftype = 'nofile'
   vim.bo[buf].bufhidden = 'wipe'
 
-  -- Floating window
-  local width = #lines[1] + 2
-  local height = #lines
+  -- Floating window — clamp dimensions to the UI before centring,
+  -- otherwise an oversized matrix produces a negative col/row.
   local ui = vim.api.nvim_list_uis()[1]
+  local width = math.min(#lines[1] + 2, ui.width - 4)
+  local height = math.min(#lines, ui.height - 4)
+
   vim.api.nvim_open_win(buf, true, {
     relative = 'editor',
-    width = math.min(width, ui.width - 4),
-    height = math.min(height, ui.height - 4),
+    width = width,
+    height = height,
     col = math.floor((ui.width - width) / 2),
     row = math.floor((ui.height - height) / 2),
     style = 'minimal',
