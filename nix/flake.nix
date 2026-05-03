@@ -10,6 +10,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wrappers = {
+      url = "github:lassulus/wrappers";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -17,6 +21,7 @@
     home-manager,
     disko,
     stylix,
+    wrappers,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -30,6 +35,7 @@
           inherit inputs;
           inherit username;
           inherit host;
+          inherit wrappers;
         };
         modules = [
           ./hosts/${host}/config.nix

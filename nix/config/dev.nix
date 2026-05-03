@@ -1,20 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     helix
-    neovim-unwrapped
-    opencode
-
-    # Claude & friends
-    claude-code
-    rtk
-
-    # Requirements for plugins
-    python313
-    clang
-    rustup
-    nixfmt
-    lua
-    luarocks
 
     unzip
 
@@ -35,9 +21,4 @@
 
     tlrc
   ];
-
-  environment.variables = {
-    EDITOR = "nvim";
-    MANPAGER = "nvim --cmd 'set laststatus=0 ' +'set statuscolumn= nowrap laststatus=0' +Man\!";
-  };
 }

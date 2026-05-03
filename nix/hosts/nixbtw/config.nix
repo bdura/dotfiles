@@ -5,11 +5,9 @@
   username,
   options,
   ...
-}:
-let
+}: let
   inherit (import ./variables.nix) keyboardLayout;
-in
-{
+in {
   imports = [
     ./hardware.nix
     ./disko.nix
@@ -18,6 +16,8 @@ in
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
+    ../../config/ai.nix
+    ../../config/neovim.nix
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
@@ -122,7 +122,7 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
   networking.hostName = host;
-  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
+  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -151,7 +151,6 @@ in
         thunar-volman
       ];
     };
-
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -222,6 +221,8 @@ in
 
   # Services to start
   services = {
+    gvfs.enable = true;
+    udisks2.enable = true;
     tailscale = {
       enable = true;
     };
@@ -293,8 +294,8 @@ in
         "nix-command"
         "flakes"
       ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
