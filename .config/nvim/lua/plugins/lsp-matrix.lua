@@ -83,28 +83,56 @@ local function show_lsp_matrix()
     table.insert(widths, #c.name + 1)
   end
 
-  -- Build lines
+  -- Build lines, recording highlight ranges as we go.
+  -- Ranges are byte offsets, which equals display width for the ASCII
+  -- portions; the only multi-byte glyphs are the ✓/✗ marks.
   local lines = {}
-  local header = pad('', capability_w, 'prepend')
+  local highlights = {}
 
+  local header = pad('', capability_w, 'prepend')
+  local col = capability_w
   for i, c in ipairs(clients) do
     local w = widths[i]
     header = header .. pad(c.name, w, 'prepend')
+    table.insert(highlights, {
+      line = #lines,
+      col_start = col + (w - #c.name),
+      col_end = col + w,
+      hl = 'Title',
+    })
+    col = col + w
   end
   table.insert(lines, header)
 
   for _, section in ipairs(CAPABILITY_SECTIONS) do
     table.insert(lines, '')
+    table.insert(highlights, {
+      line = #lines,
+      col_start = 0,
+      col_end = #section.name,
+      hl = 'Title',
+    })
     table.insert(lines, section.name)
 
     for _, capability in ipairs(section.caps) do
       local line = pad(capability.label, capability_w, 'append')
+      local line_idx = #lines
+      local cur = capability_w
 
       for i, client in ipairs(clients) do
         local ok = client:supports_method(capability.method)
         local mark = ok and '✓' or '✗'
         local w = widths[i]
         line = line .. pad(mark, w, 'prepend')
+        -- pad prepends (w - 1) ASCII spaces, then the 3-byte mark.
+        local mark_start = cur + (w - 1)
+        table.insert(highlights, {
+          line = line_idx,
+          col_start = mark_start,
+          col_end = mark_start + #mark,
+          hl = ok and 'DiagnosticOk' or 'DiagnosticError',
+        })
+        cur = mark_start + #mark
       end
       table.insert(lines, line)
     end
@@ -113,6 +141,15 @@ local function show_lsp_matrix()
   -- Scratch buffer
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+  local ns = vim.api.nvim_create_namespace('lsp_matrix')
+  for _, h in ipairs(highlights) do
+    vim.api.nvim_buf_set_extmark(buf, ns, h.line, h.col_start, {
+      end_col = h.col_end,
+      hl_group = h.hl,
+    })
+  end
+
   vim.bo[buf].modifiable = false
   vim.bo[buf].buftype = 'nofile'
   vim.bo[buf].bufhidden = 'wipe'
