@@ -326,6 +326,12 @@ local function show_lsp_matrix(opts)
     title_pos = 'center',
   })
 
+  -- 'minimal' style disables cursorline; re-enable it and remap to
+  -- Visual so the row under the cursor reads as a clear sweep across
+  -- every server column.
+  vim.wo[win].cursorline = true
+  vim.wo[win].winhighlight = 'CursorLine:Visual'
+
   state = {
     win = win,
     buf = buf,
