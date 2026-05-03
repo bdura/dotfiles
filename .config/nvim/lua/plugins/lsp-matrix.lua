@@ -64,18 +64,21 @@ local function pad(s, width, mode)
   end
 end
 
---- Show the LSP capability matrix.
----@param opts? { buffer_only?: boolean } If buffer_only, restrict to clients
---- attached to the current buffer and check capabilities against that buffer
---- (so dynamically-registered methods are reflected).
-local function show_lsp_matrix(opts)
-  opts = opts or {}
-  local origin_buf = vim.api.nvim_get_current_buf()
-  local clients = opts.buffer_only and vim.lsp.get_clients({ bufnr = origin_buf }) or vim.lsp.get_clients()
+-- Open-window state. Tracked so refresh() can find the buffer/window
+-- and so a re-invocation of :LspMatrix replaces the existing window
+-- rather than stacking duplicates.
+local state = {}
+
+--- Build the matrix lines and highlight ranges for the given origin
+--- buffer. Returns nil if no clients qualify.
+---@param origin_buf integer Buffer used for the supports_method check
+---  (so dynamically-registered methods resolve against the right doc).
+---@param buffer_only boolean Restrict client list to that buffer's clients.
+---@return { lines: string[], highlights: table[] }?
+local function build_content(origin_buf, buffer_only)
+  local clients = buffer_only and vim.lsp.get_clients({ bufnr = origin_buf }) or vim.lsp.get_clients()
   if #clients == 0 then
-    local msg = opts.buffer_only and 'No LSP clients attached to this buffer' or 'No LSP clients attached'
-    vim.notify(msg, vim.log.levels.WARN)
-    return
+    return nil
   end
 
   table.sort(clients, function(a, b)
@@ -151,43 +154,114 @@ local function show_lsp_matrix(opts)
     end
   end
 
-  -- Scratch buffer
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  return { lines = lines, highlights = highlights }
+end
 
-  local ns = vim.api.nvim_create_namespace('lsp_matrix')
-  for _, h in ipairs(highlights) do
+--- Compute the centred floating-window dimensions for the given lines.
+local function window_dims(lines)
+  local ui = vim.api.nvim_list_uis()[1]
+  local width = math.min(vim.fn.strdisplaywidth(lines[1]) + 2, ui.width - 4)
+  local height = math.min(#lines, ui.height - 4)
+  return {
+    width = width,
+    height = height,
+    col = math.floor((ui.width - width) / 2),
+    row = math.floor((ui.height - height) / 2),
+  }
+end
+
+--- Apply content to the buffer and resize the window. Used by both the
+--- initial draw and refresh().
+local function paint(buf, win, ns, content)
+  vim.bo[buf].modifiable = true
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content.lines)
+  vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+  for _, h in ipairs(content.highlights) do
     vim.api.nvim_buf_set_extmark(buf, ns, h.line, h.col_start, {
       end_col = h.col_end,
       hl_group = h.hl,
     })
   end
-
   vim.bo[buf].modifiable = false
+
+  local dims = window_dims(content.lines)
+  vim.api.nvim_win_set_config(win, vim.tbl_extend('force', { relative = 'editor' }, dims))
+end
+
+--- Refresh the matrix in the open window (if any).
+local function refresh()
+  if not (state.win and vim.api.nvim_win_is_valid(state.win)) then
+    return
+  end
+  local content = build_content(state.origin_buf, state.buffer_only)
+  if not content then
+    local msg = state.buffer_only and 'No LSP clients attached to this buffer' or 'No LSP clients attached'
+    vim.notify(msg, vim.log.levels.WARN)
+    return
+  end
+  paint(state.buf, state.win, state.ns, content)
+end
+
+--- Show the LSP capability matrix.
+---@param opts? { buffer_only?: boolean } If buffer_only, restrict to clients
+--- attached to the current buffer and check capabilities against that buffer
+--- (so dynamically-registered methods are reflected).
+local function show_lsp_matrix(opts)
+  opts = opts or {}
+
+  -- Replace any existing window so origin_buf and buffer_only reflect
+  -- the new invocation. The WinClosed autocmd resets `state`.
+  if state.win and vim.api.nvim_win_is_valid(state.win) then
+    vim.api.nvim_win_close(state.win, true)
+  end
+
+  local origin_buf = vim.api.nvim_get_current_buf()
+  local content = build_content(origin_buf, opts.buffer_only)
+  if not content then
+    local msg = opts.buffer_only and 'No LSP clients attached to this buffer' or 'No LSP clients attached'
+    vim.notify(msg, vim.log.levels.WARN)
+    return
+  end
+
+  local buf = vim.api.nvim_create_buf(false, true)
   vim.bo[buf].buftype = 'nofile'
   vim.bo[buf].bufhidden = 'wipe'
 
-  -- Floating window — clamp dimensions to the UI before centring,
-  -- otherwise an oversized matrix produces a negative col/row.
-  local ui = vim.api.nvim_list_uis()[1]
-  local width = math.min(strwidth(lines[1]) + 2, ui.width - 4)
-  local height = math.min(#lines, ui.height - 4)
-
-  vim.api.nvim_open_win(buf, true, {
+  local dims = window_dims(content.lines)
+  local win = vim.api.nvim_open_win(buf, true, {
     relative = 'editor',
-    width = width,
-    height = height,
-    col = math.floor((ui.width - width) / 2),
-    row = math.floor((ui.height - height) / 2),
+    width = dims.width,
+    height = dims.height,
+    col = dims.col,
+    row = dims.row,
     style = 'minimal',
     border = 'single',
     title = opts.buffer_only and ' LSP capability matrix (buffer) ' or ' LSP capability matrix ',
     title_pos = 'center',
   })
 
-  -- Close with q or <Esc>
+  state = {
+    win = win,
+    buf = buf,
+    ns = vim.api.nvim_create_namespace('lsp_matrix'),
+    origin_buf = origin_buf,
+    buffer_only = opts.buffer_only or false,
+  }
+
+  paint(state.buf, state.win, state.ns, content)
+
+  -- Close with q or <Esc>; refresh with R.
   vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = buf, nowait = true })
   vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf, nowait = true })
+  vim.keymap.set('n', 'R', refresh, { buffer = buf, nowait = true, desc = 'Refresh LSP matrix' })
+
+  vim.api.nvim_create_autocmd('WinClosed', {
+    pattern = tostring(win),
+    once = true,
+    callback = function()
+      state = {}
+    end,
+  })
 end
 
 ---@param opts table? Options passed to the setup function
@@ -200,6 +274,9 @@ end
 local M = {}
 
 M.show_lsp_matrix = show_lsp_matrix
+M.refresh = refresh
 M.setup = setup
+
+setup()
 
 return M
