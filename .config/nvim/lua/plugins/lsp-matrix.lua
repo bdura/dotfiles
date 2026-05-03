@@ -78,11 +78,15 @@ local function show_lsp_matrix(opts)
     return
   end
 
+  table.sort(clients, function(a, b) return a.name < b.name end)
+
+  local strwidth = vim.fn.strdisplaywidth
+
   local capability_w = 0
   for _, section in ipairs(CAPABILITY_SECTIONS) do
-    capability_w = math.max(capability_w, #section.name)
+    capability_w = math.max(capability_w, strwidth(section.name))
     for _, capability in ipairs(section.caps) do
-      capability_w = math.max(capability_w, #capability.label)
+      capability_w = math.max(capability_w, strwidth(capability.label))
     end
   end
   capability_w = capability_w + CAPABILITY_COLUMN_MARGIN
@@ -90,27 +94,27 @@ local function show_lsp_matrix(opts)
   -- Column widths
   local widths = {}
   for _, c in ipairs(clients) do
-    table.insert(widths, #c.name + SERVER_MARGIN)
+    table.insert(widths, strwidth(c.name) + SERVER_MARGIN)
   end
 
-  -- Build lines, recording highlight ranges as we go.
-  -- Ranges are byte offsets, which equals display width for the ASCII
-  -- portions; the only multi-byte glyphs are the ✓/✗ marks.
+  -- Build lines, recording highlight ranges as we go. Highlight
+  -- columns are byte offsets (extmark API), so we track them via the
+  -- running line length rather than display width — that way
+  -- multi-byte client names stay correct.
   local lines = {}
   local highlights = {}
 
   local header = pad('', capability_w, 'prepend')
-  local col = capability_w
   for i, c in ipairs(clients) do
-    local w = widths[i]
-    header = header .. pad(c.name, w, 'prepend')
+    local segment = pad(c.name, widths[i], 'prepend')
+    local seg_start = #header
+    header = header .. segment
     table.insert(highlights, {
       line = #lines,
-      col_start = col + (w - #c.name),
-      col_end = col + w,
+      col_start = seg_start + #segment - #c.name,
+      col_end = seg_start + #segment,
       hl = 'Title',
     })
-    col = col + w
   end
   table.insert(lines, header)
 
@@ -127,22 +131,19 @@ local function show_lsp_matrix(opts)
     for _, capability in ipairs(section.caps) do
       local line = pad(capability.label, capability_w, 'append')
       local line_idx = #lines
-      local cur = capability_w
 
       for i, client in ipairs(clients) do
         local ok = client:supports_method(capability.method, origin_buf)
         local mark = ok and '✓' or '✗'
-        local w = widths[i]
-        line = line .. pad(mark, w, 'prepend')
-        -- pad prepends (w - 1) ASCII spaces, then the 3-byte mark.
-        local mark_start = cur + (w - 1)
+        local segment = pad(mark, widths[i], 'prepend')
+        local seg_start = #line
+        line = line .. segment
         table.insert(highlights, {
           line = line_idx,
-          col_start = mark_start,
-          col_end = mark_start + #mark,
+          col_start = seg_start + #segment - #mark,
+          col_end = seg_start + #segment,
           hl = ok and 'DiagnosticOk' or 'DiagnosticError',
         })
-        cur = mark_start + #mark
       end
       table.insert(lines, line)
     end
@@ -167,7 +168,7 @@ local function show_lsp_matrix(opts)
   -- Floating window — clamp dimensions to the UI before centring,
   -- otherwise an oversized matrix produces a negative col/row.
   local ui = vim.api.nvim_list_uis()[1]
-  local width = math.min(#lines[1] + 2, ui.width - 4)
+  local width = math.min(strwidth(lines[1]) + 2, ui.width - 4)
   local height = math.min(#lines, ui.height - 4)
 
   vim.api.nvim_open_win(buf, true, {
