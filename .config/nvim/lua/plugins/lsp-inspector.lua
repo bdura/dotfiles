@@ -12,64 +12,81 @@
 
 local M = {}
 
+-- ─── layout constants ─────────────────────────────────────────────────────────
+local SEPARATOR_WIDTH = 64
+local SERVER_NAME_W = 24
+local CAPABILITY_LABEL_W = 18
+local TARGET_TABLE_WIDTH = 72
+local MAX_HEIGHT = 45
+local HEIGHT_RATIO = 0.55
+
 -- ─── tiny helpers ─────────────────────────────────────────────────────────────
 
+--- Pad a string to a minimum width with spaces.
+---@param s any The string to pad (converted to string if not already).
+---@param width integer The minimum width to pad to.
+---@return string The padded string.
 local function pad(s, width)
   s = tostring(s or '')
   return s .. string.rep(' ', math.max(0, width - #s))
-end
-
-local function bool_icon(v)
-  return v and '✓' or '✗'
 end
 
 -- ─── capability table ─────────────────────────────────────────────────────────
 -- Uses client:supports_method() — idiomatic 0.11+/0.12 API.
 
 -- stylua: ignore start
-local CAPABILITIES = {
-  -- Navigation
-  { label = "hover",            method = "textDocument/hover" },
-  { label = "definition",       method = "textDocument/definition" },
-  { label = "declaration",      method = "textDocument/declaration" },
-  { label = "typeDefinition",   method = "textDocument/typeDefinition" },
-  { label = "implementation",   method = "textDocument/implementation" },
-  { label = "references",       method = "textDocument/references" },
-  -- Editing
-  { label = "completion",       method = "textDocument/completion" },
-  { label = "signatureHelp",    method = "textDocument/signatureHelp" },
-  { label = "rename",           method = "textDocument/rename" },
-  { label = "codeAction",       method = "textDocument/codeAction" },
-  { label = "formatting",       method = "textDocument/formatting" },
-  { label = "rangeFormatting",  method = "textDocument/rangeFormatting" },
-  { label = "onTypeFormatting", method = "textDocument/onTypeFormatting" },
-  -- Symbols
-  { label = "documentSymbol",   method = "textDocument/documentSymbol" },
-  { label = "workspaceSymbol",  method = "workspace/symbol" },
-  { label = "codeLens",         method = "textDocument/codeLens" },
-  -- Highlights & decorations
-  { label = "docHighlight",     method = "textDocument/documentHighlight" },
-  { label = "semanticTokens",   method = "textDocument/semanticTokens/full" },
-  { label = "inlayHints",       method = "textDocument/inlayHint" },
-  { label = "inlineValue",      method = "textDocument/inlineValue" },
-  -- Misc
-  { label = "foldingRange",     method = "textDocument/foldingRange" },
-  { label = "selectionRange",   method = "textDocument/selectionRange" },
-  { label = "callHierarchy",    method = "textDocument/prepareCallHierarchy" },
-  { label = "typeHierarchy",    method = "textDocument/prepareTypeHierarchy" },
-  { label = "diagnostics",      method = "textDocument/diagnostic" },
+local CAPABILITY_SECTIONS = {
+  { name = "Navigation", caps = {
+    { label = "hover",            method = "textDocument/hover" },
+    { label = "definition",       method = "textDocument/definition" },
+    { label = "declaration",      method = "textDocument/declaration" },
+    { label = "typeDefinition",   method = "textDocument/typeDefinition" },
+    { label = "implementation",   method = "textDocument/implementation" },
+    { label = "references",       method = "textDocument/references" },
+  }},
+  { name = "Editing", caps = {
+    { label = "completion",       method = "textDocument/completion" },
+    { label = "signatureHelp",    method = "textDocument/signatureHelp" },
+    { label = "rename",           method = "textDocument/rename" },
+    { label = "codeAction",       method = "textDocument/codeAction" },
+    { label = "formatting",       method = "textDocument/formatting" },
+    { label = "rangeFormatting",  method = "textDocument/rangeFormatting" },
+    { label = "onTypeFormatting", method = "textDocument/onTypeFormatting" },
+  }},
+  { name = "Symbols", caps = {
+    { label = "documentSymbol",   method = "textDocument/documentSymbol" },
+    { label = "workspaceSymbol",  method = "workspace/symbol" },
+    { label = "codeLens",         method = "textDocument/codeLens" },
+  }},
+  { name = "Highlights & decorations", caps = {
+    { label = "docHighlight",     method = "textDocument/documentHighlight" },
+    { label = "semanticTokens",   method = "textDocument/semanticTokens/full" },
+    { label = "inlayHints",       method = "textDocument/inlayHint" },
+    { label = "inlineValue",      method = "textDocument/inlineValue" },
+  }},
+  { name = "Misc", caps = {
+    { label = "foldingRange",     method = "textDocument/foldingRange" },
+    { label = "selectionRange",   method = "textDocument/selectionRange" },
+    { label = "callHierarchy",    method = "textDocument/prepareCallHierarchy" },
+    { label = "typeHierarchy",    method = "textDocument/prepareTypeHierarchy" },
+    { label = "diagnostics",      method = "textDocument/diagnostic" },
+  }},
 }
 -- stylua: ignore end
 
 -- ─── data gathering ───────────────────────────────────────────────────────────
 
--- Returns a sorted list of server info tables for every server registered via
--- vim.lsp.config / lsp/*.lua files (the 0.11+ native config mechanism).
+--- Get a sorted list of all configured LSP servers.
+--- Returns server info including name, enabled status, attached client (if any),
+--- filetypes, root markers, and command.
+---@param attached_by_name table<string, vim.lsp.Client> Map of client names to client objects.
+---@return table[] List of server info tables sorted alphabetically by name.
 local function get_configured_servers(attached_by_name)
   local servers = {}
 
   -- vim.lsp.config behaves like a table: pairs() iterates configured names.
-  -- The special "*" wildcard entry is not a real server — skip it.
+  -- The "*" key holds defaults applied to all servers (set via vim.lsp.config('*', ...)),
+  -- not a real server config — skip it.
   for name, _ in pairs(vim.lsp.config) do
     if type(name) == 'string' and name ~= '*' then
       -- Accessing vim.lsp.config[name] resolves and returns the config.
@@ -93,34 +110,51 @@ end
 
 -- ─── line buffer with highlight tracking ─────────────────────────────────────
 
+--- Create a new buffer for rendering inspector content.
+---@return table { lines = string[], hl = table[] } Buffer with lines and highlight entries.
 local function new_buf()
   return { lines = {}, hl = {} }
 end
 
--- Append one line; hls = list of { col_start, col_end, hl_group } (0-indexed)
+--- Append a line to the buffer with optional syntax highlights.
+---@param b table The buffer table (from new_buf()).
+---@param text string The line text to append.
+---@param hls table[]? List of { col_start, col_end, hl_group } tuples (0-indexed columns).
 local function push(b, text, hls)
   local idx = #b.lines -- 0-based line index after insert
   b.lines[idx + 1] = text
   if hls then
     for _, h in ipairs(hls) do
-      b.hl[#b.hl + 1] = { idx, h[1], h[2], h[3] }
+      b.hl[#b.hl + 1] = {
+        line = idx,
+        col_start = h[1],
+        col_end = h[2],
+        group = h[3],
+      }
     end
   end
 end
 
+--- Add a section header with title and separator line.
+---@param b table The buffer table.
+---@param title string The section title.
 local function section_header(b, title)
   push(b, '')
   push(b, '  ' .. title, { { 2, 2 + #title, 'Title' } })
-  push(b, '  ' .. string.rep('─', 64), { { 2, 66, 'Comment' } })
+  push(b, '  ' .. string.rep('─', SEPARATOR_WIDTH), { { 2, 2 + SEPARATOR_WIDTH, 'Comment' } })
 end
 
 -- ─── rendering ────────────────────────────────────────────────────────────────
 
+--- Render the inspector content for a source buffer.
+---@param src_bufnr integer The source buffer number to inspect.
+---@return table { lines = string[], hl = table[] } Rendered buffer with lines and highlights.
 local function render(src_bufnr)
   local b = new_buf()
 
   local attached = vim.lsp.get_clients({ bufnr = src_bufnr })
 
+  --- @type table<string, vim.lsp.Client>
   local attached_by_name = {}
   for _, c in ipairs(attached) do
     attached_by_name[c.name] = c
@@ -161,10 +195,9 @@ local function render(src_bufnr)
   if #servers == 0 then
     push(b, '    (none — configure servers with vim.lsp.config / lsp/*.lua)', { { 4, 70, 'Comment' } })
   else
-    local NAME_W = 24
     -- table header
     local hdr = ('    %s  %s  %s  %s'):format(
-      pad('server', NAME_W),
+      pad('server', SERVER_NAME_W),
       pad('enabled', 9),
       pad('attached', 10),
       'filetypes'
@@ -180,10 +213,10 @@ local function render(src_bufnr)
       local fts = #s.filetypes > 0 and table.concat(s.filetypes, ', ') or '—'
 
       local c0 = 4
-      local c1 = c0 + NAME_W + 2
+      local c1 = c0 + SERVER_NAME_W + 2
       local c2 = c1 + 9 + 2
       local c3 = c2 + 10 + 2
-      local line = ('    %s  %s  %s  %s'):format(pad(s.name, NAME_W), pad(en_icon, 9), pad(at_icon, 10), fts)
+      local line = ('    %s  %s  %s  %s'):format(pad(s.name, SERVER_NAME_W), pad(en_icon, 9), pad(at_icon, 10), fts)
 
       push(b, line, {
         { c0, c0 + #s.name, 'Identifier' },
@@ -200,11 +233,10 @@ local function render(src_bufnr)
     section_header(b, 'Capability matrix')
     push(b, '')
 
-    local LABEL_W = 18
-    local COL_W = math.max(10, math.floor((72 - LABEL_W) / #attached))
+    local COL_W = math.max(10, math.floor((TARGET_TABLE_WIDTH - CAPABILITY_LABEL_W) / #attached))
 
     -- column header row
-    local hdr = '    ' .. pad('', LABEL_W)
+    local hdr = '    ' .. pad('', CAPABILITY_LABEL_W)
     local col_pos = {}
     for _, c in ipairs(attached) do
       col_pos[#col_pos + 1] = #hdr
@@ -217,24 +249,26 @@ local function render(src_bufnr)
     push(b, hdr, hdr_hls)
     push(b, '    ' .. string.rep('·', #hdr - 4), { { 4, #hdr, 'Comment' } })
 
-    for _, cap in ipairs(CAPABILITIES) do
-      local row = '    ' .. pad(cap.label, LABEL_W)
-      local row_hls = {}
-      local any = false
+    for _, sect in ipairs(CAPABILITY_SECTIONS) do
+      push(b, '    ' .. sect.name, { { 4, 4 + #sect.name, 'Title' } })
+      for _, cap in ipairs(sect.caps) do
+        local row = '    ' .. pad(cap.label, CAPABILITY_LABEL_W)
+        local row_hls = {}
+        local any = false
 
-      for i, c in ipairs(attached) do
-        local ok = c:supports_method(cap.method)
-        if ok then
-          any = true
+        for i, c in ipairs(attached) do
+          local ok = c:supports_method(cap.method)
+          if ok then
+            any = true
+          end
+          local offset = math.floor((COL_W - 1) / 2)
+          local col = col_pos[i] + offset
+          row = row .. pad(string.rep(' ', offset) .. (ok and '✓' or '✗'), COL_W)
+          row_hls[#row_hls + 1] = { col, col + 1, ok and 'DiagnosticOk' or 'DiagnosticWarn' }
         end
-        local icon = bool_icon(ok)
-        local offset = math.floor((COL_W - 1) / 2)
-        local col = col_pos[i] + offset
-        row = row .. pad(string.rep(' ', offset) .. icon, COL_W)
-        row_hls[#row_hls + 1] = { col, col + 1, ok and 'DiagnosticOk' or 'DiagnosticWarn' }
-      end
 
-      push(b, row, vim.list_extend({ { 4, 4 + #cap.label, any and 'Normal' or 'Comment' } }, row_hls))
+        push(b, row, vim.list_extend({ { 4, 4 + #cap.label, any and 'Normal' or 'Comment' } }, row_hls))
+      end
     end
     push(b, '')
   end
@@ -247,20 +281,29 @@ end
 
 -- ─── window / buffer plumbing ─────────────────────────────────────────────────
 
+--- @type integer Namespace for inspector highlights.
 local NS = vim.api.nvim_create_namespace('lsp_inspector')
+
+--- @type integer Augroup for auto-refresh autocmds (cleared on close).
+local AUGROUP = vim.api.nvim_create_augroup('lsp_inspector', { clear = true })
+
+--- @type { buf: integer?, win: integer?, src: integer? } Inspector window/buffer state.
 local state = { buf = nil, win = nil, src = nil }
 
+--- Apply rendered content to a buffer.
+---@param buf integer The target buffer handle.
+---@param rendered table { lines = string[], hl = table[] } The rendered content from render().
 local function apply(buf, rendered)
   vim.bo[buf].modifiable = true
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, rendered.lines)
   vim.bo[buf].modifiable = false
   vim.api.nvim_buf_clear_namespace(buf, NS, 0, -1)
   for _, h in ipairs(rendered.hl) do
-    -- h = { line, col_start, col_end, group }
-    pcall(vim.api.nvim_buf_add_highlight, buf, NS, h[4], h[1], h[2], h[3])
+    pcall(vim.api.nvim_buf_add_highlight, buf, NS, h.group, h.line, h.col_start, h.col_end)
   end
 end
 
+--- Refresh the inspector window with current source buffer data.
 local function refresh()
   if not (state.buf and vim.api.nvim_buf_is_valid(state.buf)) then
     return
@@ -268,6 +311,8 @@ local function refresh()
   apply(state.buf, render(state.src))
 end
 
+--- Open the LSP inspector window for the current buffer.
+--- If already open, reuses the existing window and refreshes content.
 function M.open()
   local src = vim.api.nvim_get_current_buf()
 
@@ -288,7 +333,7 @@ function M.open()
   vim.cmd('botright split')
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_buf(win, buf)
-  vim.api.nvim_win_set_height(win, math.min(45, math.floor(vim.o.lines * 0.55)))
+  vim.api.nvim_win_set_height(win, math.min(MAX_HEIGHT, math.floor(vim.o.lines * HEIGHT_RATIO)))
 
   vim.wo[win].wrap = false
   vim.wo[win].number = false
@@ -300,20 +345,41 @@ function M.open()
   state = { buf = buf, win = win, src = src }
   apply(buf, render(src))
 
+  -- Auto-refresh on LSP attach/detach so the inspector tracks live state
+  -- without the user having to press `r`.
+  vim.api.nvim_clear_autocmds({ group = AUGROUP })
+  vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
+    group = AUGROUP,
+    callback = function()
+      if state.win and vim.api.nvim_win_is_valid(state.win) then
+        refresh()
+      end
+    end,
+  })
+
+  --- Create a keymap for the inspector buffer.
+  ---@param lhs string The key sequence.
+  ---@param fn function The callback function.
   local function map(lhs, fn)
     vim.keymap.set('n', lhs, fn, { buffer = buf, nowait = true, silent = true })
   end
-  map('q', function()
-    vim.api.nvim_win_close(win, true)
-  end)
-  map('<Esc>', function()
-    vim.api.nvim_win_close(win, true)
-  end)
+  local function close()
+    vim.api.nvim_clear_autocmds({ group = AUGROUP })
+    if state.win and vim.api.nvim_win_is_valid(state.win) then
+      vim.api.nvim_win_close(state.win, true)
+    end
+  end
+  map('q', close)
+  map('<Esc>', close)
   map('r', refresh)
 end
 
 -- ─── setup ────────────────────────────────────────────────────────────────────
 
+--- Setup the LSP inspector plugin.
+--- Registers a user command that opens the inspector.
+---@param opts table? Configuration options.
+---@param opts.command string? Custom command name (default: 'LspInspector').
 function M.setup(opts)
   opts = opts or {}
   vim.api.nvim_create_user_command(
