@@ -180,8 +180,11 @@ local function build_content(origin_buf, buffer_only)
   end
   table.insert(lines, header)
 
-  for _, section in ipairs(CAPABILITY_SECTIONS) do
-    table.insert(lines, '')
+  for i, section in ipairs(CAPABILITY_SECTIONS) do
+    if i > 1 then
+      table.insert(lines, '')
+    end
+
     table.insert(highlights, {
       line = #lines,
       col_start = 0,
