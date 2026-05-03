@@ -43,6 +43,10 @@ local CAPABILITY_SECTIONS = {
 }
 -- stylua: ignore end
 
+local FIRST_COLUMN_MARGIN = 3
+local SERVER_MARGIN = 3
+local UI_MARGIN = 2
+
 --- Pad a string to a minimum width with spaces.
 ---@param s string The string to pad (converted to string if not already).
 ---@param width integer The minimum width to pad to.
@@ -61,10 +65,17 @@ local function pad(s, width, mode)
   end
 end
 
-local function show_lsp_matrix()
-  local clients = vim.lsp.get_clients()
+--- Show the LSP capability matrix.
+---@param opts? { buffer_only?: boolean } If buffer_only, restrict to clients
+--- attached to the current buffer and check capabilities against that buffer
+--- (so dynamically-registered methods are reflected).
+local function show_lsp_matrix(opts)
+  opts = opts or {}
+  local origin_buf = vim.api.nvim_get_current_buf()
+  local clients = opts.buffer_only and vim.lsp.get_clients({ bufnr = origin_buf }) or vim.lsp.get_clients()
   if #clients == 0 then
-    vim.notify('No LSP clients attached', vim.log.levels.WARN)
+    local msg = opts.buffer_only and 'No LSP clients attached to this buffer' or 'No LSP clients attached'
+    vim.notify(msg, vim.log.levels.WARN)
     return
   end
 
@@ -75,12 +86,12 @@ local function show_lsp_matrix()
       capability_w = math.max(capability_w, #capability.label)
     end
   end
-  capability_w = capability_w + 2
+  capability_w = capability_w + FIRST_COLUMN_MARGIN
 
   -- Column widths
   local widths = {}
   for _, c in ipairs(clients) do
-    table.insert(widths, #c.name + 1)
+    table.insert(widths, #c.name + SERVER_MARGIN)
   end
 
   -- Build lines, recording highlight ranges as we go.
@@ -120,7 +131,7 @@ local function show_lsp_matrix()
       local cur = capability_w
 
       for i, client in ipairs(clients) do
-        local ok = client:supports_method(capability.method)
+        local ok = client:supports_method(capability.method, origin_buf)
         local mark = ok and '✓' or '✗'
         local w = widths[i]
         line = line .. pad(mark, w, 'prepend')
@@ -166,7 +177,7 @@ local function show_lsp_matrix()
     row = math.floor((ui.height - height) / 2),
     style = 'minimal',
     border = 'single',
-    title = ' LSP capability matrix ',
+    title = opts.buffer_only and ' LSP capability matrix (buffer) ' or ' LSP capability matrix ',
     title_pos = 'center',
   })
 
@@ -175,4 +186,6 @@ local function show_lsp_matrix()
   vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf, nowait = true })
 end
 
-vim.api.nvim_create_user_command('LspMatrix', show_lsp_matrix, {})
+vim.api.nvim_create_user_command('LspMatrix', function(args)
+  show_lsp_matrix({ buffer_only = args.bang })
+end, { bang = true, desc = 'Show LSP capability matrix (! to scope to current buffer)' })
