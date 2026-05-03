@@ -283,6 +283,12 @@ local function show_lsp_matrix(opts)
   vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf, nowait = true })
   vim.keymap.set('n', 'R', refresh, { buffer = buf, nowait = true, desc = 'Refresh LSP matrix' })
 
+  -- Swallow jumplist motions so the inspector window can't navigate
+  -- away from itself.
+  for _, lhs in ipairs({ '<C-o>', '<C-i>', '<Tab>' }) do
+    vim.keymap.set('n', lhs, '<Nop>', { buffer = buf, nowait = true })
+  end
+
   vim.api.nvim_create_autocmd('WinClosed', {
     pattern = tostring(win),
     once = true,
