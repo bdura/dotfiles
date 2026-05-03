@@ -24,10 +24,6 @@
       "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
-    "flash": {
-      "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
-      "src": "https://github.com/folke/flash.nvim"
-    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
@@ -39,10 +35,6 @@
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
-    },
-    "mini.icons": {
-      "rev": "bac6317300e205335df425296570d84322730067",
-      "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.nvim": {
       "rev": "4f6f84a96b076747b736d100388a8d7844771d7d",

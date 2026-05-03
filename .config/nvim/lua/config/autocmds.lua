@@ -11,3 +11,23 @@ autocmd('TextYankPost', {
     vim.hl.on_yank({ timeout = 170 })
   end,
 })
+
+local package_group = augroup('Packages', { clear = true })
+
+-- Remove orphan plugins that are installed but no longer declared via vim.pack.add().
+autocmd('VimEnter', {
+  desc = 'Prune vim.pack plugins not declared this session',
+  group = package_group,
+  callback = function()
+    local orphans = {}
+    for _, p in ipairs(vim.pack.get()) do
+      if not p.active then
+        table.insert(orphans, p.spec.name)
+      end
+    end
+    if #orphans > 0 then
+      vim.notify('Removing ' .. #orphans .. ' orphan packages')
+      vim.pack.del(orphans)
+    end
+  end,
+})
