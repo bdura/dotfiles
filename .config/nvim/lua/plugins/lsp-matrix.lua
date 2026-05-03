@@ -78,7 +78,9 @@ local function show_lsp_matrix(opts)
     return
   end
 
-  table.sort(clients, function(a, b) return a.name < b.name end)
+  table.sort(clients, function(a, b)
+    return a.name < b.name
+  end)
 
   local strwidth = vim.fn.strdisplaywidth
 
@@ -188,6 +190,16 @@ local function show_lsp_matrix(opts)
   vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf, nowait = true })
 end
 
-vim.api.nvim_create_user_command('LspMatrix', function(args)
-  show_lsp_matrix({ buffer_only = args.bang })
-end, { bang = true, desc = 'Show LSP capability matrix (! to scope to current buffer)' })
+---@param opts table? Options passed to the setup function
+local function setup(opts)
+  vim.api.nvim_create_user_command('LspMatrix', function(args)
+    show_lsp_matrix({ buffer_only = args.bang })
+  end, { bang = true, desc = 'Show LSP capability matrix (! to scope to current buffer)' })
+end
+
+local M = {}
+
+M.show_lsp_matrix = show_lsp_matrix
+M.setup = setup
+
+return M
