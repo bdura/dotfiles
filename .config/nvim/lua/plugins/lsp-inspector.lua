@@ -46,6 +46,15 @@ local CAPABILITY_SECTIONS = {
 local CAPABILITY_COLUMN_MARGIN = 3
 local SERVER_MARGIN = 3
 
+-- The 'single' border adds one cell on each side, so the visible
+-- frame is `width + WINDOW_BORDER` by `height + WINDOW_BORDER`.
+-- Centring math has to account for it.
+local WINDOW_BORDER = 2
+
+-- Empty cells reserved on each side of the matrix, inside the border,
+-- so the content sits centred rather than flush against the frame.
+local INNER_PADDING = 1
+
 --- Pad a string to a minimum width with spaces.
 ---@param s string The string to pad (converted to string if not already).
 ---@param width integer The minimum width to pad to.
@@ -154,19 +163,38 @@ local function build_content(origin_buf, buffer_only)
     end
   end
 
+  -- Shift every line right by INNER_PADDING so the content is centred
+  -- inside the float (the window width adds the same amount on the
+  -- right). Highlight byte offsets shift along with the prefix.
+  if INNER_PADDING > 0 then
+    local prefix = string.rep(' ', INNER_PADDING)
+    for i, line in ipairs(lines) do
+      lines[i] = prefix .. line
+    end
+    for _, h in ipairs(highlights) do
+      h.col_start = h.col_start + INNER_PADDING
+      h.col_end = h.col_end + INNER_PADDING
+    end
+  end
+
   return { lines = lines, highlights = highlights }
 end
 
 --- Compute the centred floating-window dimensions for the given lines.
+--- `width`/`height` size the inner content area; the visible frame
+--- is larger by `WINDOW_BORDER` on each axis, which the centring math
+--- must subtract before halving.
 local function window_dims(lines)
   local ui = vim.api.nvim_list_uis()[1]
-  local width = math.min(vim.fn.strdisplaywidth(lines[1]) + 2, ui.width - 4)
+  -- lines[1] already carries INNER_PADDING on the left; the trailing
+  -- INNER_PADDING is added here so the gutter is symmetric.
+  local width = math.min(vim.fn.strdisplaywidth(lines[1]) + INNER_PADDING, ui.width - 4)
   local height = math.min(#lines, ui.height - 4)
   return {
     width = width,
     height = height,
-    col = math.floor((ui.width - width) / 2),
-    row = math.floor((ui.height - height) / 2),
+    col = math.max(0, math.floor((ui.width - width - WINDOW_BORDER) / 2)),
+    row = math.max(0, math.floor((ui.height - height - WINDOW_BORDER) / 2)),
   }
 end
 
