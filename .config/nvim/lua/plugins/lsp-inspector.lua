@@ -3,6 +3,46 @@
 -- A zero-dependency, simplistic plugin for displaying attached LSP servers
 -- and their capabilities.
 
+---@class LspInspector.Capability
+---@field label string Display label shown in the capability column.
+---@field method string LSP method name (e.g. "textDocument/hover").
+
+---@class LspInspector.Section
+---@field name string Section heading shown above its capabilities.
+---@field caps LspInspector.Capability[] Capabilities grouped under this heading.
+
+---@class LspInspector.Highlight
+---@field line integer Zero-indexed line in the buffer.
+---@field col_start integer Byte offset of the highlight start (inclusive).
+---@field col_end integer Byte offset of the highlight end (exclusive).
+---@field hl string Highlight group name.
+
+---@class LspInspector.Content
+---@field lines string[] Buffer lines, in display order.
+---@field highlights LspInspector.Highlight[] Extmark highlights to apply.
+
+---@class LspInspector.WindowDims
+---@field width integer Inner content width, in cells (excludes border).
+---@field height integer Inner content height, in cells (excludes border).
+---@field col integer Editor-relative column of the float's upper-left corner.
+---@field row integer Editor-relative row of the float's upper-left corner.
+
+--- Populated only while the inspector window is open; otherwise the
+--- module-local `state` variable is nil. When set, every field is
+--- valid.
+---@class LspInspector.State
+---@field win integer Floating window handle.
+---@field buf integer Scratch buffer handle backing the inspector window.
+---@field ns integer Highlight namespace used for the matrix marks.
+---@field origin_buf integer Buffer from which the inspector was opened.
+---@field buffer_only boolean True when the matrix is scoped to origin_buf's clients.
+
+---@class LspInspector.ShowOpts
+---@field buffer_only? boolean Restrict the client list to those attached to the
+--- current buffer; capabilities are checked against that buffer too, so
+--- dynamically-registered methods resolve correctly.
+
+---@type LspInspector.Section[]
 -- stylua: ignore start
 local CAPABILITY_SECTIONS = {
   { name = "Navigation", caps = {
@@ -75,15 +115,16 @@ end
 
 -- Open-window state. Tracked so refresh() can find the buffer/window
 -- and so a re-invocation of :LspMatrix replaces the existing window
--- rather than stacking duplicates.
-local state = {}
+-- rather than stacking duplicates. nil while the inspector is closed.
+---@type LspInspector.State?
+local state = nil
 
 --- Build the matrix lines and highlight ranges for the given origin
 --- buffer. Returns nil if no clients qualify.
 ---@param origin_buf integer Buffer used for the supports_method check
 ---  (so dynamically-registered methods resolve against the right doc).
 ---@param buffer_only boolean Restrict client list to that buffer's clients.
----@return { lines: string[], highlights: table[] }?
+---@return LspInspector.Content?
 local function build_content(origin_buf, buffer_only)
   local clients = buffer_only and vim.lsp.get_clients({ bufnr = origin_buf }) or vim.lsp.get_clients()
   if #clients == 0 then
@@ -106,6 +147,7 @@ local function build_content(origin_buf, buffer_only)
   capability_w = capability_w + CAPABILITY_COLUMN_MARGIN
 
   -- Column widths
+  ---@type integer[]
   local widths = {}
   for _, c in ipairs(clients) do
     table.insert(widths, strwidth(c.name) + SERVER_MARGIN)
@@ -184,6 +226,8 @@ end
 --- `width`/`height` size the inner content area; the visible frame
 --- is larger by `WINDOW_BORDER` on each axis, which the centring math
 --- must subtract before halving.
+---@param lines string[] Buffer lines that will be rendered.
+---@return LspInspector.WindowDims dims
 local function window_dims(lines)
   local ui = vim.api.nvim_list_uis()[1]
   -- lines[1] already carries INNER_PADDING on the left; the trailing
@@ -200,6 +244,10 @@ end
 
 --- Apply content to the buffer and resize the window. Used by both the
 --- initial draw and refresh().
+---@param buf integer Scratch buffer handle to write into.
+---@param win integer Floating window handle to resize.
+---@param ns integer Namespace under which to register highlights.
+---@param content LspInspector.Content Lines and highlights to render.
 local function paint(buf, win, ns, content)
   vim.bo[buf].modifiable = true
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, content.lines)
@@ -216,9 +264,11 @@ local function paint(buf, win, ns, content)
   vim.api.nvim_win_set_config(win, vim.tbl_extend('force', { relative = 'editor' }, dims))
 end
 
---- Refresh the matrix in the open window (if any).
+--- Refresh the matrix in the open window (if any). Uses the stored
+--- origin buffer and scope, so the inspector reflects whatever LSP
+--- clients are currently attached.
 local function refresh()
-  if not (state.win and vim.api.nvim_win_is_valid(state.win)) then
+  if not (state and vim.api.nvim_win_is_valid(state.win)) then
     return
   end
   local content = build_content(state.origin_buf, state.buffer_only)
@@ -231,15 +281,13 @@ local function refresh()
 end
 
 --- Show the LSP capability matrix.
----@param opts? { buffer_only?: boolean } If buffer_only, restrict to clients
---- attached to the current buffer and check capabilities against that buffer
---- (so dynamically-registered methods are reflected).
+---@param opts? LspInspector.ShowOpts
 local function show_lsp_matrix(opts)
   opts = opts or {}
 
   -- Replace any existing window so origin_buf and buffer_only reflect
   -- the new invocation. The WinClosed autocmd resets `state`.
-  if state.win and vim.api.nvim_win_is_valid(state.win) then
+  if state and vim.api.nvim_win_is_valid(state.win) then
     vim.api.nvim_win_close(state.win, true)
   end
 
@@ -293,12 +341,14 @@ local function show_lsp_matrix(opts)
     pattern = tostring(win),
     once = true,
     callback = function()
-      state = {}
+      state = nil
     end,
   })
 end
 
----@param opts table? Options passed to the setup function
+--- Register the `:LspInspector[!]` user command. Bang scopes the
+--- matrix to the current buffer's clients.
+---@param opts? table Reserved for future options; currently unused.
 local function setup(opts)
   vim.api.nvim_create_user_command('LspInspector', function(args)
     show_lsp_matrix({ buffer_only = args.bang })
