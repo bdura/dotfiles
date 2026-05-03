@@ -98,18 +98,21 @@ local INNER_PADDING = 1
 --- Pad a string to a minimum width with spaces.
 ---@param s string The string to pad (converted to string if not already).
 ---@param width integer The minimum width to pad to.
----@param mode "prepend"|"append" Whether to prepend or append padding.
+---@param mode "prepend"|"append"|"center" Padding placement. `center` puts
+--- `floor(slack/2)` on the left and the remainder on the right, so any
+--- odd cell goes to the right.
 ---@return string padded The padded string.
 local function pad(s, width, mode)
   local count = width - vim.fn.strdisplaywidth(s)
   assert(count >= 0, 'Padding must be positive')
 
-  local padding = string.rep(' ', count)
-
   if mode == 'prepend' then
-    return padding .. s
+    return string.rep(' ', count) .. s
+  elseif mode == 'append' then
+    return s .. string.rep(' ', count)
   else
-    return s .. padding
+    local left = math.floor(count / 2)
+    return string.rep(' ', left) .. s .. string.rep(' ', count - left)
   end
 end
 
@@ -162,13 +165,16 @@ local function build_content(origin_buf, buffer_only)
 
   local header = pad('', capability_w, 'prepend')
   for i, c in ipairs(clients) do
-    local segment = pad(c.name, widths[i], 'prepend')
+    local segment = pad(c.name, widths[i], 'center')
     local seg_start = #header
     header = header .. segment
+    -- pad('center') prefixes floor((w - display_width(name)) / 2) ASCII
+    -- spaces, so the name starts at that byte offset within `segment`.
+    local left_pad = math.floor((widths[i] - strwidth(c.name)) / 2)
     table.insert(highlights, {
       line = #lines,
-      col_start = seg_start + #segment - #c.name,
-      col_end = seg_start + #segment,
+      col_start = seg_start + left_pad,
+      col_end = seg_start + left_pad + #c.name,
       hl = 'Title',
     })
   end
@@ -191,13 +197,14 @@ local function build_content(origin_buf, buffer_only)
       for i, client in ipairs(clients) do
         local ok = client:supports_method(capability.method, origin_buf)
         local mark = ok and '✓' or '✗'
-        local segment = pad(mark, widths[i], 'prepend')
+        local segment = pad(mark, widths[i], 'center')
         local seg_start = #line
         line = line .. segment
+        local left_pad = math.floor((widths[i] - strwidth(mark)) / 2)
         table.insert(highlights, {
           line = line_idx,
-          col_start = seg_start + #segment - #mark,
-          col_end = seg_start + #segment,
+          col_start = seg_start + left_pad,
+          col_end = seg_start + left_pad + #mark,
           hl = ok and 'DiagnosticOk' or 'DiagnosticError',
         })
       end
