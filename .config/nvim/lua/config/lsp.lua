@@ -18,6 +18,8 @@ vim.lsp.enable({
   'yaml-language-server',
   -- OpenSCAD
   'openscad',
+  -- Docker
+  'docker-language-server',
   -- TypeScript
   'typescript-language-server',
 })
