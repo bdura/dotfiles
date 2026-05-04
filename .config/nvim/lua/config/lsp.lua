@@ -18,6 +18,8 @@ vim.lsp.enable({
   'yaml-language-server',
   -- OpenSCAD
   'openscad',
+  -- TypeScript
+  'typescript-language-server',
 })
 
 local map = vim.keymap.set

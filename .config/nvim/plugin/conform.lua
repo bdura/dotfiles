@@ -37,6 +37,7 @@ require('conform').setup({
       'ruff_format',
       'ruff_fix',
       'ruff_organize_imports',
+      'injected',
       stop_after_first = false,
     },
     rust = { 'rustfmt' },
@@ -46,6 +47,7 @@ require('conform').setup({
     kdl = { 'kdlfmt' },
     nix = { 'alejandra' },
     yaml = { 'yamlfmt' },
+    typescript = { 'prettier' },
   },
   default_format_opts = {
     lsp_format = 'fallback',
