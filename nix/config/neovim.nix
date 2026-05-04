@@ -30,7 +30,6 @@
       # Various build tools
       clang
       cmake
-      rustup
       lua
       luarocks
       tree-sitter
