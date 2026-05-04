@@ -28,8 +28,6 @@
       lazygit
 
       # Various build tools
-      clang
-      cmake
       lua
       luarocks
       tree-sitter
