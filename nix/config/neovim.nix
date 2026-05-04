@@ -14,9 +14,6 @@
     package = pkgs.neovim-unwrapped;
     binName = "nvim";
     runtimeInputs = with pkgs; [
-      nixd
-      rumdl
-
       # Fuzzy-finding
       fzf
       ripgrep
@@ -32,9 +29,18 @@
       luarocks
       tree-sitter
 
-      # Formatters and render tools used by plugins
+      # LSPs for ubiquitous languages
+      nixd
+      rumdl
+      taplo
+      yaml-language-server
+
+      # Formatters for ubiquitous languages
       nixfmt
       alejandra
+      yamlfmt
+
+      # Render tools
       imagemagick # Image conversion
       ghostscript # PDF files
       tectonic # Render LaTeX expressions
