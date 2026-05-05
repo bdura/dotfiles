@@ -39,6 +39,7 @@ opt.termguicolors = true
 opt.signcolumn = 'yes'
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.winborder = 'single'
+opt.cmdheight = 0
 
 opt.list = true
 opt.listchars = {
