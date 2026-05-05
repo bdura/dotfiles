@@ -16,6 +16,26 @@ crates.setup({
   },
 })
 
+-- After saving Cargo.toml, run `cargo check` in the background so the lockfile
+-- stays in sync with manifest changes.
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = 'Cargo.toml',
+  desc = 'Update Cargo.lock after saving Cargo.toml',
+  group = vim.api.nvim_create_augroup('CratesLockfileUpdate', { clear = true }),
+  callback = function(args)
+    local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(args.buf))
+    vim.system({ 'cargo', 'check', '--quiet' }, { cwd = dir }, function(result)
+      if result.code ~= 0 then
+        -- NOTE: vim.system callbacks run on a libuv thread, so we need
+        -- vim.schedule to safely call vim.notify on the main loop.
+        vim.schedule(function()
+          vim.notify('cargo check failed:\n' .. (result.stderr or ''), vim.log.levels.WARN)
+        end)
+      end
+    end)
+  end,
+})
+
 -- On Cargo.toml, rebind K so crates.nvim's popup wins when the cursor is on a
 -- crate/version line, and the LSP hover (taplo) handles everything else.
 vim.api.nvim_create_autocmd('BufRead', {
