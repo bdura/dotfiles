@@ -24,14 +24,24 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('CratesLockfileUpdate', { clear = true }),
   callback = function(args)
     local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(args.buf))
+    local handle = require('fidget.progress').handle.create({
+      title = 'cargo check',
+      message = 'running…',
+      lsp_client = { name = 'crates.nvim' },
+    })
     vim.system({ 'cargo', 'check', '--quiet' }, { cwd = dir }, function(result)
-      if result.code ~= 0 then
-        -- NOTE: vim.system callbacks run on a libuv thread, so we need
-        -- vim.schedule to safely call vim.notify on the main loop.
-        vim.schedule(function()
+      -- NOTE: vim.system callbacks run on a libuv thread, so we need
+      -- vim.schedule to safely call fidget on the main loop.
+      vim.schedule(function()
+        if result.code == 0 then
+          handle.message = 'done'
+          handle:finish()
+        else
+          handle.message = 'failed'
+          handle:cancel()
           vim.notify('cargo check failed:\n' .. (result.stderr or ''), vim.log.levels.WARN)
-        end)
-      end
+        end
+      end)
     end)
   end,
 })
