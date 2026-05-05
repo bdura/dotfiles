@@ -30,7 +30,15 @@ local function format_on_save(bufnr)
   return { timeout_ms = 500, lsp_format = 'fallback' }
 end
 
-require('conform').setup({
+local conform = require('conform')
+
+conform.setup({
+  formatters = {
+    yamlfmt = {
+      command = 'yamlfmt',
+      args = { '-formatter', 'retain_line_breaks_single=true', '-' },
+    },
+  },
   formatters_by_ft = {
     lua = { 'stylua' },
     python = {
@@ -86,7 +94,7 @@ end, { desc = 'Toggle Autoformat' })
 map({ 'n', 'v' }, '<leader>cn', '<cmd>ConformInfo<cr>', { desc = 'Conform Info' })
 
 map({ 'n', 'v' }, '<leader>cf', function()
-  require('conform').format({ async = true }, function(err, did_edit)
+  conform.format({ async = true }, function(err, did_edit)
     if not err and did_edit then
       vim.notify('Code formatted', vim.log.levels.INFO, { title = 'Conform' })
     end
@@ -94,5 +102,5 @@ map({ 'n', 'v' }, '<leader>cf', function()
 end, { desc = 'Format buffer' })
 
 map({ 'n', 'v' }, '<leader>cF', function()
-  require('conform').format({ formatters = { 'injected' }, timeout_ms = 3000 })
+  conform.format({ formatters = { 'injected' }, timeout_ms = 3000 })
 end, { desc = 'Format Injected Langs' })
