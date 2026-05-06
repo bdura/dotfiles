@@ -22,6 +22,8 @@ vim.lsp.enable({
   'docker-language-server',
   -- TypeScript
   'typescript-language-server',
+  -- Bash
+  'bash-ls',
 })
 
 local map = vim.keymap.set
