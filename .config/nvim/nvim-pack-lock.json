@@ -40,6 +40,10 @@
       "rev": "4f6f84a96b076747b736d100388a8d7844771d7d",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "none-ls.nvim": {
+      "rev": "241ff8214b4ec051eb51e74a61ff729c0271b429",
+      "src": "https://github.com/nvimtools/none-ls.nvim"
+    },
     "nvim-dap": {
       "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
       "src": "https://codeberg.org/mfussenegger/nvim-dap"
