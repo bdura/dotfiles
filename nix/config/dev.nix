@@ -12,7 +12,7 @@
     eza
     fd
     fzf
-    htop
+    btop
     jq
     ripgrep
     tmux

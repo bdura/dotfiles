@@ -3,11 +3,7 @@
   username,
   host,
   ...
-}:
-let
-  inherit (import ./variables.nix) gitUsername gitEmail;
-in
-{
+}: {
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
@@ -54,7 +50,7 @@ in
 
   home.file.".config/hypr/hyprpaper.conf".text = ''
     wallpaper {
-        monitor = 
+        monitor =
         path = ${../../config/wallpapers/gigamoon.jpg}
         fit_mode = cover
     }
@@ -80,8 +76,8 @@ in
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
   };
 
@@ -111,17 +107,17 @@ in
 
   # Scripts
   home.packages = [
-    (import ../../scripts/emopicker9000.nix { inherit pkgs; })
-    (import ../../scripts/task-waybar.nix { inherit pkgs; })
-    (import ../../scripts/squirtle.nix { inherit pkgs; })
-    (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
+    (import ../../scripts/emopicker9000.nix {inherit pkgs;})
+    (import ../../scripts/task-waybar.nix {inherit pkgs;})
+    (import ../../scripts/squirtle.nix {inherit pkgs;})
+    (import ../../scripts/nvidia-offload.nix {inherit pkgs;})
     (import ../../scripts/wallsetter.nix {
       inherit pkgs;
       inherit username;
     })
-    (import ../../scripts/web-search.nix { inherit pkgs; })
-    (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
-    (import ../../scripts/screenshootin.nix { inherit pkgs; })
+    (import ../../scripts/web-search.nix {inherit pkgs;})
+    (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
+    (import ../../scripts/screenshootin.nix {inherit pkgs;})
     (import ../../scripts/list-hypr-bindings.nix {
       inherit pkgs;
       inherit host;
@@ -170,12 +166,6 @@ in
 
   programs = {
     gh.enable = true;
-    btop = {
-      enable = true;
-      settings = {
-        vim_keys = true;
-      };
-    };
     # kitty = {
     #   enable = true;
     #   package = pkgs.kitty;
