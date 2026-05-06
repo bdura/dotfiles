@@ -34,8 +34,10 @@
       rumdl
       taplo
       yaml-language-server
+      bash-language-server
 
       # Formatters for ubiquitous languages
+      shfmt
       nixfmt
       alejandra
       yamlfmt
