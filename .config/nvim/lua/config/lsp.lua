@@ -19,7 +19,11 @@ vim.lsp.enable({
   -- OpenSCAD
   'openscad',
   -- Docker
-  'docker-language-server',
+  -- NOTE: docker-ls would be the preferred option since it's compiled...
+  -- But it does not work with dockerfiles and gives worse information
+  -- than yaml-ls for docker-compose files...
+  -- 'docker-ls',
+  'dockerfile-ls',
   -- TypeScript
   'typescript-language-server',
   -- Bash
