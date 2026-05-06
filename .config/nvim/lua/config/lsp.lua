@@ -15,7 +15,7 @@ vim.lsp.enable({
   -- TOML
   'taplo',
   -- YAML
-  'yaml-language-server',
+  'yaml-ls',
   -- OpenSCAD
   'openscad',
   -- Docker
@@ -25,7 +25,7 @@ vim.lsp.enable({
   -- 'docker-ls',
   'dockerfile-ls',
   -- TypeScript
-  'typescript-language-server',
+  'typescript-ls',
   -- Bash
   'bash-ls',
 })
