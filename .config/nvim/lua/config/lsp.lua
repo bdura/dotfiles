@@ -53,15 +53,23 @@ vim.api.nvim_create_autocmd('LspProgress', {
 local diagnostic_modes = { 'hybrid', 'text', 'lines' }
 local diagnostic_mode_index = 1
 
+---@type vim.diagnostic.Opts
+local diagnostic_base = {
+  virtual_text = { source = 'if_many' },
+  float = { source = true },
+  severity_sort = true,
+}
+
 local diagnostic_configs = {
   hybrid = { virtual_text = { current_line = false }, virtual_lines = { current_line = true } },
-  text = { virtual_text = true, virtual_lines = false },
-  lines = { virtual_text = false, virtual_lines = true },
+  text = { virtual_text = {}, virtual_lines = false },
+  lines = { virtual_text = false, virtual_lines = {} },
 }
 
 local function apply_diagnostic_config()
   local mode = diagnostic_modes[diagnostic_mode_index]
-  vim.diagnostic.config(diagnostic_configs[mode])
+  local config = vim.tbl_deep_extend('force', diagnostic_base, diagnostic_configs[mode])
+  vim.diagnostic.config(config)
 end
 
 apply_diagnostic_config()
