@@ -24,7 +24,7 @@ require('gitsigns').setup({
       gitsigns.nav_hunk('next')
     end, 'Next hunk')
 
-    map('n', '[c', function()
+    map('n', '[h', function()
       gitsigns.nav_hunk('prev')
     end, 'Previous hunk')
 
