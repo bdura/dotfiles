@@ -20,7 +20,7 @@
 ;; Chords definition
 (defchordsv2
   ;; Activate caps word
-  (d k)     @cw         50 first-release ()
+  (u i o)   @cw         50 first-release ()
   ;; Toggle between Colemak-DH & QWERTY
   (q w e r) @tog_layout 100 first-release ()
 )
