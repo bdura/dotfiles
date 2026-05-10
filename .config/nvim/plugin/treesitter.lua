@@ -151,9 +151,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
--- Dim background for injected language regions
-vim.api.nvim_set_hl(0, '@injection.dimmed', { dim = true })
-
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
