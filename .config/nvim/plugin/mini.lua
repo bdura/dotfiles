@@ -55,3 +55,6 @@ require('mini.pairs').setup({
   -- better deal with markdown code blocks
   markdown = true,
 })
+
+-- # Move
+require('mini.move').setup({})
