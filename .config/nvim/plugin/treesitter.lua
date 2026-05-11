@@ -48,6 +48,7 @@ nvim_ts.install({
   'gitattributes',
   'go',
   'html',
+  'hyprlang',
   'ini',
   'javascript',
   'jsdoc',
