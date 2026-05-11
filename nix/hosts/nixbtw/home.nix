@@ -48,13 +48,15 @@
     fill_shape=false
   '';
 
-  home.file.".config/hypr/hyprpaper.conf".text = ''
-    wallpaper {
-        monitor =
-        path = ${../../config/wallpapers/gigamoon.jpg}
-        fit_mode = cover
-    }
-  '';
+  home.file.".config/hypr/hyprpaper.conf".text =
+    # hyprlang
+    ''
+      wallpaper {
+          monitor =
+          path = ${../../config/wallpapers/gigamoon.jpg}
+          fit_mode = cover
+      }
+    '';
 
   # # Install & Configure Git
   # programs.git = {
