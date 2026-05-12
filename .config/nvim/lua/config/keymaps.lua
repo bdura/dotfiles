@@ -2,7 +2,7 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Package management
-map('n', '<leader>Pu', '<cmd>lua vim.pack.update()<CR>')
+map('n', '<leader>Pu', vim.pack.update)
 
 -- "Hot" reloading
 map('n', '<leader><leader>x', '<cmd>source %<cr>')
@@ -17,7 +17,7 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Avoid copying on paste
 map('v', 'p', '"_dP', opts)
 
--- better indenting
+-- Better indenting
 map({ 'n', 'v' }, '>', '>gv')
 map({ 'n', 'v' }, '<', '<gv')
 
@@ -26,3 +26,7 @@ map({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true
 map({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
 map({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
+
+-- Center page navigation
+map('n', '<C-d>', '<C-d>zz')
+map('n', '<C-u>', '<C-u>zz')
