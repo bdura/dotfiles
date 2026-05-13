@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd('User', {
     parsers.kanata = {
       install_info = {
         url = 'https://github.com/postsolar/tree-sitter-kanata',
-        branch = 'master',
+        revision = 'af53b4c35d6faa3b4ba7c317fb795a6eb679b42a',
       },
     }
 
