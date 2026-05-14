@@ -40,22 +40,23 @@ conform.setup({
     },
   },
   formatters_by_ft = {
+    json = { 'jq' },
+    kdl = { 'kdlfmt' },
     lua = { 'stylua' },
+    markdown = { 'rumdl' },
+    nix = { 'alejandra' },
     python = {
       'ruff_format',
       'ruff_fix',
       'ruff_organize_imports',
-      'injected',
       stop_after_first = false,
     },
     rust = { 'rustfmt' },
-    toml = { 'taplo' },
     sh = { 'shellcheck', 'shfmt' },
-    markdown = { 'rumdl', 'injected' },
-    kdl = { 'kdlfmt' },
-    nix = { 'alejandra' },
-    yaml = { 'yamlfmt' },
+    toml = { 'taplo' },
     typescript = { 'prettier' },
+    yaml = { 'yamlfmt' },
+    ['*'] = { 'injected' },
   },
   default_format_opts = {
     lsp_format = 'fallback',
@@ -63,36 +64,9 @@ conform.setup({
   format_on_save = format_on_save,
 })
 
-vim.api.nvim_create_user_command('FormatDisable', function(opts)
-  if opts.bang then
-    vim.b.disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-  vim.notify('Autoformat disabled' .. (opts.bang and ' (buffer)' or ' (global)'), vim.log.levels.WARN)
-end, { desc = 'Disable autoformat-on-save', bang = true })
-
-vim.api.nvim_create_user_command('FormatEnable', function()
-  vim.b.disable_autoformat = false
-  vim.g.disable_autoformat = false
-  vim.notify('Autoformat enabled', vim.log.levels.INFO)
-end, { desc = 'Re-enable autoformat-on-save' })
-
-local auto_format = true
-
 local map = vim.keymap.set
 
-map('n', '<leader>uf', function()
-  auto_format = not auto_format
-  if auto_format then
-    vim.cmd('FormatEnable')
-  else
-    vim.cmd('FormatDisable')
-  end
-end, { desc = 'Toggle Autoformat' })
-
 map({ 'n', 'v' }, '<leader>cn', '<cmd>ConformInfo<cr>', { desc = 'Conform Info' })
-
 map({ 'n', 'v' }, '<leader>cf', function()
   conform.format({ async = true }, function(err, did_edit)
     if not err and did_edit then
@@ -100,7 +74,6 @@ map({ 'n', 'v' }, '<leader>cf', function()
     end
   end)
 end, { desc = 'Format buffer' })
-
 map({ 'n', 'v' }, '<leader>cF', function()
   conform.format({ formatters = { 'injected' }, timeout_ms = 3000 })
 end, { desc = 'Format Injected Langs' })

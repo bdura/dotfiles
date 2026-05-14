@@ -160,6 +160,30 @@ vim.api.nvim_create_autocmd('VimEnter', {
       Snacks.toggle.profiler():map('<leader>dpp')
       Snacks.toggle.profiler_highlights():map('<leader>dph')
       Snacks.toggle.inlay_hints():map('<leader>uh')
+      Snacks.toggle
+        .new({
+          id = 'Format on Save',
+          name = 'Format on Save',
+          get = function()
+            return not vim.g.disable_autoformat
+          end,
+          set = function(_)
+            vim.g.disable_autoformat = not vim.g.disable_autoformat
+          end,
+        })
+        :map('<leader>uf')
+      Snacks.toggle
+        .new({
+          id = 'Format on Save (buffer)',
+          name = 'Format on Save (buffer)',
+          get = function()
+            return not vim.b.disable_autoformat
+          end,
+          set = function(_)
+            vim.b.disable_autoformat = not vim.b.disable_autoformat
+          end,
+        })
+        :map('<leader>uF')
     end)
   end,
 })
