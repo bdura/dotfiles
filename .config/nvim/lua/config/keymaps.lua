@@ -30,3 +30,18 @@ map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = tru
 -- Center page navigation
 map('n', '<C-d>', '<C-d>zz')
 map('n', '<C-u>', '<C-u>zz')
+
+-- Remove conflicting default keymaps
+local del = vim.keymap.del
+local keymaps = {
+  'gri',
+  'grn',
+  'grr',
+  'grt',
+  'grx',
+  'gO',
+}
+for _, keymap in ipairs(keymaps) do
+  del('n', keymap)
+end
+del({ 'n', 'v' }, 'gra')
