@@ -1,19 +1,9 @@
 {
   lib,
-  host,
   config,
   ...
-}: let
-  inherit
-    (import ../hosts/${host}/variables.nix)
-    browser
-    terminal
-    extraMonitorSettings
-    keyboardLayout
-    keyboardVariant
-    ;
-in
-  with lib; {
+}:
+with lib; {
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -46,7 +36,17 @@ in
             exec-once = lxqt-policykit-agent
 
 
-            ${extraMonitorSettings}
+            $dotblocksLGScreen = LG Electronics LG HDR 4K 0x00025CD8
+            $homeScreen = Samsung Electric Company LS27D80xU HNAX400122
+
+            # See https://wiki.hyprland.org/Configuring/Monitors/
+            monitor = eDP-1,preferred,auto,1
+            monitor = desc:$dotblocksLGScreen,preferred,auto-up,1
+            monitor = desc:$homeScreen,preferred,auto-left,1
+            # Uncomment next line to mirror eDP-1
+            monitor = ,preferred,auto-up,1
+            # monitor = , preferred, auto, 1, mirror, eDP-1
+
 
             general {
               gaps_in = 6
@@ -58,8 +58,8 @@ in
               col.inactive_border = rgb(${config.stylix.base16Scheme.base01})
             }
             input {
-              kb_layout = ${keyboardLayout}
-              kb_variant = ${keyboardVariant}
+              kb_layout = us
+              kb_variant = mac
               # kb_options = grp:alt_shift_toggle
               # kb_options = caps:super
               follow_mouse = 1
@@ -116,8 +116,8 @@ in
               # pseudotile = true
               preserve_split = true
             }
-            bind = ${modifier},Return,exec,${terminal}
-            bind = ${modifier}SHIFT,Return,exec,${browser}
+            bind = ${modifier},Return,exec,kitty
+            bind = ${modifier}SHIFT,Return,exec,firefox
             bind = ${modifier},SPACE,exec,rofi-launcher
             bind = ${modifier}SHIFT,N,exec,swaync-client -rs
             bind = ${modifier},W,killactive,

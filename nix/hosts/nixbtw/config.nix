@@ -6,9 +6,7 @@
   username,
   options,
   ...
-}: let
-  inherit (import ./variables.nix) keyboardLayout;
-in {
+}: {
   imports = [
     ./hardware.nix
     ./disko.nix
@@ -298,7 +296,7 @@ in {
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  console.keyMap = "${keyboardLayout}";
+  console.keyMap = "us";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

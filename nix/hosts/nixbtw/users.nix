@@ -2,14 +2,12 @@
   pkgs,
   username,
   ...
-}: let
-  inherit (import ./variables.nix) gitUsername;
-in {
+}: {
   users.users = {
     "${username}" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "${gitUsername}";
+      description = "Basile Dura";
       # NOTE: on first login, use this password.
       # Then, immediately create a file containing the hash for the *actual* password
       # (see below)
