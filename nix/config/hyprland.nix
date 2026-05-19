@@ -78,11 +78,6 @@ in
             windowrule = float on, match:class swayimg|vlc|Viewnior|pavucontrol
             windowrule = float on, match:class ^Bitwarden$
             windowrule = float on, match:class nwg-look|qt5ct|mpv
-            windowrule = float on, match:class zoom
-            windowrule = stay_focused on, match:title ^()$,match:class ^(steam)$
-            windowrule = min_size 1 1, match:title ^()$,match:class ^(steam)$
-            windowrule = opacity 0.9 0.7, match:class ^(Brave)$
-            windowrule = opacity 0.9 0.7, match:class ^(thunar)$
             gesture = 3, horizontal, workspace
             misc {
               initial_workspace_tracking = 0
@@ -118,7 +113,7 @@ in
               }
             }
             dwindle {
-              pseudotile = true
+              # pseudotile = true
               preserve_split = true
             }
             bind = ${modifier},Return,exec,${terminal}
@@ -126,20 +121,12 @@ in
             bind = ${modifier},SPACE,exec,rofi-launcher
             bind = ${modifier}SHIFT,N,exec,swaync-client -rs
             bind = ${modifier},W,killactive,
-            bind = ${modifier},E,exec,emopicker9000
             bind = ${modifier},S,exec,screenshootin
-            bind = ${modifier},D,exec,discord
-            bind = ${modifier},O,exec,obs
             bind = ${modifier},C,exec,hyprpicker -a
-            bind = ${modifier},G,exec,gimp
-            bind = ${modifier}SHIFT,G,exec,godot4
             bind = ${modifier},T,exec,thunar
             bind = ${modifier},M,exec,spotify
-            bind = ${modifier},P,pseudo,
-            bind = ${modifier}SHIFT,I,togglesplit,
             bind = ${modifier},F,fullscreen,
             bind = ${modifier}SHIFT,F,togglefloating,
-            bind = ${modifier}SHIFT,C,exit,
             bind = ${modifier}SHIFT,left,movewindow,l
             bind = ${modifier}SHIFT,right,movewindow,r
             bind = ${modifier}SHIFT,up,movewindow,u
@@ -170,8 +157,6 @@ in
             bind = ${modifier},8,workspace,8
             bind = ${modifier},9,workspace,9
             bind = ${modifier},0,workspace,10
-            # bind = ${modifier}SHIFT,SPACE,movetoworkspace,special
-            # bind = ${modifier},SPACE,togglespecialworkspace
             bind = ${modifier}SHIFT,1,movetoworkspace,1
             bind = ${modifier}SHIFT,2,movetoworkspace,2
             bind = ${modifier}SHIFT,3,movetoworkspace,3
@@ -184,12 +169,6 @@ in
             bind = ${modifier}SHIFT,0,movetoworkspace,10
             bind = ${modifier}CONTROL,right,workspace,e+1
             bind = ${modifier}CONTROL,left,workspace,e-1
-            bind = ${modifier},mouse_down,workspace, e+1
-            bind = ${modifier},mouse_up,workspace, e-1
-            bindm = ${modifier},mouse:272,movewindow
-            bindm = ${modifier},mouse:273,resizewindow
-            bind = ALT,Tab,cyclenext
-            bind = ALT,Tab,bringactivetotop
             bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
             bind = ,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
             binde = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
