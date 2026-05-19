@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   host,
   username,
   options,
@@ -153,7 +154,16 @@ in {
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = let
+    allowed = with pkgs; [
+      claude-code
+      slack
+      obsidian
+      python313Packages.textual-speedups
+    ];
+    whitelist = map lib.getName allowed;
+  in
+    pkg: builtins.elem (lib.getName pkg) whitelist;
 
   users = {
     mutableUsers = false;
