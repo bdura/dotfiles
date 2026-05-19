@@ -20,6 +20,21 @@
     };
   };
 in {
+  # Skip pint's test suite — it pulls in pytest-benchmark and runs a
+  # multi-minute benchmark phase whenever mistral-vibe's closure is
+  # rebuilt from source.
+  nixpkgs.overlays = [
+    (_final: prev: {
+      pythonPackagesExtensions =
+        prev.pythonPackagesExtensions
+        ++ [
+          (_pyfinal: pyprev: {
+            pint = pyprev.pint.overridePythonAttrs (_: {doCheck = false;});
+          })
+        ];
+    })
+  ];
+
   environment.systemPackages = [
     pkgs.opencode
     claude
