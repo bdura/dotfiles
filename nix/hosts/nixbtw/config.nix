@@ -19,12 +19,7 @@ in {
     ../../config/dev.nix
     ../../config/ai.nix
     ../../config/neovim.nix
-    ../../modules/amd-drivers.nix
-    ../../modules/nvidia-drivers.nix
-    ../../modules/nvidia-prime-drivers.nix
     ../../modules/intel-drivers.nix
-    ../../modules/vm-guest-services.nix
-    ../../modules/local-hardware-clock.nix
   ];
 
   boot = {
@@ -107,18 +102,7 @@ in {
     };
   };
 
-  # Extra Module Options
-  drivers.amdgpu.enable = false;
-  drivers.nvidia.enable = false;
-  drivers.nvidia-prime = {
-    enable = false;
-    intelBusID = "";
-    nvidiaBusID = "";
-  };
   drivers.intel.enable = true;
-
-  # vm.guest-services.enable = false;
-  local.hardware-clock.enable = false;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -219,10 +203,6 @@ in {
 
   environment.variables = {
     NH_FLAKE = "/home/${username}/.dotfiles/nix";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_STATE_HOME = "$HOME/.local/state";
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
 
     # Wayland apps (see <https://wiki.nixos.org/wiki/Slack>)
@@ -250,12 +230,6 @@ in {
       };
     };
     openssh.enable = true;
-    # pipewire = {
-    #   enable = true;
-    #   alsa.enable = true;
-    #   alsa.support32Bit = true;
-    #   pulse.enable = true;
-    # };
     kanata = {
       enable = true;
       keyboards = {
@@ -321,11 +295,6 @@ in {
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # # OpenGL
-  # hardware.graphics = {
-  #   enable = true;
-  # };
-
   console.keyMap = "${keyboardLayout}";
 
   # This value determines the NixOS release from which the default
@@ -346,11 +315,4 @@ in {
     dates = "02:00";
     randomizedDelaySec = "45min";
   };
-
-  # TODO: fix this part
-  # # Enable screen-sharing
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  # };
 }

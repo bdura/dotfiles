@@ -129,7 +129,6 @@ in
           "custom/startmenu" = {
             tooltip = false;
             format = "";
-            # exec = "rofi -show drun";
             on-click = "sleep 0.1 && rofi-launcher";
           };
           "custom/hyprbindings" = {
@@ -161,7 +160,7 @@ in
             return-type = "json";
             exec-if = "which swaync-client";
             exec = "swaync-client -swb";
-            on-click = "sleep 0.1 && task-waybar";
+            on-click = "sleep 0.1 && swaync-client -t";
             escape = true;
           };
           "battery" = {

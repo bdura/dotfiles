@@ -52,15 +52,6 @@
       }
     '';
 
-  # # Install & Configure Git
-  # programs.git = {
-  #   enable = true;
-  #   settings.user = {
-  #     name = "${gitUsername}";
-  #     email = "${gitEmail}";
-  #   };
-  # };
-
   # Create XDG Dirs
   xdg = {
     userDirs = {
@@ -98,8 +89,6 @@
 
   # Scripts
   home.packages = [
-    (import ../../scripts/task-waybar.nix {inherit pkgs;})
-    (import ../../scripts/nvidia-offload.nix {inherit pkgs;})
     (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
     (import ../../scripts/screenshootin.nix {inherit pkgs;})
   ];
@@ -139,26 +128,6 @@
 
   programs = {
     gh.enable = true;
-    # kitty = {
-    #   enable = true;
-    #   package = pkgs.kitty;
-    #   settings = {
-    #     scrollback_lines = 2000;
-    #     wheel_scroll_min_lines = 1;
-    #     window_padding_width = 4;
-    #     confirm_os_window_close = 0;
-    #   };
-    #   extraConfig = ''
-    #     tab_bar_style fade
-    #     tab_fade 1
-    #     active_tab_font_style   bold
-    #     inactive_tab_font_style bold
-    #   '';
-    # };
-    # starship = {
-    #   enable = true;
-    #   package = pkgs.starship;
-    # };
     home-manager.enable = true;
     hyprlock = {
       enable = true;
@@ -169,12 +138,6 @@
           hide_cursor = true;
           ignore_empty_input = true;
         };
-        # background = [
-        #   {
-        #     path = "";
-        #     color = "rgb(1e1e2e)";
-        #   }
-        # ];
         label = [
           {
             monitor = "";
@@ -197,21 +160,6 @@
             valign = "top";
           }
         ];
-        # input-field = [
-        #   {
-        #     size = "300, 50";
-        #     position = "0, 0";
-        #     monitor = "";
-        #     dots_center = true;
-        #     fade_on_empty = false;
-        #     # font_color = "rgb(CFE6F4)";
-        #     # inner_color = "rgb(657DC2)";
-        #     # outer_color = "rgb(0D0E15)";
-        #     outline_thickness = 5;
-        #     placeholder_text = "Password...";
-        #     shadow_passes = 2;
-        #   }
-        # ];
       };
     };
   };
