@@ -191,10 +191,15 @@
   environment.variables = {
     NH_FLAKE = "/home/${username}/.dotfiles/nix";
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
-
-    # Wayland apps (see <https://wiki.nixos.org/wiki/Slack>)
-    NIXOS_OZONE_WL = "1";
   };
+
+  # Electron apps that still live in `environment.systemPackages`
+  # (no dedicated module yet) but want native Wayland rendering.
+  # Slack registers itself via `modules/programs/slack.nix`.
+  my.needsOzoneWayland = with pkgs; [
+    obsidian
+    bitwarden-desktop
+  ];
 
   # Services to start
   services = {
