@@ -38,12 +38,14 @@ with lib; let
       taplo
       yaml-language-server
       bash-language-server
+      vscode-json-languageserver
 
       # Formatters for ubiquitous languages
       shfmt
       nixfmt
       alejandra
       yamlfmt
+      jq
 
       # Render tools
       imagemagick # Image conversion
