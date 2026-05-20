@@ -89,7 +89,6 @@
   # Scripts
   home.packages = [
     (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
-    (import ../../scripts/screenshootin.nix {inherit pkgs;})
   ];
 
   services = {

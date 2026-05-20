@@ -3,7 +3,6 @@
   pkgs,
   host,
   username,
-  options,
   ...
 }: {
   imports = [
@@ -81,7 +80,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
   networking.hostName = host;
-  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -110,11 +108,6 @@
 
     hyprpicker
     wl-clipboard
-
-    # Screenshooting
-    grim
-    slurp
-    swappy
   ];
 
   my.allowedUnfree = with pkgs; [
