@@ -76,6 +76,7 @@
   my.programs.slack.enable = true;
 
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
