@@ -14,4 +14,5 @@ wk.add({
   { '[', group = 'Previous' },
   { '<leader>d', group = 'Debugging' },
   { '<leader>b', group = 'Buffer Managment' },
+  { '<leader>x', group = 'Source/execute' },
 })

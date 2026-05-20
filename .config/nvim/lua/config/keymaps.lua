@@ -5,9 +5,9 @@ local opts = { noremap = true, silent = true }
 map('n', '<leader>Pu', vim.pack.update)
 
 -- "Hot" reloading
-map('n', '<leader><leader>x', '<cmd>source %<cr>')
-map('n', '<leader>x', ':.lua<cr>')
-map('v', '<leader>x', ':lua<cr>')
+map('n', '<leader>xf', '<cmd>source %<cr>', { desc = 'Source file' })
+map('n', '<leader>xx', ':.lua<cr>', { desc = 'Source line' })
+map('v', '<leader>xx', ':lua<cr>', { desc = 'Source selection' })
 
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
@@ -45,3 +45,4 @@ for _, keymap in ipairs(keymaps) do
   del('n', keymap)
 end
 del({ 'n', 'v' }, 'gra')
+del({ 'n', 'x', 'o' }, 'gc')
