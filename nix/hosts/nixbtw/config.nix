@@ -17,15 +17,12 @@
     ../../config/dev.nix
     ../../modules
   ];
+
   # Styling Options
   stylix = {
     enable = true;
-    enableReleaseChecks = false;
     # Taken from <https://www.reddit.com/r/space/comments/11jburq/i_took_an_absurdly_high_resolution_photo_of_the/>
     image = ../../config/wallpapers/gigamoon.jpg;
-    # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
-    # looks like it's broken.
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     base16Scheme = {
       base00 = "1A1B26";
       base01 = "16161E";
@@ -45,7 +42,6 @@
       base0F = "F7768E";
     };
     polarity = "dark";
-    opacity.terminal = 1.0;
     cursor.package = pkgs.bibata-cursors;
     cursor.name = "Bibata-Modern-Ice";
     cursor.size = 24;
@@ -80,6 +76,8 @@
   my.programs.neovim.enable = true;
   my.programs.slack.enable = true;
 
+  programs.firefox.enable = true;
+
   # Enable networking
   networking.networkmanager.enable = true;
   networking.hostName = host;
@@ -88,19 +86,14 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  programs = {
-    firefox.enable = true;
-  };
-
-  my.allowedUnfree = with pkgs; [
-    obsidian
-  ];
-
   users = {
     mutableUsers = false;
   };
 
-  programs.nix-ld.enable = true;
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 
   environment.systemPackages = with pkgs; [
     obsidian
@@ -118,20 +111,16 @@
     swaynotificationcenter
 
     hyprpicker
-    grim
     wl-clipboard
 
     # Screenshooting
+    grim
     slurp
     swappy
-
-    # Scanning tool
-    simple-scan
   ];
 
-  environment.pathsToLink = [
-    "/share/applications"
-    "/share/xdg-desktop-portal"
+  my.allowedUnfree = with pkgs; [
+    obsidian
   ];
 
   fonts = {
@@ -152,10 +141,7 @@
 
   # Services to start
   services = {
-    tailscale = {
-      enable = true;
-    };
-    openssh.enable = true;
+    tailscale.enable = true;
     kanata = {
       enable = true;
       keyboards = {
@@ -203,8 +189,6 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-
-  console.keyMap = "us";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

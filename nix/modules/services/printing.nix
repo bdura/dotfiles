@@ -53,5 +53,9 @@ in {
       nssmdns4 = true;
       openFirewall = true;
     };
+
+    environment.systemPackages = [
+      pkgs.simple-scan
+    ];
   };
 }
