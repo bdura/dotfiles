@@ -3,6 +3,8 @@ vim.lsp.enable({
   'rust-analyzer',
   -- Lua
   'lua_ls',
+  -- JSON
+  'jsonls',
   -- Python
   'ty',
   'ruff',
