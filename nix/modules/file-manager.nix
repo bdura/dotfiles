@@ -26,9 +26,9 @@
   ...
 }:
 with lib; let
-  cfg = config.fileManager;
+  cfg = config.my.fileManager;
 in {
-  options.fileManager = {
+  options.my.fileManager = {
     enable = mkEnableOption "Thunar + gvfs + udisks2 file management stack";
   };
 

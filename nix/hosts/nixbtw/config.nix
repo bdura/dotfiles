@@ -17,8 +17,7 @@
     ../../config/dev.nix
     ../../config/ai.nix
     ../../config/neovim.nix
-    ../../modules/intel-drivers.nix
-    ../../modules/file-manager.nix
+    ../../modules
   ];
 
   boot = {
@@ -101,8 +100,8 @@
     };
   };
 
-  drivers.intel.enable = true;
-  fileManager.enable = true;
+  my.drivers.intel.enable = true;
+  my.fileManager.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
