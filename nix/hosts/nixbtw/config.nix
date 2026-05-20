@@ -1,60 +1,27 @@
 {
   inputs,
   pkgs,
-  lib,
   host,
   username,
-  options,
   ...
 }: {
   imports = [
     ./hardware.nix
-    ./disko.nix
+    ./storage.nix
     ./users.nix
     ./envvar.nix
+    ./startup.nix
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
-    ../../config/ai.nix
-    ../../config/neovim.nix
-    ../../modules/intel-drivers.nix
-  ];
-
-  boot = {
-    # Bootloader.
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      # Disable generation selection by default. Press any key to re-enable it.
-      timeout = 0;
-    };
-    # Make /tmp a tmpfs
-    tmp = {
-      useTmpfs = true;
-      cleanOnBoot = true;
-      # The Tmpfs can use 30% of available RAM at most
-      tmpfsSize = "30%";
-    };
-  };
-
-  # swapfile on @swap subvolume
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 16 * 1024; # 16 GiB
-    }
+    ../../modules
   ];
 
   # Styling Options
   stylix = {
     enable = true;
-    enableReleaseChecks = false;
     # Taken from <https://www.reddit.com/r/space/comments/11jburq/i_took_an_absurdly_high_resolution_photo_of_the/>
     image = ../../config/wallpapers/gigamoon.jpg;
-    # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
-    # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
-    # looks like it's broken.
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     base16Scheme = {
       base00 = "1A1B26";
       base01 = "16161E";
@@ -74,7 +41,6 @@
       base0F = "F7768E";
     };
     polarity = "dark";
-    opacity.terminal = 1.0;
     cursor.package = pkgs.bibata-cursors;
     cursor.name = "Bibata-Modern-Ice";
     cursor.size = 24;
@@ -100,97 +66,46 @@
     };
   };
 
-  drivers.intel.enable = true;
+  my.drivers.intel.enable = true;
+  my.services.file-manager.enable = true;
+  my.services.printing.enable = true;
+  my.programs.bitwarden.enable = true;
+  my.programs.claude.enable = true;
+  my.programs.mistral-vibe.enable = true;
+  my.programs.neovim.enable = true;
+  my.programs.slack.enable = true;
+
+  programs.firefox.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
   networking.hostName = host;
-  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  programs = {
-    firefox.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-  };
-
-  nixpkgs.config.allowUnfreePredicate = let
-    allowed = with pkgs; [
-      claude-code
-      slack
-      obsidian
-      python313Packages.textual-speedups
-    ];
-    whitelist = map lib.getName allowed;
-  in
-    pkg: builtins.elem (lib.getName pkg) whitelist;
-
-  users = {
-    mutableUsers = false;
-  };
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
   ];
 
-  console.font = "Lat2-Terminus16";
-
   environment.systemPackages = with pkgs; [
-    slack
     obsidian
 
     hyprpaper
 
-    bitwarden-desktop
-    hypridle
     brightnessctl
-    tuigreet
-    kanata
     kitty
     networkmanagerapplet
     nh
     pavucontrol
     swaynotificationcenter
 
-    hyprpicker
-    grim
     wl-clipboard
-
-    # Screenshooting
-    slurp
-    swappy
-
-    # Scanning tool
-    simple-scan
   ];
 
-  environment.pathsToLink = [
-    "/share/applications"
-    "/share/xdg-desktop-portal"
+  my.allowedUnfree = with pkgs; [
+    obsidian
   ];
 
   fonts = {
@@ -201,33 +116,17 @@
 
   environment.variables = {
     NH_FLAKE = "/home/${username}/.dotfiles/nix";
-    SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
-
-    # Wayland apps (see <https://wiki.nixos.org/wiki/Slack>)
-    NIXOS_OZONE_WL = "1";
   };
+
+  # Obsidian still lives in `environment.systemPackages` (no
+  # dedicated module yet) and wants native Wayland rendering.
+  # Slack and Bitwarden flip the same toggle from their own
+  # modules; the `true` declarations merge cleanly.
+  my.needsOzoneWayland = true;
 
   # Services to start
   services = {
-    gvfs.enable = true;
-    udisks2.enable = true;
-    tailscale = {
-      enable = true;
-    };
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          # Wayland Desktop Manager is installed only via home-manager!
-          user = username;
-          # .wayland-session is a script generated by home-manager, which links to the current wayland compositor(sway/hyprland or others).
-          # with such a vendor-no-locking script, we can switch to another wayland compositor without modifying greetd's config here.
-          # command = "$HOME/.wayland-session"; # start a wayland session directly without a login manager
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland"; # start Hyprland with a TUI login manager
-        };
-      };
-    };
-    openssh.enable = true;
+    tailscale.enable = true;
     kanata = {
       enable = true;
       keyboards = {
@@ -240,18 +139,6 @@
         };
       };
     };
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-        cups-browsed
-      ];
-    };
   };
 
   # Bluetooth Support
@@ -261,12 +148,6 @@
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
-
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
 
   # Optimization settings and garbage collection automation
   nix = {
@@ -279,8 +160,6 @@
       # Route legacy nix CLI state (`~/.nix-defexpr`, `~/.nix-profile`,
       # `~/.nix-channels`) into $XDG_STATE_HOME/nix.
       use-xdg-base-directories = true;
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
@@ -295,8 +174,6 @@
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
-
-  console.keyMap = "us";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

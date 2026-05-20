@@ -3,27 +3,30 @@
   username,
   ...
 }: {
-  users.users = {
-    "${username}" = {
-      homeMode = "755";
-      isNormalUser = true;
-      description = "Basile Dura";
-      # NOTE: on first login, use this password.
-      # Then, immediately create a file containing the hash for the *actual* password
-      # (see below)
-      # initialHashedPassword = "$y$j9T$u9Vi2s3/fJru5y48CgYCl/$ZXrpSMA72ziaeJL0ZzqrLFQl4kTs1ScI5YvRs8sfGeA";
-      hashedPasswordFile = "/etc/secrets/basile-password-hash";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "libvirtd"
-        "scanner"
-        "lp"
-        "uinput"
-      ];
-      shell = pkgs.fish;
-      ignoreShellProgramCheck = true;
-      packages = [];
+  users = {
+    mutableUsers = false;
+    users = {
+      "${username}" = {
+        homeMode = "755";
+        isNormalUser = true;
+        description = "Basile Dura";
+        # NOTE: on first login, use this password.
+        # Then, immediately create a file containing the hash for the *actual* password
+        # (see below)
+        # initialHashedPassword = "$y$j9T$u9Vi2s3/fJru5y48CgYCl/$ZXrpSMA72ziaeJL0ZzqrLFQl4kTs1ScI5YvRs8sfGeA";
+        hashedPasswordFile = "/etc/secrets/basile-password-hash";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "libvirtd"
+          "scanner"
+          "lp"
+          "uinput"
+        ];
+        shell = pkgs.fish;
+        ignoreShellProgramCheck = true;
+        packages = [];
+      };
     };
   };
 }

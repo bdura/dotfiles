@@ -1,7 +1,6 @@
 {
   pkgs,
   username,
-  host,
   ...
 }: {
   # Home Manager Settings
@@ -61,36 +60,15 @@
     };
   };
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
-
   # Styling Options
   stylix.targets.waybar.enable = false;
   stylix.targets.rofi.enable = false;
   stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
-  gtk = {
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.theme = null;
-  };
 
   # Scripts
   home.packages = [
     (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
-    (import ../../scripts/screenshootin.nix {inherit pkgs;})
   ];
 
   services = {
@@ -127,7 +105,6 @@
   };
 
   programs = {
-    gh.enable = true;
     home-manager.enable = true;
     hyprlock = {
       enable = true;
