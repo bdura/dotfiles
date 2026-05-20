@@ -38,7 +38,6 @@ Snacks.setup({
   scratch = { enabled = true },
   statuscolumn = { enabled = true },
   toggle = { enabled = true },
-  zen = { enabled = true },
   picker = {
     sources = {
       files = {
@@ -53,7 +52,6 @@ Snacks.setup({
             },
           },
         },
-
         exclude = excludes,
       },
       grep = {

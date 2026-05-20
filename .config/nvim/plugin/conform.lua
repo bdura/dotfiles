@@ -44,6 +44,7 @@ conform.setup({
     kdl = { 'kdlfmt' },
     lua = { 'stylua' },
     markdown = { 'rumdl' },
+    nginx = { 'nginxfmt' },
     nix = { 'alejandra' },
     python = {
       'ruff_format',
