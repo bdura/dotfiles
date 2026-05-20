@@ -84,10 +84,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  users = {
-    mutableUsers = false;
-  };
-
   environment.pathsToLink = [
     "/share/applications"
     "/share/xdg-desktop-portal"
