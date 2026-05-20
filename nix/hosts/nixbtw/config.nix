@@ -99,6 +99,7 @@
   my.drivers.intel.enable = true;
   my.services.file-manager.enable = true;
   my.services.printing.enable = true;
+  my.programs.bitwarden.enable = true;
   my.programs.claude.enable = true;
   my.programs.mistral-vibe.enable = true;
   my.programs.neovim.enable = true;
@@ -153,7 +154,6 @@
 
     hyprpaper
 
-    bitwarden-desktop
     hypridle
     brightnessctl
     tuigreet
@@ -189,14 +189,12 @@
 
   environment.variables = {
     NH_FLAKE = "/home/${username}/.dotfiles/nix";
-    SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
-  # Obsidian and Bitwarden Desktop are Electron apps still living
-  # in `environment.systemPackages` (no dedicated module yet) — flip
-  # the toggle so they render under native Wayland. Slack sets the
-  # same toggle from `modules/programs/slack.nix`; both `true`
-  # declarations merge cleanly.
+  # Obsidian still lives in `environment.systemPackages` (no
+  # dedicated module yet) and wants native Wayland rendering.
+  # Slack and Bitwarden flip the same toggle from their own
+  # modules; the `true` declarations merge cleanly.
   my.needsOzoneWayland = true;
 
   # Services to start
