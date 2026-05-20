@@ -51,7 +51,6 @@
     enableReleaseChecks = false;
     # Taken from <https://www.reddit.com/r/space/comments/11jburq/i_took_an_absurdly_high_resolution_photo_of_the/>
     image = ../../config/wallpapers/gigamoon.jpg;
-    # NOTE: this is from <https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/tokyo-night-dark.yaml>
     # TODO: use the name? [This](https://stylix.danth.me/configuration.html#handmade-schemes)
     # looks like it's broken.
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
@@ -101,8 +100,8 @@
   };
 
   my.drivers.intel.enable = true;
-  my.fileManager.enable = true;
-  my.printing.enable = true;
+  my.services.file-manager.enable = true;
+  my.services.printing.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;

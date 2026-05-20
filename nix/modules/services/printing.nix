@@ -33,9 +33,9 @@
   ...
 }:
 with lib; let
-  cfg = config.my.printing;
+  cfg = config.my.services.printing;
 in {
-  options.my.printing = {
+  options.my.services.printing = {
     enable = mkEnableOption "CUPS printing stack + mDNS printer discovery";
   };
 
