@@ -102,8 +102,6 @@
 
     hypridle
     brightnessctl
-    tuigreet
-    kanata
     kitty
     networkmanagerapplet
     nh
