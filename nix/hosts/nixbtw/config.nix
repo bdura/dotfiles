@@ -8,7 +8,7 @@
 }: {
   imports = [
     ./hardware.nix
-    ./disko.nix
+    ./storage.nix
     ./users.nix
     ./envvar.nix
     ./startup.nix
@@ -17,14 +17,6 @@
     ../../config/dev.nix
     ../../modules
   ];
-  # swapfile on @swap subvolume
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 16 * 1024; # 16 GiB
-    }
-  ];
-
   # Styling Options
   stylix = {
     enable = true;
