@@ -18,6 +18,7 @@
     ../../config/ai.nix
     ../../config/neovim.nix
     ../../modules/intel-drivers.nix
+    ../../modules/file-manager.nix
   ];
 
   boot = {
@@ -101,6 +102,7 @@
   };
 
   drivers.intel.enable = true;
+  fileManager.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -127,13 +129,6 @@
 
   programs = {
     firefox.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
   };
 
   nixpkgs.config.allowUnfreePredicate = let
@@ -209,8 +204,6 @@
 
   # Services to start
   services = {
-    gvfs.enable = true;
-    udisks2.enable = true;
     tailscale = {
       enable = true;
     };
