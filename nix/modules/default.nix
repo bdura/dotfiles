@@ -14,13 +14,7 @@
 # - `my.needsOzoneWayland` is a plain boolean toggle that any
 #   module can flip to `true` to set `NIXOS_OZONE_WL = "1"`
 #   system-wide. The env var enables native Wayland rendering for
-#   Chromium / Electron apps (Slack, Obsidian, Bitwarden Desktop,
-#   ...) instead of letting them fall back to XWayland. Multiple
-#   modules setting the toggle to `true` merge cleanly under the
-#   default `bool` merge function. The option is opt-in (rather
-#   than introspected) because most Electron apps bundle their own
-#   Electron binary, so `pkgs.electron` never appears in their
-#   derivation closure and there is nothing reliable to detect.
+#   Chromium / Electron apps.
 {
   lib,
   config,
