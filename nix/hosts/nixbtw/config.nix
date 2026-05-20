@@ -192,13 +192,12 @@
     SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
   };
 
-  # Electron apps that still live in `environment.systemPackages`
-  # (no dedicated module yet) but want native Wayland rendering.
-  # Slack registers itself via `modules/programs/slack.nix`.
-  my.needsOzoneWayland = with pkgs; [
-    obsidian
-    bitwarden-desktop
-  ];
+  # Obsidian and Bitwarden Desktop are Electron apps still living
+  # in `environment.systemPackages` (no dedicated module yet) — flip
+  # the toggle so they render under native Wayland. Slack sets the
+  # same toggle from `modules/programs/slack.nix`; both `true`
+  # declarations merge cleanly.
+  my.needsOzoneWayland = true;
 
   # Services to start
   services = {

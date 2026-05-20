@@ -27,6 +27,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [pkgs.slack];
     my.allowedUnfree = [pkgs.slack];
-    my.needsOzoneWayland = [pkgs.slack];
+    my.needsOzoneWayland = true;
   };
 }
