@@ -66,6 +66,14 @@
   stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
 
+  gtk = {
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    gtk4.theme = null;
+  };
+
   # Scripts
   home.packages = [
     (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
