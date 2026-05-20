@@ -15,7 +15,6 @@
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
-    ../../config/ai.nix
     ../../config/neovim.nix
     ../../modules
   ];
@@ -102,6 +101,8 @@
   my.drivers.intel.enable = true;
   my.services.file-manager.enable = true;
   my.services.printing.enable = true;
+  my.programs.claude.enable = true;
+  my.programs.mistral-vibe.enable = true;
   my.programs.slack.enable = true;
 
   # Enable networking
@@ -132,7 +133,6 @@
   };
 
   my.allowedUnfree = with pkgs; [
-    claude-code
     obsidian
     python313Packages.textual-speedups
   ];
