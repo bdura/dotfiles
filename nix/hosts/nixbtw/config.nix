@@ -98,7 +98,6 @@
 
     hyprpaper
 
-    hypridle
     brightnessctl
     kitty
     networkmanagerapplet
@@ -106,7 +105,6 @@
     pavucontrol
     swaynotificationcenter
 
-    hyprpicker
     wl-clipboard
   ];
 
