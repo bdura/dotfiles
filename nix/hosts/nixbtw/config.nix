@@ -11,29 +11,12 @@
     ./disko.nix
     ./users.nix
     ./envvar.nix
+    ./startup.nix
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
     ../../modules
   ];
-
-  boot = {
-    # Bootloader.
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      # Disable generation selection by default. Press any key to re-enable it.
-      timeout = 0;
-    };
-    # Make /tmp a tmpfs
-    tmp = {
-      useTmpfs = true;
-      cleanOnBoot = true;
-      # The Tmpfs can use 30% of available RAM at most
-      tmpfsSize = "30%";
-    };
-  };
-
   # swapfile on @swap subvolume
   swapDevices = [
     {
@@ -119,7 +102,6 @@
 
   my.allowedUnfree = with pkgs; [
     obsidian
-    python313Packages.textual-speedups
   ];
 
   users = {
@@ -127,12 +109,6 @@
   };
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
-
-  console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
     obsidian
@@ -187,16 +163,6 @@
     tailscale = {
       enable = true;
     };
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          # Wayland Desktop Manager is installed only via home-manager!
-          user = username;
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland"; # start Hyprland with a TUI login manager
-        };
-      };
-    };
     openssh.enable = true;
     kanata = {
       enable = true;
@@ -231,8 +197,6 @@
       # Route legacy nix CLI state (`~/.nix-defexpr`, `~/.nix-profile`,
       # `~/.nix-channels`) into $XDG_STATE_HOME/nix.
       use-xdg-base-directories = true;
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
