@@ -4,14 +4,13 @@
 # `$XDG_CONFIG_HOME/vibe` rather than the upstream default.
 #
 # - Adds the wrapped `vibe` binary to `environment.systemPackages`,
-#   alongside `rtk` (the sandbox-aware command wrapper that all
-#   CLIs are routed through on this system).
+#   alongside [`rtk`].
 # - Applies a nixpkgs overlay that disables `python313Packages.pint`'s
 #   test suite. `pint` is a transitive dependency of mistral-vibe and
 #   its check phase pulls in `pytest-benchmark`, running a multi-minute
-#   benchmark on every from-source rebuild of vibe's closure. The
-#   overlay is scoped to this module because no other package on the
-#   system needs `pint`.
+#   benchmark on every from-source rebuild of vibe's closure.
+#
+# [`rtk`]: https://github.com/rtk-ai/rtk
 {
   lib,
   pkgs,

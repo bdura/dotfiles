@@ -1,24 +1,16 @@
 # # Bitwarden Desktop
 #
-# Bitwarden's desktop password manager. The module wires up three
-# pieces of state:
+# Bitwarden's desktop password manager.
+#
+# This module:
 #
 # - Adds `bitwarden-desktop` to `environment.systemPackages`.
 # - Sets `SSH_AUTH_SOCK` to the path of Bitwarden's SSH-agent
-#   socket (`$HOME/.bitwarden-ssh-agent.sock`). With this in place,
-#   any `ssh` invocation transparently uses keys stored inside
-#   Bitwarden once the desktop app is unlocked, so no separate
-#   ssh-agent / GnuPG agent is needed.
+#   socket (`$HOME/.bitwarden-ssh-agent.sock`).
+#   See <https://bitwarden.com/help/ssh-agent/> for mor information.
 # - Flips `my.needsOzoneWayland = true` because the app is Electron
 #   and otherwise falls back to XWayland (degraded HiDPI, broken
 #   global shortcuts, fractional-scaling artefacts).
-#
-# Not handled here: the Hyprland window rule that floats the
-# unlock dialog (`windowrule = float on, match:class ^Bitwarden$`)
-# lives in `config/hyprland.nix`. It is home-manager state and
-# cannot be expressed cleanly from a system-level NixOS module;
-# left in place rather than synthesised across the system /
-# home-manager boundary.
 {
   lib,
   pkgs,

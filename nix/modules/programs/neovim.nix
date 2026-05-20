@@ -2,30 +2,7 @@
 #
 # Neovim with the full toolchain of LSPs, formatters, and renderers
 # baked into its runtime PATH. Configuration itself is out of scope:
-# `init.lua` and friends are managed as plain dotfiles outside Nix,
-# so this module installs the *unwrapped* upstream Neovim and lets
-# the `wrappers` library inject every runtime dependency without
-# polluting the system PATH.
-#
-# Group rationale (none of these are required by Neovim itself —
-# they are tools that plugins shell out to):
-#
-# - Fuzzy-finding (`fzf`, `ripgrep`, `fd`): telescope / fzf-lua etc.
-# - Git integration (`git`, `git-lfs`, `lazygit`): fugitive, gitsigns,
-#   and the lazygit popup.
-# - Build tools (`lua`, `luarocks`, `tree-sitter`): needed when
-#   plugins compile something at install time.
-# - LSPs for ubiquitous languages: Nix, Markdown, TOML, YAML, Bash.
-#   Per-project LSPs (Rust, Python, ...) come in via direnv / project
-#   shells, not here, so this set deliberately stays small.
-# - Formatters mirror the LSP set so format-on-save works out of
-#   the box for the same languages.
-# - Render tools: `image.nvim` / preview plugins shell out to
-#   `imagemagick` (raster), `ghostscript` (PDF), `tectonic` + `biber`
-#   (LaTeX), `mermaid-cli` (diagrams).
-#
-# Also exports `EDITOR` and `MANPAGER` so non-Neovim callers (git,
-# man, sudoedit, ...) pick up the same wrapped binary.
+# it is managed as plain dotfiles outside Nix.
 {
   lib,
   pkgs,

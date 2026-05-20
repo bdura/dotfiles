@@ -6,10 +6,11 @@
 # `claude`, matching upstream's preferred invocation.
 #
 # - Adds the wrapped binary to `environment.systemPackages`,
-#   alongside `rtk` (the sandbox-aware command wrapper that all
-#   CLIs are routed through on this system).
+#   alongside [`rtk`]
 # - Registers `claude-code` with `my.allowedUnfree` (the upstream
 #   package is proprietary).
+#
+# [`rtk`]: https://github.com/rtk-ai/rtk
 {
   lib,
   pkgs,
