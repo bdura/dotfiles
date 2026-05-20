@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  lib,
   host,
   username,
   options,
@@ -15,7 +14,6 @@
     ../../config/direnv.nix
     ../../config/git.nix
     ../../config/dev.nix
-    ../../config/neovim.nix
     ../../modules
   ];
 
@@ -103,6 +101,7 @@
   my.services.printing.enable = true;
   my.programs.claude.enable = true;
   my.programs.mistral-vibe.enable = true;
+  my.programs.neovim.enable = true;
   my.programs.slack.enable = true;
 
   # Enable networking
