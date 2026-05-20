@@ -102,6 +102,7 @@
   my.drivers.intel.enable = true;
   my.services.file-manager.enable = true;
   my.services.printing.enable = true;
+  my.programs.slack.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -130,16 +131,11 @@
     firefox.enable = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate = let
-    allowed = with pkgs; [
-      claude-code
-      slack
-      obsidian
-      python313Packages.textual-speedups
-    ];
-    whitelist = map lib.getName allowed;
-  in
-    pkg: builtins.elem (lib.getName pkg) whitelist;
+  my.allowedUnfree = with pkgs; [
+    claude-code
+    obsidian
+    python313Packages.textual-speedups
+  ];
 
   users = {
     mutableUsers = false;
@@ -154,7 +150,6 @@
   console.font = "Lat2-Terminus16";
 
   environment.systemPackages = with pkgs; [
-    slack
     obsidian
 
     hyprpaper
