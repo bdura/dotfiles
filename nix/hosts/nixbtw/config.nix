@@ -102,6 +102,7 @@
 
   my.drivers.intel.enable = true;
   my.fileManager.enable = true;
+  my.printing.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -231,18 +232,6 @@
           config = builtins.readFile ../../config/kanata.kbd;
         };
       };
-    };
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-        cups-browsed
-      ];
     };
   };
 
