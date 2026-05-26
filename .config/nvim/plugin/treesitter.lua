@@ -28,6 +28,14 @@ vim.api.nvim_create_autocmd('User', {
         branch = 'main',
       },
     }
+
+    parsers.ghostty = {
+      install_info = {
+        url = 'https://github.com/bezhermoso/tree-sitter-ghostty',
+        branch = 'main',
+        queries = 'queries/ghostty',
+      },
+    }
   end,
 })
 
@@ -41,6 +49,7 @@ nvim_ts.install({
   'diff',
   'dockerfile',
   'fish',
+  'ghostty',
   'gitcommit',
   'gitignore',
   'git_config',

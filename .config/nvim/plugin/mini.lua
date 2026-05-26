@@ -4,13 +4,26 @@ vim.pack.add({
 
 -- # Icons
 local icons = require('mini.icons')
--- WESL icons
-local glyph = '󰬄'
-local hl = 'MiniIconsBlue'
-icons.setup({
-  filetype = { wesl = { glyph = glyph, hl = hl } },
-  extension = { wesl = { glyph = glyph, hl = hl } },
-})
+
+do
+  -- WESL icons
+  local glyph = '󰬄'
+  local hl = 'MiniIconsBlue'
+  icons.setup({
+    filetype = { wesl = { glyph = glyph, hl = hl } },
+    extension = { wesl = { glyph = glyph, hl = hl } },
+  })
+end
+
+do
+  -- Ghostty icons
+  local glyph = '󰒓'
+  local hl = 'MiniIconsBlue'
+  icons.setup({
+    filetype = { ghostty = { glyph = glyph, hl = hl } },
+    extension = { ghostty = { glyph = glyph, hl = hl } },
+  })
+end
 
 -- # Status line
 require('mini.statusline').setup({
