@@ -45,4 +45,3 @@ for _, keymap in ipairs(keymaps) do
   del('n', keymap)
 end
 del({ 'n', 'v' }, 'gra')
-del({ 'n', 'x', 'o' }, 'gc')
