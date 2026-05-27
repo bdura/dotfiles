@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./hardware.nix
-    ./storage.nix
+    ./disko.nix
     ./users.nix
     ./envvar.nix
     ./startup.nix

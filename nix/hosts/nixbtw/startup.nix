@@ -20,6 +20,13 @@
     };
   };
 
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16 * 1024; # 16 GiB
+    }
+  ];
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
