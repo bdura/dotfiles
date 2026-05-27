@@ -22,7 +22,7 @@
   ;; Activate caps word
   (u i o)   @cw         50 first-release ()
   ;; Toggle between Colemak-DH & QWERTY
-  (q w e r) @tog_layout 100 first-release ()
+  (u o p) @tog_layout 50 first-release ()
 )
 
 ;; Layer triggers.
