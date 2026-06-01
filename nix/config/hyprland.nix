@@ -133,7 +133,6 @@ in {
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier},C,exec,hyprpicker -a
           bind = ${modifier},T,exec,thunar
-          bind = ${modifier},M,exec,spotify
           bind = ${modifier},F,fullscreen,
           bind = ${modifier}SHIFT,F,togglefloating,
           bind = ${modifier}SHIFT,left,movewindow,l
