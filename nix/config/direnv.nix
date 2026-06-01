@@ -1,13 +1,8 @@
-{
-  pkgs,
-  ...
-}:
-let
+{pkgs, ...}: let
   direnv-exec = pkgs.writeShellScriptBin "direnv-exec" ''
     direnv exec . "$@"
   '';
-in
-{
+in {
   programs = {
     direnv = {
       enable = true;
