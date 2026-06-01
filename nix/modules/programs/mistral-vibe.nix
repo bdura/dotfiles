@@ -5,10 +5,12 @@
 #
 # - Adds the wrapped `vibe` binary to `environment.systemPackages`,
 #   alongside [`rtk`].
-# - Applies a nixpkgs overlay that disables `python313Packages.pint`'s
-#   test suite. `pint` is a transitive dependency of mistral-vibe and
-#   its check phase pulls in `pytest-benchmark`, running a multi-minute
-#   benchmark on every from-source rebuild of vibe's closure.
+# - Applies a nixpkgs overlay that disables
+#   `python313Packages.pytest-benchmark`'s test suite. Several packages
+#   in vibe's closure (`pint`, `jsonpath-python`, ...) pull it in as a
+#   check input, and its own `pytestCheckPhase` runs a ~8 minute
+#   benchmark on every from-source rebuild. Disabling the check at the
+#   leaf means it stays available as a dependency but builds instantly.
 #
 # [`rtk`]: https://github.com/rtk-ai/rtk
 {
@@ -49,7 +51,7 @@ in {
           prev.pythonPackagesExtensions
           ++ [
             (_pyfinal: pyprev: {
-              pint = pyprev.pint.overridePythonAttrs (_: {doCheck = false;});
+              pytest-benchmark = pyprev.pytest-benchmark.overridePythonAttrs (_: {doCheck = false;});
             })
           ];
       })
