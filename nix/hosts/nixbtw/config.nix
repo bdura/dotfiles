@@ -73,7 +73,10 @@
   my.programs.claude.enable = true;
   my.programs.mistral-vibe.enable = true;
   my.programs.neovim.enable = true;
+
+  # GUI applications
   my.programs.slack.enable = true;
+  my.programs.signal.enable = true;
 
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
