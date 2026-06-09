@@ -8,6 +8,7 @@ vim.lsp.enable({
   -- Python
   'ty',
   'ruff',
+  'pytest-ls',
   -- Markdown
   'rumdl',
   -- Nix
