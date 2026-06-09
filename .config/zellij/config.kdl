@@ -59,6 +59,9 @@ keybinds clear-defaults=true {
         bind "Alt l" {
             Resize "Increase right"
         }
+        bind "Ctrl space" {
+            Write 0
+        }
     }
     pane {
         bind "r" {
