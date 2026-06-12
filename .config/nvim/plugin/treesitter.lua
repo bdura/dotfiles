@@ -36,6 +36,14 @@ vim.api.nvim_create_autocmd('User', {
         queries = 'queries/ghostty',
       },
     }
+
+    parsers.alloy = {
+      install_info = {
+        url = 'https://github.com/mattsre/tree-sitter-alloy',
+        branch = 'main',
+        queries = 'queries',
+      },
+    }
   end,
 })
 
@@ -86,6 +94,7 @@ nvim_ts.install({
   -- External grammars
   'kanata',
   'wesl',
+  'alloy',
 })
 
 local textobjects = require('nvim-treesitter-textobjects')

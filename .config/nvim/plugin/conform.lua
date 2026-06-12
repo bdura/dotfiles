@@ -38,8 +38,13 @@ conform.setup({
       command = 'yamlfmt',
       args = { '-formatter', 'retain_line_breaks_single=true', '-' },
     },
+    alloyfmt = {
+      command = 'alloy',
+      args = { 'fmt', '$FILENAME' },
+    },
   },
   formatters_by_ft = {
+    alloy = { 'alloyfmt' },
     json = { 'jq' },
     kdl = { 'kdlfmt' },
     lua = { 'stylua' },
