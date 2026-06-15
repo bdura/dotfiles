@@ -12,6 +12,16 @@ autocmd('TextYankPost', {
   end,
 })
 
+-- Map `q` to quit on the empty start buffer (nvim launched with no file).
+autocmd('VimEnter', {
+  desc = 'Map q to quit on the startup buffer',
+  callback = function()
+    if vim.fn.argc() == 0 and vim.api.nvim_buf_get_name(0) == '' and vim.bo.filetype == '' then
+      vim.keymap.set('n', 'q', '<cmd>quit<cr>', { buffer = 0, desc = 'Quit' })
+    end
+  end,
+})
+
 local package_group = augroup('Packages', { clear = true })
 
 -- Remove orphan plugins that are installed but no longer declared via vim.pack.add().
