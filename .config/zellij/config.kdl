@@ -61,6 +61,7 @@ keybinds clear-defaults=true {
         }
         bind "Ctrl space" {
             Write 0
+            SwitchToMode "locked"
         }
     }
     pane {
