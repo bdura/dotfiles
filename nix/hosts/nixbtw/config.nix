@@ -96,14 +96,10 @@
   environment.systemPackages = with pkgs; [
     obsidian
 
-    hyprpaper
-
     brightnessctl
     kitty
-    networkmanagerapplet
     nh
     pavucontrol
-    swaynotificationcenter
 
     wl-clipboard
   ];

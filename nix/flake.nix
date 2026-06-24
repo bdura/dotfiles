@@ -14,6 +14,10 @@
       url = "github:lassulus/wrappers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -53,6 +57,7 @@
             home-manager.backupFileExtension = "backup";
             home-manager.users.${username} = import ./hosts/${host}/home.nix;
           }
+          ./noctalia.nix
         ];
       };
     };

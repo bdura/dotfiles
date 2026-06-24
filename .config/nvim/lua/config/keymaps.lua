@@ -14,8 +14,9 @@ map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 -- Exit match highlighting on Esc
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Avoid copying on paste
-map('v', 'p', '"_dP', opts)
+-- Avoid copying on paste: visual-mode P preserves the unnamed register.
+map('x', 'p', 'P', { desc = 'Paste without yanking selection' })
+map('x', 'P', 'p', { desc = 'Paste and yank selection' })
 
 -- Better indenting
 map({ 'n', 'v' }, '>', '>gv')
