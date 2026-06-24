@@ -57,13 +57,8 @@ in {
           env = QT_QPA_PLATFORM=wayland;xcb
           env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
           env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
-          exec-once = hyprpaper
-          exec-once = hypridle
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          exec-once = killall -q waybar;sleep .5 && waybar
-          exec-once = killall -q swaync;sleep .5 && swaync
-          exec-once = nm-applet --indicator
           exec-once = lxqt-policykit-agent
 
 
@@ -149,8 +144,6 @@ in {
           }
           bind = ${modifier},Return,exec,kitty
           bind = ${modifier}SHIFT,Return,exec,firefox
-          bind = ${modifier},SPACE,exec,rofi-launcher
-          bind = ${modifier}SHIFT,N,exec,swaync-client -rs
           bind = ${modifier},W,killactive,
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier}SHIFT,S,exec,videoshootin
@@ -209,7 +202,6 @@ in {
           bind = ,XF86AudioPrev, exec, playerctl previous
           bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
           bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
-          bind = ${modifier}, ESCAPE, exec, hyprlock
         ''
       ];
   };
