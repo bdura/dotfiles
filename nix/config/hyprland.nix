@@ -20,7 +20,7 @@
     name = "videoshootin";
     runtimeInputs = with pkgs; [wf-recorder slurp libnotify procps coreutils];
     text = ''
-      if pgrep -x wf-recorder > /dev/null; then
+      if pgrep -x wf-recorder >/dev/null; then
         pkill -INT -x wf-recorder
         notify-send "Recording stopped"
       else
@@ -60,6 +60,7 @@ in {
           exec-once = dbus-update-activation-environment --systemd --all
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec-once = lxqt-policykit-agent
+          exec-once = noctalia
 
 
           $dotblocksLGScreen = LG Electronics LG HDR 4K 0x00025CD8
@@ -142,8 +143,12 @@ in {
             # pseudotile = true
             preserve_split = true
           }
+          $ipc = noctalia msg
           bind = ${modifier},Return,exec,kitty
           bind = ${modifier}SHIFT,Return,exec,firefox
+          bind = ${modifier},SPACE,exec,$ipc panel-toggle launcher
+          bind = ${modifier},ESCAPE,exec,$ipc session lock
+          bind = ${modifier},comma,exec,$ipc settings-toggle
           bind = ${modifier},W,killactive,
           bind = ${modifier},S,exec,screenshootin
           bind = ${modifier}SHIFT,S,exec,videoshootin
@@ -193,15 +198,16 @@ in {
           bind = ${modifier}SHIFT,0,movetoworkspace,10
           bind = ${modifier}CONTROL,right,workspace,e+1
           bind = ${modifier}CONTROL,left,workspace,e-1
-          bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-          bind = ,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-          binde = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-          bind = ,XF86AudioPlay, exec, playerctl play-pause
-          bind = ,XF86AudioPause, exec, playerctl play-pause
-          bind = ,XF86AudioNext, exec, playerctl next
-          bind = ,XF86AudioPrev, exec, playerctl previous
-          bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
-          bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
+          bindel = ,XF86AudioRaiseVolume,exec,$ipc volume-up
+          bindel = ,XF86AudioLowerVolume,exec,$ipc volume-down
+          bindl  = ,XF86AudioMute,exec,$ipc volume-mute
+          bindl  = ,XF86AudioMicMute,exec,$ipc mic-mute
+          bindl  = ,XF86AudioPlay,exec,$ipc media toggle
+          bindl  = ,XF86AudioPause,exec,$ipc media toggle
+          bindl  = ,XF86AudioNext,exec,$ipc media next
+          bindl  = ,XF86AudioPrev,exec,$ipc media previous
+          bindel = ,XF86MonBrightnessDown,exec,$ipc brightness-down
+          bindel = ,XF86MonBrightnessUp,exec,$ipc brightness-up
         ''
       ];
   };
