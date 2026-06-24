@@ -12,9 +12,31 @@
       grim -g "$(slurp)" - | swappy -f -
     '';
   };
+
+  # Screen-recording toggle. First press prompts for a region and
+  # starts wf-recorder in the background; second press sends SIGINT
+  # so wf-recorder flushes the mp4 cleanly before exiting.
+  videoshooting = pkgs.writeShellApplication {
+    name = "videoshootin";
+    runtimeInputs = with pkgs; [wf-recorder slurp libnotify procps coreutils];
+    text = ''
+      if pgrep -x wf-recorder > /dev/null; then
+        pkill -INT -x wf-recorder
+        notify-send "Recording stopped"
+      else
+        geometry=$(slurp) || exit 1
+        output_dir="$HOME/Videos"
+        mkdir -p "$output_dir"
+        output="$output_dir/recording-$(date +%Y%m%d-%H%M%S).mp4"
+        wf-recorder -g "$geometry" -f "$output" &
+        notify-send "Recording started" "$output"
+      fi
+    '';
+  };
 in {
   home.packages = [
     screenshooting
+    videoshooting
     pkgs.hyprpicker
   ];
 
@@ -131,6 +153,7 @@ in {
           bind = ${modifier}SHIFT,N,exec,swaync-client -rs
           bind = ${modifier},W,killactive,
           bind = ${modifier},S,exec,screenshootin
+          bind = ${modifier}SHIFT,S,exec,videoshootin
           bind = ${modifier},C,exec,hyprpicker -a
           bind = ${modifier},T,exec,thunar
           bind = ${modifier},F,fullscreen,
