@@ -44,13 +44,5 @@
   stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
 
-  gtk = {
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    gtk4.theme = null;
-  };
-
   programs.home-manager.enable = true;
 }
