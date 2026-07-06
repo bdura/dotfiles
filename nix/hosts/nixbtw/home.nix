@@ -1,8 +1,4 @@
-{
-  pkgs,
-  username,
-  ...
-}: {
+{username, ...}: {
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
@@ -43,6 +39,7 @@
   # Styling Options
   stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
+  gtk.gtk4.theme = null;
 
   programs.home-manager.enable = true;
 }
