@@ -1,4 +1,8 @@
-{...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   boot = {
     # Bootloader.
     loader = {
@@ -28,11 +32,22 @@
     keyMap = "us";
   };
 
-  # Register Hyprland as a system-level Wayland session so the
-  # noctalia-greeter session picker can discover it. The user-level
-  # Hyprland config still lives in home-manager.
+  # Register Hyprland as a system-level Wayland session so greeters can discover it.
+  # The user-level Hyprland config still lives in home-manager.
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        # Wayland Desktop Manager is installed only via home-manager!
+        user = username;
+        # start Hyprland with a TUI login manager
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
+      };
+    };
   };
 }
