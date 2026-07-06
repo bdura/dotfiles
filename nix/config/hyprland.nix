@@ -61,7 +61,9 @@ in {
           exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec-once = lxqt-policykit-agent
           exec-once = noctalia
-          exec-once = bitwarden --hidden
+          # Delay Bitwarden until noctalia's StatusNotifier host is up;
+          # otherwise the tray icon registers with no watcher and never shows.
+          exec-once = sh -c 'sleep 3 && bitwarden --hidden'
 
 
           $dotblocksLGScreen = LG Electronics LG HDR 4K 0x00025CD8
