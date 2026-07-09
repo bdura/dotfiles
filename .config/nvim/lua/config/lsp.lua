@@ -35,9 +35,14 @@ vim.lsp.enable({
 
 local map = vim.keymap.set
 
-map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Actions' })
-map('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Code Rename' })
-map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover)' })
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    map('n', '<leader>lr', '<cmd>lsp restart<cr>', { buffer = args.buf, desc = 'LSP Restart' })
+    map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Actions' })
+    map('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Code Rename' })
+    map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover)' })
+  end,
+})
 
 vim.api.nvim_create_autocmd('LspProgress', {
   pattern = 'end',
