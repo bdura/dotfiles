@@ -11,6 +11,12 @@
 # - Flips `my.needsOzoneWayland = true` because the app is Electron
 #   and otherwise falls back to XWayland (degraded HiDPI, broken
 #   global shortcuts, fractional-scaling artefacts).
+# - Pins the electron version bitwarden currently bundles under
+#   `my.permittedInsecurePackages`, since upstream has marked it
+#   insecure and refuses to evaluate without an explicit allow.
+#   The aggregator asserts the pin is still a real build input of
+#   `bitwarden-desktop`, so a future electron bump surfaces as an
+#   assertion failure instead of a silently unused allowlist entry.
 {
   lib,
   pkgs,
@@ -32,5 +38,12 @@ in {
     };
 
     my.needsOzoneWayland = true;
+
+    my.permittedInsecurePackages = [
+      {
+        package = pkgs.bitwarden-desktop;
+        insecureName = "electron-39.8.10";
+      }
+    ];
   };
 }
