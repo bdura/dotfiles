@@ -11,7 +11,7 @@ local excludes = {
   '**/.yarn/releases/*',
   '**/.pnpm-store/*',
   '**/.idea/*',
-  '**/.venv/*',
+  '**/.venv*/*',
   '**/__pycache__/*',
   '**/.*_cache/*',
   '**/*.egg-info/*',
@@ -87,7 +87,7 @@ Snacks.setup({
         exclude = {
           '.git',
           '.pnpm-store',
-          '.venv',
+          '.venv*',
           '.hypothesis/',
           '.ruff_cache/',
           '.direnv',
