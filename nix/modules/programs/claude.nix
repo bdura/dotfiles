@@ -27,6 +27,10 @@ with lib; let
     env = {
       CLAUDE_CONFIG_DIR = "$HOME/.config/claude";
     };
+    runtimeInputs = with pkgs; [
+      rtk
+      nodejs
+    ];
   };
 in {
   options.my.programs.claude = {
@@ -34,10 +38,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      claude
-      pkgs.rtk
-    ];
+    environment.systemPackages = [claude];
     my.allowedUnfree = [pkgs.claude-code];
   };
 }

@@ -23,6 +23,9 @@ with lib; let
     env = {
       VIBE_HOME = "$HOME/.config/vibe";
     };
+    runtimeInputs = with pkgs; [
+      rtk
+    ];
   };
 in {
   options.my.programs.mistral-vibe = {
@@ -30,10 +33,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      vibe
-      pkgs.rtk
-    ];
+    environment.systemPackages = [vibe];
 
     my.allowedUnfree = [
       pkgs.python313Packages.textual-speedups
