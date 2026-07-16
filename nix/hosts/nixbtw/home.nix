@@ -39,7 +39,6 @@
   # Styling Options
   stylix.targets.btop.enable = false;
   stylix.targets.hyprland.enable = false;
-  gtk.gtk4.theme = null;
 
   programs.home-manager.enable = true;
 }
