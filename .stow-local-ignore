@@ -2,6 +2,7 @@
 \.git
 \.gitignore
 \.pre-commit-config\.yaml
+\.rumdl_cache
 
 # Markdown files
 README\.md
