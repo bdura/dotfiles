@@ -71,7 +71,7 @@
   my.services.printing.enable = true;
   my.programs.bitwarden.enable = true;
   my.programs.claude.enable = true;
-  my.programs.mistral-vibe.enable = true;
+  # my.programs.mistral-vibe.enable = true;
   my.programs.neovim.enable = true;
 
   # GUI applications
