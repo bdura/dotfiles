@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "0.80.10",
+  "theme": "dark",
+  "defaultProvider": "mistral",
+  "defaultModel": "mistral-medium-latest",
+  "defaultThinkingLevel": "off",
+  "skills": [
+    "~/.config/agents/skills/"
+  ]
+}
