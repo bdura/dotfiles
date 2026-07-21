@@ -2,9 +2,13 @@
   "lastChangelogVersion": "0.80.10",
   "theme": "dark",
   "defaultProvider": "mistral",
-  "defaultModel": "mistral-medium-3.5",
+  "defaultModel": "mistral-medium-latest",
   "defaultThinkingLevel": "medium",
+  "showHardwareCursor": true,
   "skills": [
     "~/.config/agents/skills/"
-  ]
+  ],
+  "my": {
+    "shellCommandPrefix": "rtk"
+  }
 }
