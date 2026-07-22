@@ -57,10 +57,19 @@ Always use this tool instead of asking questions in plain text — it provides a
         };
       }
 
-      const result = await ctx.ui.custom<Result | null>(
-        (tui, theme, _kb, done) =>
-          new AskUserQuestionComponent(params.questions, tui, theme, done),
-      );
+      // Hide working indicator while user interacts with the UI
+      ctx.ui.setWorkingVisible(false);
+
+      let result: Result | null;
+      try {
+        result = await ctx.ui.custom<Result | null>(
+          (tui, theme, _kb, done) =>
+            new AskUserQuestionComponent(params.questions, tui, theme, done),
+        );
+      } finally {
+        // Restore working indicator visibility
+        ctx.ui.setWorkingVisible(true);
+      }
 
       if (result === null || result.cancelled) {
         return {
