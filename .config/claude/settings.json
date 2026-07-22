@@ -20,5 +20,7 @@
         "repo": "jeffallan/claude-skills"
       }
     }
-  }
+  },
+  "tui": "fullscreen",
+  "effortLevel": "high"
 }
