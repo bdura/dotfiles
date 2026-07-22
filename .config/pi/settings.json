@@ -2,7 +2,7 @@
   "lastChangelogVersion": "0.80.10",
   "theme": "dark",
   "defaultProvider": "mistral",
-  "defaultModel": "mistral-medium-latest",
+  "defaultModel": "mistral-medium-3.5",
   "defaultThinkingLevel": "medium",
   "showHardwareCursor": true,
   "skills": [
