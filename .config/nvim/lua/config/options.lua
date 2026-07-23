@@ -23,6 +23,8 @@ opt.softtabstop = 2
 opt.expandtab = true
 opt.smartindent = true
 opt.autoindent = true
+opt.formatoptions = 'tcqjro'
+opt.textwidth = 88
 
 -- Fold settings
 opt.foldmethod = 'expr'
