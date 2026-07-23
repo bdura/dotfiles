@@ -10,6 +10,11 @@ pkgs.mkShell {
     alejandra
     kdlfmt
     lua-language-server
-    rustup
+
+    rustc
+    cargo
+    gcc
+    binutils
+    pkg-config
   ];
 }
