@@ -28,9 +28,16 @@ map({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr =
 map({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 
--- Center page navigation
-map('n', '<C-d>', '<C-d>zz')
-map('n', '<C-u>', '<C-u>zz')
+-- Center page navigation: scroll by a third of the window (a count passed to
+-- <C-d>/<C-u> overrides the default half-page 'scroll' amount), then recenter.
+local function scroll_third(key)
+  return function()
+    local third = math.max(1, math.floor(vim.api.nvim_win_get_height(0) / 3))
+    return third .. key .. 'zz'
+  end
+end
+map('n', '<C-d>', scroll_third('<C-d>'), { expr = true })
+map('n', '<C-u>', scroll_third('<C-u>'), { expr = true })
 
 -- Remove conflicting default keymaps
 local del = vim.keymap.del
