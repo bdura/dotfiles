@@ -1,6 +1,6 @@
 ---
 name: reviewer
-model: claude-sonnet-4-5
+model: mistral-small-latest
 tools: read, grep, find, ls, submit_verdict
 ---
 

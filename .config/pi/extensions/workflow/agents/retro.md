@@ -1,6 +1,6 @@
 ---
 name: retro
-model: claude-haiku-4-5
+model: mistral-small-latest
 tools: read, write, edit
 ---
 
@@ -24,5 +24,6 @@ End your reply with a section exactly like (omit it entirely if there is nothing
 carrying forward):
 
 ### STEERING_NOTES
+
 - <concise bullet>
 - <concise bullet>

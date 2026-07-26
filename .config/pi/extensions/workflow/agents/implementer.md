@@ -1,6 +1,6 @@
 ---
 name: implementer
-model: claude-sonnet-4-5
+model: mistral-medium-3.5
 tools: read, write, edit, bash
 ---
 
@@ -27,6 +27,7 @@ that task's change in the current repository — nothing more.
 When the task is complete, end your reply with a section exactly like:
 
 ### HANDOFF
+
 - Files changed: <list>
 - Key decisions: <brief>
 - Assumptions / follow-ups: <brief, or "none">
