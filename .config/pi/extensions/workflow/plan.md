@@ -20,7 +20,7 @@ The code is split into two layers:
 
 ### The pipeline (per task)
 
-```
+```text
                       ┌──────────── fail (feedback → implementer, same session) ───────────┐
                       │                                                                     │
   task ──► implementer ──► [ruff] ──► [ty] ──► [pytest] ──► validator ──► reviewer ──► retro ──► next task
@@ -55,6 +55,7 @@ These were settled deliberately. Implement to these; do not redesign.
 | 13 | Persistence | **In-memory only, no resume** in v1. Abort ends the run; only git changes + milestone entries persist. |
 
 ### Explicitly out of scope for v1
+
 - Low-latency model to parse feedback into structured form (future; feedback stays plaintext).
 - A plan-decomposer agent (tasks are pre-structured in the plan).
 - Resumability / crash recovery.
@@ -81,6 +82,7 @@ Resolve paths under the Pi monorepo docs/examples directories.
 - `examples/extensions/status-line.ts` and `widget-placement.ts` — `setStatus`/`setWidget` usage.
 
 Key API facts (already verified against docs — trust these):
+
 - `createAgentSession` can be called from inside an extension command handler. It returns
   `{ session }`. Always `session.dispose()` when done with a role invocation.
 - `defineTool({ name, label, description, parameters, execute })` where `execute` returns
@@ -96,7 +98,7 @@ Key API facts (already verified against docs — trust these):
 
 ## 4. Directory layout
 
-```
+```text
 extensions/workflow/
 ├── plan.md                     # this file
 ├── index.ts                    # extension entry: registers /workflow command + wiring
@@ -186,6 +188,7 @@ export interface TaskSpec {
 ```
 
 Notes:
+
 - `agentVerdictGate` needs a Typebox schema; keep the verdict schema in the instantiation.
 - A "deterministic gate state" can be modeled either as a `State` with `role: ""` (no agent,
   just run the gate) or by attaching multiple transitions with gates to the implement state.
@@ -196,6 +199,7 @@ Notes:
 ## 6. Framework components
 
 ### 6.1 `framework/plan.ts` — plan parsing
+
 - Input: path to a markdown plan. Output: ordered `TaskSpec[]`.
 - Parse a checklist / task-list convention. Recommended: top-level `## Task: <title>`
   sections, or `- [ ] <title>` bullets with following indented body. Pick one convention,
@@ -204,13 +208,16 @@ Notes:
 - Each task's `body` becomes the implementer's task text.
 
 ### 6.2 `framework/agents.ts` — agent discovery
+
 - Adapt `subagent/agents.ts`: read `extensions/workflow/agents/*.md`, `parseFrontmatter`
   for `name`, `model`, `tools`; markdown body is the system prompt.
 - Build `Record<string, AgentRole>` keyed by name. Error if a role referenced by a `State`
   is missing.
 
 ### 6.3 `framework/runner.ts` — role invocation
+
 Responsibilities:
+
 - `runRole(role, opts): Promise<RoleRunResult>` — creates an `AgentSession` via
   `createAgentSession`:
   - `model`: resolve `role.model` through `ModelRuntime`; fallback to host default.
@@ -258,6 +265,7 @@ export function agentVerdictGate<S extends TSchema>(schema: S, opts: {
 ```
 
 `submit_verdict` tool (built by the framework, one instance per verdict role invocation):
+
 - `defineTool` with the role's verdict `schema` as `parameters`.
 - `execute` captures the verdict into a closure variable and returns `{ terminate: true }`.
 - Verdict-enforcement wrapper (decision #6): after the role's turn ends, if no verdict was
@@ -269,6 +277,7 @@ Command execution: run gate commands in `ctx.cwd`, honoring `ctx.signal`. Use th
 robust output truncation approach as `subagent`/`truncated-tool` for large outputs.
 
 ### 6.5 `framework/handoff.ts` — artifacts + git
+
 - `assertCleanTree(cwd)` — precondition check (decision #4). Abort with a clear message if
   `git status --porcelain` is non-empty or not a git repo.
 - `getBaselineRef(cwd)` — record starting `HEAD`.
@@ -279,6 +288,7 @@ robust output truncation approach as `subagent`/`truncated-tool` for large outpu
   the text prepended to subsequent agents' system prompts (decision #11).
 
 ### 6.6 `framework/ui.ts` — observability (decision #12)
+
 - Live dashboard via `ctx.ui.setWidget("workflow", lines)` and `ctx.ui.setStatus`:
   current task `i/N`, current state, per-transition loop counters, global budget used, last
   `GateResult` (pass/fail + short reason), and streaming sub-agent tool calls (last N).
@@ -288,8 +298,10 @@ robust output truncation approach as `subagent`/`truncated-tool` for large outpu
 - Clear the widget on completion/abort.
 
 ### 6.7 `framework/engine.ts` — the driver
+
 Algorithm:
-```
+
+```text
 assertCleanTree(cwd); baselineRef = getBaselineRef(cwd)
 tasks = parsePlan(planPath)                       // error if empty
 for (taskIndex, task) in tasks:
@@ -324,6 +336,7 @@ for (taskIndex, task) in tasks:
     // retro state already ran as part of the graph; its note appended to steering
 finish: clear dashboard, notify summary
 ```
+
 - `escalate(reason)` → `ctx.ui.select("<reason> — how to proceed?", ["Retry", "Abort", "Accept & continue"])`.
   Abort throws `WorkflowAbort`. Accept treats the current gate as pass. Retry resets the
   relevant counter.
@@ -334,6 +347,7 @@ finish: clear dashboard, notify summary
 ## 7. Extension entry (`index.ts`) + instantiation
 
 ### 7.1 `index.ts`
+
 - `export default function (pi: ExtensionAPI)`.
 - Create `ModelRuntime` lazily (in the command handler or `session_start`), reuse it.
 - `pi.registerCommand("workflow", { description, handler })`:
@@ -348,6 +362,7 @@ finish: clear dashboard, notify summary
   replacement (we don't switch sessions here, so this is low risk).
 
 ### 7.2 `workflows/python.ts` (the instantiation)
+
 - Import framework gate helpers + Typebox.
 - Define verdict schemas:
   - `validatorVerdict = Type.Object({ verdict: StringEnum(["pass","fail"]), issues: Type.Array(Type.Object({ severity, description, location? })), summary: Type.String() })`
@@ -363,7 +378,9 @@ finish: clear dashboard, notify summary
 - Set `globalBudget` and per-transition `maxLoops`. Keep CLI-gate caps low (risk #2 in §9).
 
 ### 7.3 Agent markdown files (`agents/*.md`)
+
 Frontmatter `name`, `model`, `tools`; body = system prompt.
+
 - `implementer.md` — full coding tools (`read, write, edit, bash`). Prompt: implement the
   single given task, keep changes scoped, write a handoff note.
 - `validator.md` — **read-only** tools (`read, grep, find, ls, bash` for running nothing
