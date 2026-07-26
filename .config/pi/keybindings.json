@@ -1,11 +1,5 @@
 {
   "app.editor.external": [
     "alt+v"
-  ],
-  "tui.input.submit": [
-    "ctrl+enter"
-  ],
-  "tui.input.newLine": [
-    "enter"
   ]
 }
