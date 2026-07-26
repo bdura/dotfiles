@@ -14,7 +14,8 @@
 
 import { computeDiff, extractBlock } from "./handoff";
 import { WorkflowRunner } from "./runner";
-import type { GateResult, RunContext, State, TaskSpec, UsageTotals, WorkflowDefinition, WorkflowAbort } from "./types";
+import { WorkflowAbort } from "./types";
+import type { GateResult, RunContext, State, TaskSpec, UsageTotals, WorkflowDefinition } from "./types";
 import type { WorkflowUI } from "./ui";
 import type { ModelRuntime, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
 
