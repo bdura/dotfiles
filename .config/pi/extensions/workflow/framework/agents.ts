@@ -6,8 +6,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseFrontmatter } from "@earendil-works/pi-coding-agent";
-import type { AgentRole } from "./types.ts";
-import { WorkflowAbort } from "./types.ts";
+import type { AgentRole } from "./types";
+import { WorkflowAbort } from "./types";
 
 /** Load every *.md in `dir` as an AgentRole keyed by frontmatter `name`. */
 export function discoverRoles(dir: string): Record<string, AgentRole> {

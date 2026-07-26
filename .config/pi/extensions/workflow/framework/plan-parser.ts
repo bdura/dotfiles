@@ -12,8 +12,8 @@
  */
 
 import { readFileSync } from "node:fs";
-import type { TaskSpec } from "./types.ts";
-import { WorkflowAbort } from "./types.ts";
+import type { TaskSpec } from "./types";
+import { WorkflowAbort } from "./types";
 
 const HEADING_TASK = /^#{2,3}\s*Task:\s*(.+?)\s*$/i;
 const CHECKLIST_TASK = /^- \[[ xX]\]\s*(.+?)\s*$/;

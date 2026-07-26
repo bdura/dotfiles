@@ -6,12 +6,12 @@
  * failure (feedback as plaintext) until the terminal state is reached.
  */
 
-import { assertCleanTree, computeDiff, extractBlock, getBaselineRef } from "./handoff.ts";
-import { parsePlan } from "./plan-parser.ts";
-import { WorkflowRunner } from "./runner.ts";
-import type { RunContext, State, TaskSpec, WorkflowDefinition } from "./types.ts";
-import { WorkflowAbort } from "./types.ts";
-import type { WorkflowUI } from "./ui.ts";
+import { assertCleanTree, computeDiff, extractBlock, getBaselineRef } from "./handoff";
+import { parsePlan } from "./plan-parser";
+import { WorkflowRunner } from "./runner";
+import type { RunContext, State, TaskSpec, WorkflowDefinition } from "./types";
+import { WorkflowAbort } from "./types";
+import type { WorkflowUI } from "./ui";
 
 export interface EngineDeps {
 	cwd: string;

@@ -3,7 +3,7 @@
  */
 
 import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
-import type { GateResult, UsageTotals } from "./types.ts";
+import type { GateResult, UsageTotals } from "./types";
 
 const WIDGET_KEY = "workflow";
 const STATUS_KEY = "workflow";

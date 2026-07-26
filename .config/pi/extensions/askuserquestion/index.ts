@@ -1,8 +1,8 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Box, TruncatedText } from "@earendil-works/pi-tui";
-import { AskUserQuestionComponent } from "./component.ts";
-import { InputSchema, type Question, type Result } from "./schema.ts";
-import { validateUniqueness } from "./validate.ts";
+import { AskUserQuestionComponent } from "./component";
+import { InputSchema, type Question, type Result } from "./schema";
+import { validateUniqueness } from "./validate";
 
 export default function (pi: ExtensionAPI) {
   pi.registerTool({

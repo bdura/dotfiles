@@ -3,8 +3,8 @@
  * in-memory handoff / steering notes (decision #13: no files written to the repo).
  */
 
-import { runCommand } from "./exec.ts";
-import { WorkflowAbort } from "./types.ts";
+import { runCommand } from "./exec";
+import { WorkflowAbort } from "./types";
 
 const DIFF_CAP = 100 * 1024; // cap diff injected into prompts
 

@@ -14,11 +14,11 @@ import {
 	getAgentDir,
 	ModelRuntime,
 } from "@earendil-works/pi-coding-agent";
-import { assertRolesPresent, discoverRoles } from "./framework/agents.ts";
-import { runWorkflow } from "./framework/engine.ts";
-import { WorkflowUI } from "./framework/ui.ts";
-import { WorkflowAbort } from "./framework/types.ts";
-import { buildPythonWorkflow } from "./workflows/python.ts";
+import { assertRolesPresent, discoverRoles } from "./framework/agents";
+import { runWorkflow } from "./framework/engine";
+import { WorkflowUI } from "./framework/ui";
+import { WorkflowAbort } from "./framework/types";
+import { buildPythonWorkflow } from "./workflows/python";
 
 // Resolve this extension's directory so we can find agents/ regardless of cwd.
 const EXT_DIR = dirname(new URL(import.meta.url).pathname);

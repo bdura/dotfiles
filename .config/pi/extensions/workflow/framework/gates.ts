@@ -4,8 +4,8 @@
  */
 
 import type { Static, TSchema } from "typebox";
-import { runCommand } from "./exec.ts";
-import type { Gate, GateResult, RunContext } from "./types.ts";
+import { runCommand } from "./exec";
+import type { Gate, GateResult, RunContext } from "./types";
 
 export interface DeterministicGateSpec {
 	/** Human label for the dashboard, e.g. "ruff". */

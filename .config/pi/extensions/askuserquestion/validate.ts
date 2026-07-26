@@ -1,4 +1,4 @@
-import type { Question } from "./schema.ts";
+import type { Question } from "./schema";
 
 /**
  * Returns an error message if question texts or option labels are not unique,

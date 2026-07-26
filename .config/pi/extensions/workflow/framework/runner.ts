@@ -19,9 +19,9 @@ import {
 	resolveCliModel,
 	SessionManager,
 } from "@earendil-works/pi-coding-agent";
-import type { AgentRole, RoleRunResult, State, TaskSpec, VerdictConfig } from "./types.ts";
-import { emptyUsage, WorkflowAbort } from "./types.ts";
-import type { WorkflowUI } from "./ui.ts";
+import type { AgentRole, RoleRunResult, State, TaskSpec, VerdictConfig } from "./types";
+import { emptyUsage, WorkflowAbort } from "./types";
+import type { WorkflowUI } from "./ui";
 
 export interface RunStateOptions {
 	task: TaskSpec;
