@@ -2,8 +2,11 @@
  * Concrete instantiation: a Python project workflow.
  *
  * Pipeline (per task):
- *   implement → ruff → ty → pytest → validate → review → retro → done
- * Deterministic gates run ruff/ty/pytest; validate/review are agent-led verdicts.
+ *   implement → cli-checks → validate → review → retro → done
+ *
+ * The cli-checks state runs ruff, ty, and pytest sequentially via a single
+ * deterministicGate with an array of commands (stops at first failure).
+ * validate/review are agent-led verdicts.
  * Any gate failure routes back to the implementer with plaintext feedback.
  *
  * This file is the ONLY place that names ruff/ty/pytest or the concrete roles;
@@ -78,9 +81,11 @@ function interpretReviewer(v: Static<typeof ReviewerVerdict>): GateResult {
 
 // ---- deterministic gate commands (edit these for your project) ---------------
 
-const RUFF_COMMAND = "ruff check .";
-const TY_COMMAND = "ty check";
-const PYTEST_COMMAND = "pytest -q";
+const CLI_CHECKS = [
+	{ name: "ruff", command: "ruff check ." },
+	{ name: "ty", command: "ty check" },
+	{ name: "pytest", command: "pytest -q", timeoutMs: 10 * 60_000 },
+];
 
 const alwaysPass = fnGate(async () => ({ pass: true }));
 
@@ -89,32 +94,13 @@ export function buildPythonWorkflow(roles: Record<string, AgentRole>): WorkflowD
 		{
 			id: "implement",
 			role: "implementer",
-			transitions: [{ gate: alwaysPass, onPass: "ruff", onFail: "implement", maxLoops: 1 }],
+			transitions: [{ gate: alwaysPass, onPass: "cli-checks", onFail: "implement", maxLoops: 1 }],
 		},
 		{
-			id: "ruff",
+			id: "cli-checks",
 			role: "",
 			transitions: [
-				{ gate: deterministicGate({ name: "ruff", command: RUFF_COMMAND }), onPass: "ty", onFail: "implement", maxLoops: 3 },
-			],
-		},
-		{
-			id: "ty",
-			role: "",
-			transitions: [
-				{ gate: deterministicGate({ name: "ty", command: TY_COMMAND }), onPass: "pytest", onFail: "implement", maxLoops: 3 },
-			],
-		},
-		{
-			id: "pytest",
-			role: "",
-			transitions: [
-				{
-					gate: deterministicGate({ name: "pytest", command: PYTEST_COMMAND, timeoutMs: 10 * 60_000 }),
-					onPass: "validate",
-					onFail: "implement",
-					maxLoops: 3,
-				},
+				{ gate: deterministicGate(CLI_CHECKS), onPass: "validate", onFail: "implement", maxLoops: 3 },
 			],
 		},
 		{

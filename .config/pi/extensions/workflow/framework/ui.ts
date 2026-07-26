@@ -19,8 +19,6 @@ export interface Milestone {
 }
 
 export class WorkflowUI {
-	private taskIndex = 0;
-	private taskCount = 0;
 	private taskTitle = "";
 	private state = "";
 	private loopInfo = "";
@@ -33,9 +31,7 @@ export class WorkflowUI {
 		private readonly ctx: ExtensionCommandContext,
 	) {}
 
-	setTask(index: number, count: number, title: string) {
-		this.taskIndex = index;
-		this.taskCount = count;
+	setTask(title: string) {
 		this.taskTitle = title;
 		this.activity = [];
 		this.lastGate = "";
@@ -70,12 +66,12 @@ export class WorkflowUI {
 
 	private render() {
 		const lines = [
-			`⚙ Workflow — task ${this.taskIndex + 1}/${this.taskCount}: ${this.taskTitle}`,
+			`⚙ Workflow — ${this.taskTitle}`,
 			`  state: ${this.state}   loops: ${this.loopInfo || "-"}   budget: ${this.budget || "-"}   gate: ${this.lastGate || "-"}`,
 			...this.activity.map((a) => `    ${a}`),
 		];
 		this.ctx.ui.setWidget(WIDGET_KEY, lines);
-		this.ctx.ui.setStatus(STATUS_KEY, `workflow ${this.taskIndex + 1}/${this.taskCount} · ${this.state}`);
+		this.ctx.ui.setStatus(STATUS_KEY, `workflow · ${this.state}`);
 	}
 
 	milestone(m: Milestone) {

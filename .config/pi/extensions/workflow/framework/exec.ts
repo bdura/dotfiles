@@ -34,7 +34,7 @@ export function runCommand(command: string, opts: RunCommandOptions): Promise<Ex
 		const useShell = opts.args === undefined;
 		const child = useShell
 			? spawn(command, { cwd: opts.cwd, shell: true, stdio: ["ignore", "pipe", "pipe"] })
-			: spawn(command, opts.args, { cwd: opts.cwd, shell: false, stdio: ["ignore", "pipe", "pipe"] });
+			: spawn(command, opts.args || [], { cwd: opts.cwd, shell: false, stdio: ["ignore", "pipe", "pipe"] });
 
 		let stdout = "";
 		let stderr = "";

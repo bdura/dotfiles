@@ -3,7 +3,7 @@
  *
  * Usage: /workflow <path-to-plan.md>
  *
- * Drives a deterministic implement → gate → validate → review → retro pipeline
+ * Drives a deterministic implement -> gate -> validate -> review -> retro pipeline
  * per task, using isolated SDK sub-sessions for each agent role. See plan.md for
  * the full design and rationale.
  */
@@ -15,7 +15,9 @@ import {
 	ModelRuntime,
 } from "@earendil-works/pi-coding-agent";
 import { assertRolesPresent, discoverRoles } from "./framework/agents";
-import { runWorkflow } from "./framework/engine";
+import { assertCleanTree, getBaselineRef } from "./framework/handoff";
+import { parsePlan } from "./framework/plan-parser";
+import { Task, type TaskResult } from "./framework/task";
 import { WorkflowUI } from "./framework/ui";
 import { WorkflowAbort } from "./framework/types";
 import { buildPythonWorkflow } from "./workflows/python";
@@ -57,17 +59,38 @@ export default function (pi: ExtensionAPI) {
 				const def = buildPythonWorkflow(roles);
 				assertRolesPresent(roles, [def.implementerRole, ...def.states.map((s) => s.role).filter(Boolean)]);
 
+				await assertCleanTree(ctx.cwd, controller.signal);
+				const baselineRef = await getBaselineRef(ctx.cwd, controller.signal);
+				const tasks = parsePlan(planPath);
+				
+				if (tasks.length === 0) {
+					ui.notify("No tasks found in plan.", "error");
+					return;
+				}
+
+				// For now: run only the first task
+				const taskSpec = tasks[0];
 				ui.notify(`Starting workflow "${def.name}" on ${planPath}`, "info");
-				await runWorkflow(def, {
+
+				const task = new Task(taskSpec, def, {
 					cwd: ctx.cwd,
-					agentDir: getAgentDir(),
+					baselineRef,
+					steeringNotes: "",
 					modelRuntime,
 					ui,
-					ctx,
 					signal: controller.signal,
-					planPath,
+					agentDir: getAgentDir(),
+					ctx,
 				});
-				ui.notify("Workflow completed.", "info");
+
+				const result: TaskResult = await task.run();
+
+				if (result.success) {
+					ui.notify("Workflow completed.", "info");
+				} else {
+					ui.notify(`Workflow failed: ${result.error?.message ?? "Unknown error"}`, "error");
+					ui.notify("Any partial changes remain in your working tree (git diff to inspect).", "warning");
+				}
 			} catch (err) {
 				if (err instanceof WorkflowAbort) {
 					ui.notify(`Workflow stopped (${err.kind}): ${err.message}`, err.kind === "user" ? "warning" : "error");

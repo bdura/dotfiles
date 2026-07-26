@@ -18,33 +18,48 @@ export interface DeterministicGateSpec {
 }
 
 /**
- * A deterministic gate that runs a shell command. Passes iff exit code 0.
+ * A deterministic gate that runs a shell command (or array of commands).
+ * For a single command: passes iff exit code 0.
+ * For an array: runs sequentially, stops at first failure, passes only if all pass.
  * On failure, the combined stderr/stdout becomes the feedback fed to the
  * implementer verbatim (decision: feedback stays plaintext in v1).
  */
-export function deterministicGate(spec: DeterministicGateSpec): Gate {
+export function deterministicGate(spec: DeterministicGateSpec | DeterministicGateSpec[]): Gate {
 	return async (ctx: RunContext): Promise<GateResult> => {
-		const r = await runCommand(spec.command, {
-			cwd: ctx.cwd,
-			signal: ctx.signal,
-			timeoutMs: spec.timeoutMs,
-		});
-		if (spec.interpret) return spec.interpret(r);
-		if (r.exitCode === 0) {
-			return { pass: true, label: `${spec.name}: ok` };
+		const specs = Array.isArray(spec) ? spec : [spec];
+		
+		for (const s of specs) {
+			const r = await runCommand(s.command, {
+				cwd: ctx.cwd,
+				signal: ctx.signal,
+				timeoutMs: s.timeoutMs,
+			});
+			
+			if (s.interpret) {
+				const interpreted = s.interpret(r);
+				if (!interpreted.pass) {
+					return interpreted;
+				}
+				continue;
+			}
+			
+			if (r.exitCode !== 0) {
+				const output = [r.stdout, r.stderr].filter(Boolean).join("\n").trim();
+				return {
+					pass: false,
+					label: `${s.name}: failed (exit ${r.exitCode})`,
+					feedback: [
+						`The \`${s.name}\` check failed (\`${s.command}\`, exit code ${r.exitCode}).`,
+						"Fix the issues below, then finish.",
+						"",
+						output || "(no output captured)",
+					].join("\n"),
+					structured: { exitCode: r.exitCode },
+				};
+			}
 		}
-		const output = [r.stdout, r.stderr].filter(Boolean).join("\n").trim();
-		return {
-			pass: false,
-			label: `${spec.name}: failed (exit ${r.exitCode})`,
-			feedback: [
-				`The \`${spec.name}\` check failed (\`${spec.command}\`, exit code ${r.exitCode}).`,
-				"Fix the issues below, then finish.",
-				"",
-				output || "(no output captured)",
-			].join("\n"),
-			structured: { exitCode: r.exitCode },
-		};
+		
+		return { pass: true, label: specs.length === 1 ? `${specs[0].name}: ok` : "all cli checks passed" };
 	};
 }
 

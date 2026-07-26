@@ -12,13 +12,15 @@ import { WorkflowRunner } from "./runner";
 import type { RunContext, State, TaskSpec, WorkflowDefinition } from "./types";
 import { WorkflowAbort } from "./types";
 import type { WorkflowUI } from "./ui";
+import {ExtensionCommandContext, ModelRuntime} from "@earendil-works/pi-coding-agent";
+
 
 export interface EngineDeps {
 	cwd: string;
 	agentDir: string;
-	modelRuntime: import("@earendil-works/pi-coding-agent").ModelRuntime;
+	modelRuntime: ModelRuntime;
 	ui: WorkflowUI;
-	ctx: import("@earendil-works/pi-coding-agent").ExtensionCommandContext;
+	ctx: ExtensionCommandContext;
 	signal: AbortSignal;
 	planPath: string;
 }

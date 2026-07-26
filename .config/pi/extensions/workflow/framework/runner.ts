@@ -80,6 +80,10 @@ export class WorkflowRunner {
 			}
 		}
 
+		// Subscribe to session events for activity tracking and usage accumulation.
+		// `unsub` (short for "unsubscribe") is the cleanup function returned by subscribe()
+		// that removes this event listener. It must be called in the finally block to
+		// prevent memory leaks. This follows the common JS pattern: subscribe() => cleanupFn.
 		const unsub = session.subscribe((ev: any) => {
 			if (ev.type === "tool_execution_start") {
 				this.deps.ui.pushActivity(`${role.name}: ${formatTool(ev.toolName, ev.args)}`);
