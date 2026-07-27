@@ -38,12 +38,5 @@ in {
     };
 
     my.needsOzoneWayland = true;
-
-    my.permittedInsecurePackages = [
-      {
-        package = pkgs.bitwarden-desktop;
-        insecureName = "electron-39.8.10";
-      }
-    ];
   };
 }
