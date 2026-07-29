@@ -1,0 +1,22 @@
+feeds:
+  - url: https://github.com/ghostty-org/ghostty/releases.atom
+    name: ghostty
+  - url: https://github.com/aphp/edsnlp/releases.atom
+    name: edsnlp
+  - url: https://github.com/aphp/edspdf/releases.atom
+    name: edspdf
+  - url: https://rustacean-station.org/podcast.rss
+    name: rustacean-station
+database: nom.db
+ordering: asc
+filtering:
+  defaultIncludeFeedName: false
+theme:
+  glamour: dark
+  titleColor: "62"
+  titleColorFg: "231"
+  filterColor: "62"
+  selectedItemColor: "170"
+  readIcon: ✓
+http:
+  mintls: TLS 1.2
