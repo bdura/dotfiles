@@ -26,6 +26,7 @@ with lib; let
     binName = "claude";
     env = {
       CLAUDE_CONFIG_DIR = "$HOME/.config/claude";
+      CLAUDE_CODE_DISABLE_MOUSE_CLICKS = "1";
     };
     runtimeInputs = with pkgs; [
       rtk
