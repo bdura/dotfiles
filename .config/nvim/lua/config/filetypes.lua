@@ -22,3 +22,10 @@ vim.filetype.add({
     ['.*/compose%.[^/]+%.ya?ml'] = 'yaml.docker-compose',
   },
 })
+
+vim.filetype.add({
+  pattern = {
+    ['.*%.html%.j2'] = 'htmldjango',
+    ['.*%.html%.jinja'] = 'htmldjango',
+  },
+})
