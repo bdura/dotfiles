@@ -30,6 +30,24 @@ local excludes = {
 Snacks.setup({
   bigfile = { enabled = true },
   explorer = { enabled = true, replace_netrw = true },
+  gitbrowse = {
+    url_patterns = {
+      -- GitLab
+      ['gitlab%.'] = {
+        branch = '/-/tree/{branch}',
+        file = '/-/blob/{branch}/{file}#L{line_start}-{line_end}',
+        permalink = '/-/blob/{commit}/{file}#L{line_start}-{line_end}',
+        commit = '/-/commit/{commit}',
+      },
+      -- Forgejo/Gitea routing
+      ['codeberg%.org'] = {
+        branch = '/src/branch/{branch}',
+        file = '/src/branch/{branch}/{file}#L{line_start}-L{line_end}',
+        permalink = '/src/commit/{commit}/{file}#L{line_start}-L{line_end}',
+        commit = '/commit/{commit}',
+      },
+    },
+  },
   indent = { enabled = true },
   input = { enabled = true },
   layout = { enabled = true },
@@ -187,34 +205,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 -- Copy a forge URL for the current line (or visual selection) to the clipboard.
---
--- We prefer a permalink, but we pin it to a commit the *remote* actually has:
--- the newest commit touching this file that is reachable from the upstream
--- branch. Snacks' own permalink resolution uses the newest commit touching the
--- file whether or not it has been pushed, which yields a 404 for anyone else
--- when we have unpushed work. When there is no upstream (or the file is not in
--- its history yet) we hand resolution back to Snacks, which degrades to a
--- branch link if it cannot find a commit either.
 local function copy_line_url()
-  local file = vim.api.nvim_buf_get_name(0)
-  local cwd = file ~= '' and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
-
-  local commit = nil ---@type string?
-  if file ~= '' then
-    local upstream =
-      vim.fn.systemlist({ 'git', '-C', cwd, 'rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{upstream}' })
-    if vim.v.shell_error == 0 and upstream[1] and upstream[1] ~= '' then
-      local log =
-        vim.fn.systemlist({ 'git', '-C', cwd, 'log', '-n', '1', '--pretty=format:%H', upstream[1], '--', file })
-      if vim.v.shell_error == 0 and log[1] and log[1] ~= '' then
-        commit = log[1]
-      end
-    end
-  end
-
   Snacks.gitbrowse({
     what = 'permalink',
-    commit = commit,
     notify = false,
     ---@param url string
     open = function(url)
