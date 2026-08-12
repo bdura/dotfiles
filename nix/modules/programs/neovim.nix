@@ -49,6 +49,7 @@ with lib; let
       yaml-language-server
       bash-language-server
       vscode-json-languageserver
+      typos-lsp
 
       # Formatters for ubiquitous languages
       shfmt
