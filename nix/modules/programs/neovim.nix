@@ -12,6 +12,16 @@
 }:
 with lib; let
   cfg = config.my.programs.neovim;
+  reflow = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "reflow";
+    version = "0.1.0";
+    src = fetchGit {
+      url = "https://codeberg.org/bdura/reflow";
+      rev = "e2d6fc242fa3cb01b5ed23b285bcf43663d87745";
+    };
+    cargoLock.lockFile = "${src}/Cargo.lock";
+    nativeBuildInputs = with pkgs; [git];
+  };
   nvim = wrappers.lib.wrapPackage {
     pkgs = pkgs;
     package = pkgs.neovim-unwrapped;
@@ -46,6 +56,7 @@ with lib; let
       alejandra
       yamlfmt
       jq
+      reflow
 
       # Render tools
       imagemagick # Image conversion
