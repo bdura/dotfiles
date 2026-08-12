@@ -31,6 +31,8 @@ vim.lsp.enable({
   'typescript-ls',
   -- Bash
   'bash-ls',
+  -- All
+  'typos-ls',
 })
 
 local map = vim.keymap.set
