@@ -189,10 +189,6 @@ keybinds clear-defaults=true {
             SwitchToMode "renametab"
             TabNameInput 0
         }
-        bind "s" {
-            ToggleActiveSyncTab
-            SwitchToMode "locked"
-        }
         bind "t" {
             SwitchToMode "normal"
         }
