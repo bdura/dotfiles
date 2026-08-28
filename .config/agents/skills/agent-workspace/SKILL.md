@@ -1,7 +1,6 @@
 ---
 name: agent-workspace
-description: Learn about the agent workspace. Activate whenever there is a `.agent-workspace`
-directory at the project root.
+description: Learn about the agent workspace. Activate whenever there is a `.agent-workspace` directory at the project root.
 ---
 
 # Agent workspace
