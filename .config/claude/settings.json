@@ -23,5 +23,14 @@
   },
   "effortLevel": "high",
   "tui": "fullscreen",
-  "enableWorkflows": false
+  "enableWorkflows": false,
+  "disableBundledSkills": true,
+  "autoMemoryEnabled": false,
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(rtk rg *)",
+      "Bash(rtk find *)"
+    ]
+  }
 }
