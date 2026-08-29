@@ -17,6 +17,22 @@ Those can be:
 The issue lays out all the context needed to understand it. A separate agent with
 no prior knowledge should be able to understand it from reading only.
 
+## Filing
+
+Write the issue to `.agent-workspace/issues/<slug>.md`, then add a line to
+`.agent-workspace/issues/index.md`:
+
+```markdown
+- [<slug>](<slug>.md) — **severity.** One line on what is wrong and why it
+  matters.
+```
+
+The workspace is a git worktree on the `agent-workspace` branch: commit the issue
+with `git -C .agent-workspace commit`, separately from any code.
+
+An issue is closed by deleting its file and its index line once the fix lands —
+see /fix-issue. There is no resolved state to set.
+
 ## Template
 
 ```markdown
