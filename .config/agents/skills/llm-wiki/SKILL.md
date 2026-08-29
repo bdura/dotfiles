@@ -14,8 +14,7 @@ The human curates sources, asks questions, and guides the analysis.
 
 ## Folder structure
 
-The wiki lives in the agent workspace, alongside `specs/`, `plans/` and
-`issues/`:
+The wiki lives in the agent workspace, alongside `specs/`, `plans/` and `issues/`:
 
 ```raw
 .agent-workspace/

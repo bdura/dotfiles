@@ -4,6 +4,8 @@ description: Implement a piece of work based on an implementation plan.
 disable-model-invocation: true
 ---
 
+# Implement a task
+
 Implement a single task from the plan named `<plan-slug>`. Read, in order:
 
 - the task file, `.agent-workspace/plans/<plan-slug>/<NN>-<task-slug>.md`
@@ -13,9 +15,9 @@ Implement a single task from the plan named `<plan-slug>`. Read, in order:
 If the user names a task without its number, find it in the plan. If any of its
 blockers is still unticked, say so before starting.
 
-Use /tdd where possible. The task file's `## Tests` section is the agreed test
-list: write those tests without re-confirming, and check with the user only if
-you need to deviate from them.
+Use /tdd where possible. The task file's `## Tests` section is the agreed test list:
+write those tests without re-confirming, and check with the user only if you need
+to deviate from them.
 
 Run typechecking regularly, and the full test suite once at the end.
 
@@ -26,8 +28,8 @@ separately from the code. Once the task is done:
 
 1. Commit the code to the current branch, with a one-liner conventional commit.
 
-If /implement-plan dispatched you, stop here and report: what you changed, the
-test command you ran, and the tail of its output. The runner verifies that
+If /implement-plan dispatched you, stop here and report: what you changed,
+the test command you ran, and the tail of its output. The runner verifies that
 evidence before it records anything, so leave the workspace alone.
 
 Otherwise, finish the bookkeeping yourself:

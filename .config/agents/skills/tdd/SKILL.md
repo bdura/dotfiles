@@ -39,8 +39,8 @@ Every function should be tested.
 Before writing any test, write down what will be tested and confirm with the user.
 
 When you are working from a plan task, its `## Tests` section already is that
-agreement: implement it without re-confirming. Deviating from it does need a
-check — say what you want to test instead, and why.
+agreement: implement it without re-confirming. Deviating from it does need a check,
+say what you want to test instead, and why.
 
 ## Anti-patterns
 
@@ -58,6 +58,6 @@ check — say what you want to test instead, and why.
 - **Red before green.** Write the failing test first, then only enough code to
   pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One test, one minimal implementation per cycle.
-- **Refactor as its own step.** Refactoring happens with the bar green, between
-  cycles — never inside one. A red cycle is for making the test pass and nothing
-  else.
+- **Refactor as its own step.** Refactoring happens with the bar green,
+  between cycles — never inside one. A red cycle is for making the test pass
+  and nothing else.

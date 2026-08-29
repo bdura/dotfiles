@@ -23,8 +23,8 @@ same code. Say so before drafting if two plans would collide.
 
 ### 3. Explore the codebase (optional)
 
-If you have not already explored the codebase, do so to understand the current
-state of the code. Start with the architecture document, and scan
+If you have not already explored the codebase, do so to understand the
+current state of the code. Start with the architecture document, and scan
 `.agent-workspace/wiki/index.md` for relevant entries.
 
 Look for opportunities to prefactor the code to make the implementation easier.
@@ -77,8 +77,8 @@ it. Each fact belongs in exactly one of them.
 - `index.md` — the plan itself: task list, definition of done, dependency graph.
   It is the **sole owner** of all three; nothing else restates them.
   See [template](references/plan-template.md).
-- `design.md` — **why**. The decisions, argued, under numbered sections so task
-  files can cite them (`design.md §6.2`). Written once as a record of the
+- `design.md` — **why**. The decisions, argued, under numbered sections
+  so task files can cite them (`design.md §6.2`). Written once as a record of the
   reasoning; it is not maintained afterwards, and it carries no task breakdown.
   Omit it when the plan rests on no decision worth arguing.
 - `context.md` — **what an implementer must know**: background distilled from

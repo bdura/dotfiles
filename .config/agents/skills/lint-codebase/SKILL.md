@@ -1,8 +1,9 @@
 ---
 name: lint-codebase
 description: Lint the codebase after a plan was implemented.
-disable-model-invocation: true
 ---
+
+# Lint the codebase
 
 List the changes made to the codebase. Check that:
 
@@ -11,5 +12,4 @@ List the changes made to the codebase. Check that:
 - Examples still compile/run
 
 Produce a list of elements that are stale, and check with the user whether they
-should be fixed right away or filed to `.agent-workspace/issues/` with
-/file-issue.
+should be fixed right away or filed as issues with /file-issue.
