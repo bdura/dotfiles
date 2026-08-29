@@ -14,22 +14,23 @@ individual tasks.
 ### 1. Gather context
 
 Work from whatever is already in the conversation context. If the user passes a
-a spec path, read its full body and comments.
+spec path, read its full body.
 
 ### 2. Check existing plans for conflict
 
-Explore the existing plans in the workspace.
+Read `.agent-workspace/plans/index.md` and any plan it lists that touches the
+same code. Say so before drafting if two plans would collide.
 
-### 2. Explore the codebase (optional)
+### 3. Explore the codebase (optional)
 
 If you have not already explored the codebase, do so to understand the current
-state of the code. Start with the architecture document, and scan the agent
-workspace's wiki for relevant entries.
+state of the code. Start with the architecture document, and scan
+`.agent-workspace/wiki/index.md` for relevant entries.
 
 Look for opportunities to prefactor the code to make the implementation easier.
 "Make the change easy, then make the easy change."
 
-### 3. Draft tasks
+### 4. Draft tasks
 
 Break the work into individual tasks (roughly sized to fit in a commit).
 
@@ -49,7 +50,7 @@ it can start. A task with no blockers can start immediately.
 When relevant, adding a collection of integration tests that check behavior for
 the completed feature should be appended to the list of tasks.
 
-### 4. Quiz the user
+### 5. Quiz the user
 
 Present the proposed breakdown as a numbered list. For each task, show:
 
@@ -66,19 +67,34 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. File the plan
+### 6. File the plan
 
-Add the full implementation plan to the agent workspace:
+Create `.agent-workspace/plans/<feature-slug>/` and write four kinds of file into
+it. Each fact belongs in exactly one of them.
 
-- Create a `plans/<feature-slug>/` directory
-- Add a plan overview under `plans/<feature-slug>/overview.md`.
+<document-roles>
+
+- `index.md` — the plan itself: task list, definition of done, dependency graph.
+  It is the **sole owner** of all three; nothing else restates them.
   See [template](references/plan-template.md).
-- Add a plan context under `plans/<feature-slug>/context.md`. It should contain
-  anything in the repo, wiki, or anywhere else that's relevant to build the feature.
-  An agent should be able to perfectly implement a task based on its description,
-  the plan overview and this document alone.
-- Write one file per task under `plans/<feature-slug>/<NN>-<slug>.md`,
-  numbered from `01` in dependency order (blockers first). See
-  [template](references/task-template.md).
+- `design.md` — **why**. The decisions, argued, under numbered sections so task
+  files can cite them (`design.md §6.2`). Written once as a record of the
+  reasoning; it is not maintained afterwards, and it carries no task breakdown.
+  Omit it when the plan rests on no decision worth arguing.
+- `context.md` — **what an implementer must know**: background distilled from
+  `design.md` with the argument stripped out. This is the file tasks are expected
+  to read, so keep it short enough to be worth loading every time.
+- `<NN>-<slug>.md` — one per task, numbered from `01` in dependency order
+  (blockers first). See [template](references/task-template.md).
 
-Update `plans/index.md` with the new plan.
+</document-roles>
+
+Between the task file, `index.md` and `context.md`, an agent should be able to
+implement a task perfectly without reading anything else.
+
+Then add a line to `.agent-workspace/plans/index.md`:
+
+```markdown
+- [<feature-slug>](<feature-slug>/index.md) — **status.** What the plan does, how
+  many tasks, and the spec it implements.
+```
