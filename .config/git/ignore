@@ -32,5 +32,8 @@ shell.nix
 **/.claude/
 .agent-workspace/
 
+AGENTS.md
+CLAUDE.md
+
 **/tmp/
 **/.repos
