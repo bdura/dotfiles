@@ -27,7 +27,7 @@
       "ScheduleWakeup",
       "CronCreate",
       "CronDelete",
-      "CronEdit"
+      "CronList"
     ]
   }
 }
