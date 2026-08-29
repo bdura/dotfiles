@@ -1,7 +1,9 @@
 ## Exploring an external repository
 
-To explore an external repository, clone it in `./.repos/`. If it already exists,
-update it.
+Clone the repository into `.agent-workspace/.repos/<repo-name>/`. That directory
+must be listed in the workspace's own `.gitignore` — clones are working material
+and never belong in a commit. If the clone already exists, update it as described
+below.
 
 Explore the repository:
 
@@ -29,10 +31,18 @@ Respect the following template for the main entry:
 ---
 summary: Exploration of <project name>
 url: <repo URL>
-commit-hash: <latest checked out commit>
+commit-hash: <commit the pages describe>
 ---
 
 # Project name
 ```
 
-Modify the commit hash upon update.
+### Pinning and updating
+
+The clone is pinned to the commit recorded in `commit-hash`, so it is left in a
+detached checkout. Never `git pull` it — that will fail or silently move you off
+the pinned commit.
+
+To update: `git fetch`, pick the commit you now want to describe, `git checkout`
+that commit, then revise the pages and set `commit-hash` to match. The frontmatter
+and the working tree must always agree.

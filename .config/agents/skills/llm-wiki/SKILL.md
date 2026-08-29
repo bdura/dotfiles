@@ -14,11 +14,16 @@ The human curates sources, asks questions, and guides the analysis.
 
 ## Folder structure
 
+The wiki lives in the agent workspace, alongside `specs/`, `plans/` and
+`issues/`:
+
 ```raw
-inbox/        -- transient source documents for the agents to ingest
-sources/      -- persistent source documents (append-only)
-wiki/         -- markdown pages maintained by the agent
-wiki/index.md -- table of contents for the entire wiki
+.agent-workspace/
+├── inbox/         -- transient source documents for the agents to ingest
+├── sources/       -- persistent source documents (append-only)
+├── .repos/        -- external repositories cloned for study (never committed)
+└── wiki/          -- markdown pages maintained by the agent
+    └── index.md   -- entry point to the wiki
 ```
 
 Pages should be as "atomic" as possible, meaning they should ideally cover a single
@@ -26,8 +31,9 @@ concept or topic. They can however be regrouped through the use of "top-level"
 or "hub" pages that serve as intermediate index pages for efficient navigation
 through the wiki.
 
-The wiki index does not necessary link to every single page, but every entry
-should be accessible from the index through the index-(hub-)page hierarchy.
+`wiki/index.md` is the entry point, not an exhaustive listing: it need not link
+every page directly, but every page must be reachable from it by following the
+index-then-hub-page hierarchy.
 
 ## Rules
 

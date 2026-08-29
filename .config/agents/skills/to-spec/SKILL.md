@@ -14,18 +14,24 @@ produces a spec. Do NOT interview the user; just synthesize what you already kno
 1. If you haven't already:
 
    - Explore the repo to understand the current state of the codebase
-   - Scan the agent workspace's wiki for entries relevant to the feature being
-     developed, to ground your decisions in a broader context
+   - Scan `.agent-workspace/wiki/index.md` for entries relevant to the feature
+     being developed, to ground your decisions in a broader context
 
 2. Sketch out the seams at which you're going to test the feature. Existing seams
    should be preferred to new ones. Use the highest seam possible.
 
-Check with the user that these seams match their expectations.
+3. Check with the user that these seams match their expectations. Do not write
+   the spec before they do.
 
-3. Write the spec using the template below, then publish it to the project's
-   agent workspace `specs/`
+4. Write the spec using the template below, then publish it to
+   `.agent-workspace/specs/<feature-slug>.md`.
 
-4. Update `specs/index.md`
+5. Add a line for it to `.agent-workspace/specs/index.md`:
+
+   ```markdown
+   - [<feature-slug>](<feature-slug>.md) — **status.** One line on what the
+     feature is and where it stands.
+   ```
 
 ## Template
 
