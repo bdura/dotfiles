@@ -17,5 +17,8 @@
     "opencode/claude-fable-5",
     "opencode/claude-sonnet-5",
     "opencode/kimi-k2.7-code"
+  ],
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question"
   ]
 }
