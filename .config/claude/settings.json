@@ -1,27 +1,33 @@
 {
   "model": "opus",
-  "enabledPlugins": {
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "clangd-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "rust-skills": {
-      "source": {
-        "source": "github",
-        "repo": "actionbook/rust-skills"
-      }
-    },
-    "fullstack-dev-skills": {
-      "source": {
-        "source": "github",
-        "repo": "jeffallan/claude-skills"
-      }
-    }
-  },
   "effortLevel": "high",
   "tui": "fullscreen",
-  "enableWorkflows": false
+  "enableWorkflows": false,
+  "disableBundledSkills": true,
+  "disableRemoteControl": true,
+  "disableArtifact": true,
+  "disableClaudeAiConnectors": true,
+  "autoMemoryEnabled": false,
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(rtk rg *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk find *)"
+    ],
+    "deny": [
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "DesignSync",
+      "NotebookEdit",
+      "SendMessage",
+      "PushNotification",
+      "RemoteTrigger",
+      "ReportFindings",
+      "ScheduleWakeup",
+      "CronCreate",
+      "CronDelete",
+      "CronList"
+    ]
+  }
 }

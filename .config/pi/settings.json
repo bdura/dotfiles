@@ -1,14 +1,24 @@
 {
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.84.2",
   "theme": "dark",
   "defaultProvider": "mistral",
   "defaultModel": "mistral-medium-3.5",
   "defaultThinkingLevel": "medium",
-  "showHardwareCursor": true,
   "skills": [
     "~/.config/agents/skills/"
   ],
   "my": {
     "shellCommandPrefix": "rtk"
-  }
+  },
+  "enabledModels": [
+    "mistral/mistral-medium-3.5",
+    "mistral/mistral-small-latest",
+    "opencode/claude-opus-5",
+    "opencode/claude-fable-5",
+    "opencode/claude-sonnet-5",
+    "opencode/kimi-k2.7-code"
+  ],
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ]
 }

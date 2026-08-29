@@ -20,5 +20,8 @@ nix
 # Direnv
 \.direnv
 
+.config/pi/node_modules
+
 # Temporary exclude
 .config/hypr
+

@@ -29,8 +29,11 @@ scratch*
 # I would use a flake anyway.
 shell.nix
 
-**/.claude/settings.local.json
+**/.claude/
+.agent-workspace/
 
-/SESSION.md
+AGENTS.md
+CLAUDE.md
 
 **/tmp/
+**/.repos
