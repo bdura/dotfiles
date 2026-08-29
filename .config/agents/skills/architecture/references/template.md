@@ -13,15 +13,14 @@ the document can use them freely.
 
 ## Bird's Eye View
 
-What the system does, at the altitude where the whole thing fits in a few
-paragraphs. Name the major components and how work flows between them. Say what
-the system deliberately does *not* do — the boundaries are as informative as the
-contents.
+What the system does, at the altitude where the whole thing fits in a few paragraphs.
+Name the major components and how work flows between them. Say what the system
+deliberately does *not* do — the boundaries are as informative as the contents.
 
 ## Entry Point
 
-Where execution begins, and what happens on the way to the first interesting
-line: which file, which function, what it reads, what it constructs.
+Where execution begins, and what happens on the way to the first interesting line:
+which file, which function, what it reads, what it constructs.
 
 ## Code Map
 
@@ -51,11 +50,11 @@ what talks to it, why it is separate from its neighbour.
 
 ## Common tasks
 
-Where to start for the changes people actually make — "add a builtin", "support a
-new backend", "add a config option". A pointer per task, not a tutorial.
+Where to start for the changes people actually make — "add a builtin", "support
+a new backend", "add a config option". A pointer per task, not a tutorial.
 
 ## Cross-cutting concerns
 
 The things that do not live in one module: error handling, logging, invariants
-that span components, the rules that any change has to respect. Where an
-invariant is enforced, say by what — a type, a test, or only a convention.
+that span components, the rules that any change has to respect. Where an invariant
+is enforced, say by what — a type, a test, or only a convention.

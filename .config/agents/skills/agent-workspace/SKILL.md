@@ -1,6 +1,6 @@
 ---
 name: agent-workspace
-description: Learn about the agent workspace. Activate whenever there is a `.agent-workspace` directory at the project root.
+description: Learn about the agent workspace.
 ---
 
 # Agent workspace
@@ -31,9 +31,8 @@ clean without a `.gitignore` entry for it.
 
 Two consequences:
 
-- The workspace commits separately, on its own branch:
-  `git -C .agent-workspace commit`. Never `git add .agent-workspace` from the
-  project root.
+- The workspace commits separately, on its own branch: `git -C .agent-workspace commit`.
+  Never `git add .agent-workspace` from the project root.
 - Finishing a piece of work usually means two commits — the code on the current
   branch, the workspace bookkeeping on `agent-workspace`.
 

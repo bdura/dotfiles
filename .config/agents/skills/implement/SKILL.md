@@ -25,6 +25,13 @@ The workspace is a git worktree on the `agent-workspace` branch, so it commits
 separately from the code. Once the task is done:
 
 1. Commit the code to the current branch, with a one-liner conventional commit.
+
+If /implement-plan dispatched you, stop here and report: what you changed, the
+test command you ran, and the tail of its output. The runner verifies that
+evidence before it records anything, so leave the workspace alone.
+
+Otherwise, finish the bookkeeping yourself:
+
 2. Tick the task in `.agent-workspace/plans/<plan-slug>/index.md`.
 3. Commit the workspace: `git -C .agent-workspace commit`.
 
