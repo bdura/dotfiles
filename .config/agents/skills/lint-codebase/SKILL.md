@@ -1,6 +1,7 @@
 ---
 name: lint-codebase
 description: Lint the codebase after a plan was implemented.
+user-invocable: true
 ---
 
 # Lint the codebase

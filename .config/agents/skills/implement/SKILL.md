@@ -2,6 +2,7 @@
 name: implement
 description: Implement a piece of work based on an implementation plan.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Implement a task

@@ -2,6 +2,7 @@
 name: implement-plan
 description: Implement an entire plan, running /implement on each task in turn.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Implement a plan

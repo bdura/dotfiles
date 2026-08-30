@@ -2,6 +2,7 @@
 name: to-spec
 description: Turn the current conversation into a spec. No interview, just synthesis of what you've already discussed.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Create a specification document

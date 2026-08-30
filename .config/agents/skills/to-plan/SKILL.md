@@ -2,6 +2,7 @@
 name: to-plan
 description: Turn a spec or the current conversation into an implementation plan.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # To Plan
