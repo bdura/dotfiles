@@ -22,6 +22,10 @@ to deviate from them.
 
 Run typechecking regularly, and the full test suite once at the end.
 
+Write what you would want to read cold: no comment that restates the code, no
+changelog in the source, nothing that betrays this conversation. A comment earns
+its place by saying *why*. /deslop cleans up after you — do not give it work.
+
 ## Finishing
 
 Once the task is done, report: what you changed, the test command you ran,
