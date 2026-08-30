@@ -24,19 +24,12 @@ Run typechecking regularly, and the full test suite once at the end.
 
 ## Finishing
 
-The workspace is a git worktree on the `agent-workspace` branch, so it commits
-separately from the code. Once the task is done:
+Once the task is done, report: what you changed, the test command you ran,
+and the tail of its output. Leave the workspace alone — do **not** commit code
+or workspace.
 
-1. Commit the code to the current branch, with a one-liner conventional commit.
-
-If /implement-plan dispatched you, stop here and report: what you changed,
-the test command you ran, and the tail of its output. The runner verifies that
-evidence before it records anything, so leave the workspace alone.
-
-Otherwise, finish the bookkeeping yourself:
-
-2. Tick the task in `.agent-workspace/plans/<plan-slug>/index.md`.
-3. Commit the workspace: `git -C .agent-workspace commit`.
+The user (or /implement-plan if it dispatched you) is responsible for reviewing
+the work and committing it. You can commit on the user's request.
 
 Leave the definition-of-done boxes alone unless you ran what they ask for and
 watched it pass.
