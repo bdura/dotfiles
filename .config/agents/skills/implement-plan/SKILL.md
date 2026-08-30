@@ -34,10 +34,9 @@ Until no task is ready:
    If it is empty while tasks remain unticked, the rest of the plan is blocked:
    stop, and say what it is blocked on.
 
-2. **Dispatch** the lowest-numbered ready task to a fresh general-purpose subagent.
-   Tell it to run /implement on task `<NN>` of plan `<plan-slug>`, and to report
-   back what it changed, the test command it ran, and the tail of that command's
-   output.
+2. **Dispatch** the lowest-numbered ready task to a fresh `implement` subagent.
+   Give it the plan slug and the task number, and ask it to report back what it
+   changed, the test command it ran, and the tail of that command's output.
 
 3. **Verify** before recording anything that the report carries a test command
    and its output, not just an assurance. If that's not the case, halt.
