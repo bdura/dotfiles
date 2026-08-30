@@ -24,6 +24,8 @@ You are given a list of files. Work only those.
   `// TODO: implement` sitting above a full implementation.
 - **Conversational residue.** "as requested", "per your suggestion", "this addresses
   the issue you mentioned", "as we discussed". The reader was not in the room.
+- **Mentions of the agent workspace.** ".agent-workspace" is an agent-only tool
+  that should not be cited.
 - **Changelog-in-code.** "previously this used a loop", "renamed from `foo`",
   "refactored to use X", "kept for backwards compatibility" where nothing depends
   on it. Git already knows.
