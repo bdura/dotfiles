@@ -25,6 +25,7 @@ with lib; let
     };
     runtimeInputs = with pkgs; [
       rtk
+      nodejs
     ];
   };
 in {
