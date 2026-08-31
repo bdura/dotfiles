@@ -85,7 +85,7 @@ it. Each fact belongs in exactly one of them.
 - `context.md` — **what an implementer must know**: background distilled from
   `design.md` with the argument stripped out. This is the file tasks are expected
   to read, so keep it short enough to be worth loading every time.
-- `<NN>-<slug>.md` — one per task, numbered from `01` in dependency order
+- `tasks/<NN>-<slug>.md` — one per task, numbered from `01` in dependency order
   (blockers first). See [template](references/task-template.md).
 
 </document-roles>
