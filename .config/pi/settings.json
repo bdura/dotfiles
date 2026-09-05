@@ -19,6 +19,13 @@
     "opencode/kimi-k2.7-code"
   ],
   "packages": [
-    "npm:@juicesharp/rpiv-ask-user-question"
-  ]
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-claude-bridge"
+  ],
+  "showHardwareCursor": true,
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "enableInstallTelemetry": false,
+  "tuiMode": "fullscreen"
 }
