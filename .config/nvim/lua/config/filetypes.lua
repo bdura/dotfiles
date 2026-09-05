@@ -15,6 +15,10 @@ vim.filetype.add({
 })
 
 vim.filetype.add({
+  extension = { ucad = 'microcad', ['µcad'] = 'microcad' },
+})
+
+vim.filetype.add({
   pattern = {
     ['.*/docker%-compose%.ya?ml'] = 'yaml.docker-compose',
     ['.*/compose%.ya?ml'] = 'yaml.docker-compose',

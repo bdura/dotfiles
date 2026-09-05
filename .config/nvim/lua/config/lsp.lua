@@ -11,6 +11,9 @@ vim.lsp.enable({
   'pytest-ls',
   -- Markdown
   'rumdl',
+  -- CAD
+  'openscad',
+  'microcad-ls',
   -- Nix
   'nixd',
   -- WGSL & WESL
@@ -19,8 +22,6 @@ vim.lsp.enable({
   'taplo',
   -- YAML
   'yaml-ls',
-  -- OpenSCAD
-  'openscad',
   -- Docker
   -- NOTE: docker-ls would be the preferred option since it's compiled...
   -- But it does not work with dockerfiles and gives worse information

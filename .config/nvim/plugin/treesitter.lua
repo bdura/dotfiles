@@ -11,6 +11,17 @@ vim.pack.add({
   },
 })
 
+-- nvim-treesitter fetches grammars as `<url>/archive/<rev>.tar.gz` and expects
+-- GitHub's `<repo>-<rev>/` top-level directory. Codeberg tarballs extract to a
+-- plain `<repo>/`, so the download fails. Let vim.pack keep the checkout around
+-- and build the parser from it instead.
+vim.pack.add({
+  {
+    src = 'https://codeberg.org/microcad/tree-sitter-microcad',
+    version = 'main',
+  },
+}, { load = false })
+
 vim.api.nvim_create_autocmd('User', {
   pattern = 'TSUpdate',
   callback = function()
@@ -41,6 +52,13 @@ vim.api.nvim_create_autocmd('User', {
       install_info = {
         url = 'https://github.com/mattsre/tree-sitter-alloy',
         branch = 'main',
+        queries = 'queries',
+      },
+    }
+
+    parsers.microcad = {
+      install_info = {
+        path = vim.pack.get({ 'tree-sitter-microcad' })[1].path,
         queries = 'queries',
       },
     }
@@ -96,6 +114,7 @@ nvim_ts.install({
   'kanata',
   'wesl',
   'alloy',
+  'microcad',
 })
 
 local textobjects = require('nvim-treesitter-textobjects')

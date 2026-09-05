@@ -82,6 +82,11 @@
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
     },
+    "tree-sitter-microcad": {
+      "rev": "339420b9cfbb9d6e96ed1f881c1632af4c3fcd22",
+      "src": "https://codeberg.org/microcad/tree-sitter-microcad",
+      "version": "'main'"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
