@@ -1,6 +1,7 @@
 ---
 name: file-issue
 description: File an issue to the workspace. Use when an issue is detected in the code.
+user-invocable: true
 ---
 
 # Issue

@@ -2,6 +2,7 @@
 name: fix-issue
 description: Fix an issue filed in the agent workspace.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Fix an issue

@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.2",
+  "lastChangelogVersion": "0.84.3",
   "theme": "dark",
   "defaultProvider": "mistral",
   "defaultModel": "mistral-medium-3.5",
@@ -19,6 +19,13 @@
     "opencode/kimi-k2.7-code"
   ],
   "packages": [
-    "npm:@juicesharp/rpiv-ask-user-question"
-  ]
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-claude-bridge"
+  ],
+  "showHardwareCursor": true,
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "enableInstallTelemetry": false,
+  "tuiMode": "fullscreen"
 }

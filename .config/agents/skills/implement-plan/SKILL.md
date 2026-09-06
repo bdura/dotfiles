@@ -2,6 +2,7 @@
 name: implement-plan
 description: Implement an entire plan, running /implement on each task in turn.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Implement a plan
@@ -33,20 +34,18 @@ Until no task is ready:
    If it is empty while tasks remain unticked, the rest of the plan is blocked:
    stop, and say what it is blocked on.
 
-2. **Dispatch** the lowest-numbered ready task to a fresh general-purpose subagent.
-   Tell it to run /implement on task `<NN>` of plan `<plan-slug>`, and to report
-   back what it changed, the test command it ran, and the tail of that command's
-   output.
+2. **Dispatch** the lowest-numbered ready task to a fresh `implement` subagent.
+   Give it the plan slug and the task number, and ask it to report back what it
+   changed, the test command it ran, and the tail of that command's output.
 
-3. **Verify** before recording anything:
+3. **Verify** before recording anything that the report carries a test command
+   and its output, not just an assurance. If that's not the case, halt.
+   Do not tick, and do not dispatch anything else.
 
-   - a new commit landed on the target branch
-   - the project tree is clean
-   - the report carries a test command and its output, not just an assurance
+4. **Commit.** Commit the code to the target branch with a one-liner conventional
+   commit.
 
-   If any of these fails, halt. Do not tick, and do not dispatch anything else.
-
-4. **Record.** Tick the task in the plan's `index.md`, then commit the workspace
+5. **Record.** Tick the task in the plan's `index.md`, then commit the workspace
    with `git -C .agent-workspace commit`.
 
 Halt on any subagent that reports failure, cannot get the bar green, or wants
