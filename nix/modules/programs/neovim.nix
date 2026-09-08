@@ -75,7 +75,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [nvim];
+    environment.systemPackages = [
+      nvim
+      reflow
+    ];
 
     environment.variables = let
       bin = "${nvim}/bin/nvim";
