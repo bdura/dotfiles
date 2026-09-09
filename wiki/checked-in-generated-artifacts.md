@@ -40,3 +40,11 @@ it, commit it, and add a test that regenerates it and diffs.
   holds where Sphinx is installed — a live instance of the gating hazard above.
   See [[fish-command-reference-pages]] and
   [[fish-docs-conventions-and-checks]].
+- [[git-spice]] commits its generated CLI reference and shorthand table, which
+  the docs site then pulls in with a single snippet include. The guard is not a
+  test but an autofix bot: CI regenerates and either commits the fix or fails
+  the PR. Committing the artifact is what lets the Python docs build run with no
+  Go step at all — the checked-in file *is* the seam between the two
+  toolchains, which is a second reason for the pattern beyond avoiding a build
+  dependency. The cost lands as expected: the generated reference shows up in
+  every relevant PR diff.

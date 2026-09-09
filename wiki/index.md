@@ -7,15 +7,23 @@ else.
 
 - [[git-workflow]] — Git working practices: worktree layout, and how work in
   progress is parked and resumed.
-- [[fish-shell]] — exploration of the fish shell through its own documentation:
-  design principles, POSIX divergences, and the Sphinx toolchain behind them.
+- [[stacked-branch-workflow]] — shaping chains of dependent branches and getting
+  each reviewed separately, with the design decisions such tooling must make.
 
-## General patterns
+## Explored projects
 
-Reusable ideas extracted from explored projects, each linking back to its
-instances.
+Each project page is its own hub for that project's pages.
+
+- [[git-spice]] — CLI for stacking Git branches and submitting them as dependent
+  change requests to a forge. Read through its own documentation.
+- [[fish-shell]] — the friendly interactive shell, whose oddities are argued from
+  five named design laws. Read through its own documentation and docs toolchain.
+
+## Cross-cutting patterns
+
+General patterns instantiated by more than one explored project.
 
 - [[docs-driven-by-production-tools]] — invoke the real tool from the docs build
-  rather than reimplementing its behaviour.
-- [[checked-in-generated-artifacts]] — commit a generated file and guard it with
-  a regenerate-and-diff test.
+  rather than reimplementing its behaviour, so the docs cannot drift.
+- [[checked-in-generated-artifacts]] — commit the generated file and guard it
+  with a regenerate-and-diff check.

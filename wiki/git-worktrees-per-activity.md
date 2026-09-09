@@ -83,6 +83,20 @@ worktrees:
   discover dead ends "more gracefully than hitting a brick wall coding at 80
   WPM".[^src]
 
+## Tooling that knows about worktrees
+
+Worktree-per-activity is a hand-rolled discipline, but some tooling encodes it.
+[[git-spice]] exposes a `worktree` field in its stack listing, offers a
+`--worktree` configuration level so a setting can differ per tree, and has a
+`spice.repoSync.detachWorktrees` option that "leaves each affected worktree at
+its current commit… with staged, unstaged, and untracked changes intact" — a
+tool-enforced version of the detached-observer tree this page calls crucial. Its
+recipes also compose its interactive branch picker with `git worktree add`.
+
+Relatedly, `git worktree` is one of the features git-spice cites as the reason to
+drive the real `git` binary rather than a library, since reimplementations
+"misbehave" on it — see [[subprocess-the-reference-implementation]].
+
 ## Related
 
 - [[committing-instead-of-stashing]] — how branch switching is handled without

@@ -38,3 +38,18 @@ bootstrapping (build tool → build docs → package both).
   the shell's own. The cost is that building HTML docs requires first building
   `fish_indent` and putting it on `PATH`. See
   [[fish-docs-sphinx-extensions]] and [[fish-docs-build-pipeline]].
+- [[git-spice]] generates its entire CLI reference by introspecting the live
+  command-parser model **in-process**, rather than by scraping `--help` output.
+  A hidden `dumpmd` subcommand, compiled only under a build tag so it never
+  ships, walks the parser's own tree and emits Markdown. Going in-process rather
+  than shelling out gets structure that text scraping loses — flag groups, env
+  var bindings, negatability — but couples doc presentation to the parser's
+  struct tags, which now carry two meanings at once.
+
+  It also inverts the pattern into a *completeness* check: the generator emits
+  links like `/cli/config.md#spicefoobar` for each configurable flag, and the
+  site builds with strict anchor validation, so tagging a new flag without
+  writing its prose section fails the build. Link checking as a contract on
+  documentation coverage, with no bespoke tooling. (Recorded from a toolchain
+  exploration whose own pages were not written; see the edges note on
+  [[git-spice]].)
