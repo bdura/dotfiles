@@ -2,7 +2,7 @@ vim.lsp.enable({
   -- Rust
   'rust-analyzer',
   -- Lua
-  'lua_ls',
+  'lua-ls',
   -- JSON
   'jsonls',
   -- Python
