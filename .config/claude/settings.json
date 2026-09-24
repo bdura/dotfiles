@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "commit": ""
+  },
   "permissions": {
     "allow": [
       "Bash(rtk ls *)",
@@ -11,7 +14,6 @@
       "ExitPlanMode",
       "DesignSync",
       "NotebookEdit",
-      "SendMessage",
       "PushNotification",
       "RemoteTrigger",
       "ReportFindings",
@@ -23,6 +25,7 @@
   },
   "model": "opus[1m]",
   "disableClaudeAiConnectors": true,
+  "syncClaudeAiSkills": false,
   "disableBundledSkills": true,
   "disableRemoteControl": true,
   "disableArtifact": true,
@@ -51,7 +54,5 @@
   },
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
-  "attribution": {
-    "commit": ""
-  }
+  "theme": "dark"
 }
