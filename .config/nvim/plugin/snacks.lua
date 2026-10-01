@@ -153,7 +153,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
     vim.schedule(function()
-      Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>us')
       Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>uw')
       Snacks.toggle.diagnostics():map('<leader>ud')
       Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')

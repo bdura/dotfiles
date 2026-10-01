@@ -22,6 +22,17 @@ autocmd('VimEnter', {
   end,
 })
 
+-- Only spell check file buffers: terminals, pickers, help, oil and the like opt out.
+autocmd({ 'BufWinEnter', 'TermOpen' }, {
+  desc = 'Disable spell checking in non-file buffers',
+  group = augroup('Spelling', { clear = true }),
+  callback = function()
+    if vim.bo.buftype ~= '' then
+      vim.opt_local.spell = false
+    end
+  end,
+})
+
 local package_group = augroup('Packages', { clear = true })
 
 -- Remove orphan plugins that are installed but no longer declared via vim.pack.add().

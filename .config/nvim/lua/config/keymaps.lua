@@ -39,6 +39,36 @@ end
 map('n', '<C-d>', scroll_third('<C-d>'), { expr = true })
 map('n', '<C-u>', scroll_third('<C-u>'), { expr = true })
 
+-- Spelling: cycle the current buffer through English, French and off, or set any
+-- language. Missing dictionaries are offered for download by Nvim's spellfile plugin.
+local spell_cycle = { en = 'fr', fr = false }
+
+map('n', '<leader>us', function()
+  local next_lang = 'en'
+  if vim.wo.spell then
+    next_lang = spell_cycle[vim.bo.spelllang]
+    if next_lang == nil then
+      next_lang = 'en'
+    end
+  end
+  if next_lang then
+    vim.opt_local.spelllang = next_lang
+  end
+  vim.opt_local.spell = next_lang ~= false
+  vim.notify('Spelling: ' .. (next_lang or 'off'))
+end, { desc = 'Cycle Spelling (en/fr/off)' })
+
+map('n', '<leader>uS', function()
+  vim.ui.input({ prompt = 'Spell language: ', default = vim.bo.spelllang }, function(input)
+    if not input or input == '' then
+      return
+    end
+    vim.opt_local.spelllang = input
+    vim.opt_local.spell = true
+    vim.notify('Spelling: ' .. input)
+  end)
+end, { desc = 'Set Spell Language' })
+
 -- Remove conflicting default keymaps
 local del = vim.keymap.del
 local keymaps = {
