@@ -1,7 +1,7 @@
 ; comments
 
-(line_comment) @comment.line
-(block_comment) @comment.block
+(line_comment) @comment.line @spell
+(block_comment) @comment.block @spell
 
 ; variables, types, constants
 
