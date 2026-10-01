@@ -64,5 +64,9 @@ opt.undolevels = 10000
 opt.autoread = true
 opt.autowrite = false
 
+-- Spelling
+opt.spell = true
+opt.spelllang = 'en'
+
 -- Misc
 opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
