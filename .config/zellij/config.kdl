@@ -63,6 +63,14 @@ keybinds clear-defaults=true {
             Write 0
             SwitchToMode "locked"
         }
+        bind "]" {
+            FocusHostSession
+            SwitchToMode "locked"
+        }
+        bind "[" {
+            FocusGuestSession
+            SwitchToMode "locked"
+        }
     }
     pane {
         bind "r" {
@@ -302,6 +310,10 @@ keybinds clear-defaults=true {
         bind "d" {
             Detach
         }
+        bind "f" {
+            ToggleHostFullscreen
+            SwitchToMode "locked"
+        }
         bind "o" {
             SwitchToMode "normal"
         }
@@ -504,6 +516,7 @@ simplified_ui true
 //
 theme "catppuccin-mocha"
 default_mode "locked"
+nested_session_handling "descend"
 show_startup_tips false
 pane_frames false
 
