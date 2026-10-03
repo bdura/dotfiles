@@ -35,6 +35,8 @@ shell.nix
 AGENTS.md
 CLAUDE.md
 
+.playwright-mcp
+
 **/tmp/
 **/.repos
 
