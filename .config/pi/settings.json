@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "1.0.2",
   "theme": "dark",
   "defaultProvider": "mistral",
   "defaultModel": "mistral-medium-3.5",
@@ -16,7 +16,8 @@
     "opencode/claude-opus-5",
     "opencode/claude-fable-5",
     "opencode/claude-sonnet-5",
-    "opencode/kimi-k2.7-code"
+    "opencode/kimi-k2.7-code",
+    "mistral/mistral-large-4"
   ],
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
