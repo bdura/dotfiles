@@ -27,6 +27,24 @@ local excludes = {
   '**/.node-gyp/**',
 }
 
+-- Push `.worktrees` strictly to the bottom, and penalise `.agent-workspace`.
+-- Paths are checked relative to the picker cwd, so working from inside a worktree still works.
+---@param base? snacks.picker.transform
+---@return snacks.picker.transform
+local function deprioritize(base)
+  return function(item, ctx)
+    if base and base(item, ctx) == false then
+      return false
+    end
+    local path = Snacks.picker.util.path(item)
+    path = path and '/' .. (vim.fs.relpath(ctx.filter.cwd, path) or path) or ''
+    item.buried = path:find('/.worktrees/', 1, true) and 1 or 0
+    if path:find('/.agent-workspace/', 1, true) then
+      item.score_mul = 0.5
+    end
+  end
+end
+
 Snacks.setup({
   bigfile = { enabled = true },
   explorer = { enabled = true, replace_netrw = true },
@@ -71,6 +89,9 @@ Snacks.setup({
           },
         },
         exclude = excludes,
+        transform = deprioritize(),
+        matcher = { sort_empty = true },
+        sort = { fields = { 'buried', 'score:desc', '#text', 'idx' } },
       },
       grep = {
         hidden = true,
@@ -85,6 +106,13 @@ Snacks.setup({
           },
         },
         exclude = excludes,
+        transform = deprioritize(),
+        matcher = { sort_empty = true },
+        sort = { fields = { 'buried', 'score:desc', 'idx' } },
+      },
+      smart = {
+        transform = deprioritize(require('snacks.picker.transform').unique_file),
+        sort = { fields = { 'buried', 'score:desc', '#text', 'idx' } },
       },
       grep_buffers = {},
       explorer = {
