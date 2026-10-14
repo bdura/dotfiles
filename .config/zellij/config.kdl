@@ -90,7 +90,8 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
         bind "h" {
-            NewPane "left"
+            NewPane "right"
+            MovePane "left"
             SwitchToMode "locked"
         }
         bind "j" {
@@ -98,7 +99,8 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
         bind "k" {
-            NewPane "up"
+            NewPane "down"
+            MovePane "up"
             SwitchToMode "locked"
         }
         bind "l" {
@@ -519,4 +521,5 @@ default_mode "locked"
 nested_session_handling "descend"
 show_startup_tips false
 pane_frames false
+pane_frame_style "none"
 
