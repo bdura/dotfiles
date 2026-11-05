@@ -21,3 +21,8 @@ abbr -a --position anywhere -- --helpc '--help | bat -p -l help'
 abbr -a -- gl serie
 abbr -a -- lg lazygit
 abbr -a -- zj zellij
+
+# Claude
+abbr -a -- cr 'claude --resume'
+abbr -a -- cf 'claude --model fable'
+abbr -a -- crb 'claude "/rebase"'

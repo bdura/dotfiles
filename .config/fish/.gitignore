@@ -1,2 +1,3 @@
 fish_variables
-completions
+completions/*
+!completions/wt.fish
