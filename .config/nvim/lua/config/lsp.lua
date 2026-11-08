@@ -1,40 +1,19 @@
-vim.lsp.enable({
-  -- Rust
-  'rust-analyzer',
-  -- Lua
-  'lua-ls',
-  -- JSON
-  'jsonls',
-  -- Python
-  'ty',
-  'ruff',
-  'pytest-ls',
-  -- Markdown
-  'rumdl',
-  -- CAD
-  'openscad',
-  'microcad-ls',
-  -- Nix
-  'nixd',
-  -- WGSL & WESL
-  'wgsl-analyzer',
-  -- TOML
-  'taplo',
-  -- YAML
-  'yaml-ls',
-  -- Docker
+-- Every server configured in lsp/ is enabled, except the ones listed here.
+local disabled = {
   -- NOTE: docker-ls would be the preferred option since it's compiled...
   -- But it does not work with dockerfiles and gives worse information
   -- than yaml-ls for docker-compose files...
-  -- 'docker-ls',
-  'dockerfile-ls',
-  -- TypeScript
-  'typescript-ls',
-  -- Bash
-  'bash-ls',
-  -- All
-  'typos-ls',
-})
+  ['docker-ls'] = true,
+}
+
+local servers = {}
+for name, type in vim.fs.dir(vim.fn.stdpath('config') .. '/lsp') do
+  local server = name:match('^(.+)%.lua$')
+  if type == 'file' and server and not disabled[server] then
+    table.insert(servers, server)
+  end
+end
+vim.lsp.enable(servers)
 
 local map = vim.keymap.set
 
