@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.2",
+  "lastChangelogVersion": "1.5.2",
   "theme": "dark",
   "defaultProvider": "mistral",
   "defaultModel": "mistral-medium-3.5",
