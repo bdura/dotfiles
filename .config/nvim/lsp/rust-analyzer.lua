@@ -219,6 +219,7 @@ return {
       checkOnSave = true,
       cargo = {
         features = 'all',
+        allTargets = true,
       },
       check = {
         command = 'clippy',

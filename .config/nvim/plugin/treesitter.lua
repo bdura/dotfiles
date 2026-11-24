@@ -62,6 +62,13 @@ vim.api.nvim_create_autocmd('User', {
         queries = 'queries',
       },
     }
+
+    parsers.applescript = {
+      install_info = {
+        url = 'https://github.com/HelgeSverre/tree-sitter-applescript',
+        queries = 'queries',
+      },
+    }
   end,
 })
 
@@ -111,10 +118,11 @@ nvim_ts.install({
   'xml',
   'yaml',
   -- External grammars
-  'kanata',
-  'wesl',
   'alloy',
+  'applescript',
+  'kanata',
   'microcad',
+  'wesl',
 })
 
 local textobjects = require('nvim-treesitter-textobjects')
